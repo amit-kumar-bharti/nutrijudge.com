@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Referral Code Demo - NUTRIJUDGE</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #0d6efd;
+            --secondary-color: #6f42c1;
+            --accent-color: #fd7e14;
+            --success-color: #198754;
+            --warning-color: #ffc107;
+            --danger-color: #dc3545;
+            --dark-color: #212529;
+            --light-color: #f8f9fa;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-color);
+            background-color: var(--light-color);
+        }
+
+        .demo-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 80px 0 40px;
+            text-align: center;
+        }
+
+        .demo-section {
+            padding: 40px 0;
+        }
+
+        .demo-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .referral-code-display {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .code-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin: 10px 0;
+        }
+
+        .user-list {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .user-item {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .user-item:last-child {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Demo Header -->
+    <section class="demo-header">
+        <div class="container">
+            <h1><i class="fas fa-code me-3"></i>Referral Code System Demo</h1>
+            <p>Test the personal referral code generation and management system</p>
+        </div>
+    </section>
+
+    <!-- Demo Content -->
+    <section class="demo-section">
+        <div class="container">
+            <!-- User Registration Demo -->
+            <div class="demo-card">
+                <h3><i class="fas fa-user-plus me-2"></i>User Registration Demo</h3>
+                <p>Register new users to see referral codes being generated automatically.</p>
+                
+                <form id="demoRegistrationForm">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="demoFirstName" class="form-label">First Name</label>
+                                <input type="text" class="form-control" id="demoFirstName" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="demoLastName" class="form-label">Last Name</label>
+                                <input type="text" class="form-control" id="demoLastName" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="demoEmail" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="demoEmail" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="demoPhone" class="form-label">Phone</label>
+                        <input type="tel" class="form-control" id="demoPhone" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="demoPassword" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="demoPassword" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="demoReferralCode" class="form-label">Referral Code (Optional)</label>
+                        <input type="text" class="form-control" id="demoReferralCode" placeholder="Enter existing user's referral code">
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-user-plus me-2"></i>Register User
+                    </button>
+                </form>
+            </div>
+
+            <!-- Current User Info -->
+            <div class="demo-card">
+                <h3><i class="fas fa-user me-2"></i>Current User</h3>
+                <div id="currentUserInfo">
+                    <p class="text-muted">No user logged in</p>
+                </div>
+                <div id="currentUserReferralCode" style="display: none;">
+                    <div class="referral-code-display">
+                        <h5>Your Referral Code</h5>
+                        <div class="code-text" id="userReferralCode"></div>
+                        <button class="btn btn-light" onclick="copyReferralCode()">
+                            <i class="fas fa-copy me-2"></i>Copy Code
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- User Login Demo -->
+            <div class="demo-card">
+                <h3><i class="fas fa-sign-in-alt me-2"></i>User Login Demo</h3>
+                <form id="demoLoginForm">
+                    <div class="mb-3">
+                        <label for="demoLoginEmail" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="demoLoginEmail" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="demoLoginPassword" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="demoLoginPassword" required>
+                    </div>
+                    <button type="submit" class="btn btn-success">
+                        <i class="fas fa-sign-in-alt me-2"></i>Login
+                    </button>
+                </form>
+            </div>
+
+            <!-- All Users -->
+            <div class="demo-card">
+                <h3><i class="fas fa-users me-2"></i>All Registered Users</h3>
+                <div class="user-list" id="allUsersList">
+                    <p class="text-muted">No users registered yet</p>
+                </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="demo-card">
+                <h3><i class="fas fa-tools me-2"></i>Demo Actions</h3>
+                <div class="row">
+                    <div class="col-md-6">
+                        <button class="btn btn-warning mb-2 w-100" onclick="clearAllData()">
+                            <i class="fas fa-trash me-2"></i>Clear All Data
+                        </button>
+                    </div>
+                    <div class="col-md-6">
+                        <button class="btn btn-info mb-2 w-100" onclick="generateSampleUsers()">
+                            <i class="fas fa-magic me-2"></i>Generate Sample Users
+                        </button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <button class="btn btn-secondary mb-2 w-100" onclick="logoutUser()">
+                            <i class="fas fa-sign-out-alt me-2"></i>Logout
+                        </button>
+                    </div>
+                    <div class="col-md-6">
+                        <button class="btn btn-primary mb-2 w-100" onclick="refreshData()">
+                            <i class="fas fa-sync-alt me-2"></i>Refresh Data
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/js/bootstrap.min.js"></script>
+    <script src="src/data.js"></script>
+    <script src="src/unifiedLogin.js"></script>
+    <script src="src/userManager.js"></script>
+    <script>
+        // Demo registration form
+        document.getElementById('demoRegistrationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const userData = {
+                firstName: document.getElementById('demoFirstName').value,
+                lastName: document.getElementById('demoLastName').value,
+                email: document.getElementById('demoEmail').value,
+                phone: document.getElementById('demoPhone').value,
+                password: document.getElementById('demoPassword').value,
+                referredBy: document.getElementById('demoReferralCode').value.trim() || null
+            };
+            
+            try {
+                const newUser = userManager.registerUser(userData);
+                showAlert(`User registered successfully! Referral code: ${newUser.referralCode}`, 'success');
+                document.getElementById('demoRegistrationForm').reset();
+                refreshData();
+            } catch (error) {
+                showAlert(error.message, 'danger');
+            }
+        });
+
+        // Demo login form
+        document.getElementById('demoLoginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('demoLoginEmail').value;
+            const password = document.getElementById('demoLoginPassword').value;
+            
+            try {
+                const user = userManager.loginUser(email, password);
+                showAlert(`Login successful! Welcome, ${user.firstName}`, 'success');
+                document.getElementById('demoLoginForm').reset();
+                refreshData();
+            } catch (error) {
+                showAlert(error.message, 'danger');
+            }
+        });
+
+        // Copy referral code
+        function copyReferralCode() {
+            const code = document.getElementById('userReferralCode').textContent;
+            navigator.clipboard.writeText(code).then(function() {
+                showAlert('Referral code copied to clipboard!', 'success');
+            }).catch(function() {
+                showAlert('Failed to copy code', 'warning');
+            });
+        }
+
+        // Logout user
+        function logoutUser() {
+            userManager.logoutUser();
+            showAlert('Logged out successfully', 'info');
+            refreshData();
+        }
+
+        // Clear all data
+        function clearAllData() {
+            if (confirm('Are you sure you want to clear all data? This cannot be undone.')) {
+                        localStorage.removeItem('nutrijudgeUsers');
+        localStorage.removeItem('nutrijudgeCurrentUser');
+                location.reload();
+            }
+        }
+
+        // Generate sample users
+        function generateSampleUsers() {
+            const sampleUsers = [
+                {
+                    firstName: 'John',
+                    lastName: 'Doe',
+                    email: 'john@example.com',
+                    phone: '1234567890',
+                    password: 'password123'
+                },
+                {
+                    firstName: 'Jane',
+                    lastName: 'Smith',
+                    email: 'jane@example.com',
+                    phone: '0987654321',
+                    password: 'password123',
+                    referredBy: null
+                },
+                {
+                    firstName: 'Mike',
+                    lastName: 'Johnson',
+                    email: 'mike@example.com',
+                    phone: '5555555555',
+                    password: 'password123',
+                    referredBy: null
+                }
+            ];
+            
+            sampleUsers.forEach((userData, index) => {
+                try {
+                    // Get the first user's referral code for the second user
+                    if (index === 1 && userManager.users.length > 0) {
+                        userData.referredBy = userManager.users[0].referralCode;
+                    }
+                    // Get the second user's referral code for the third user
+                    if (index === 2 && userManager.users.length > 1) {
+                        userData.referredBy = userManager.users[1].referralCode;
+                    }
+                    
+                    userManager.registerUser(userData);
+                } catch (error) {
+                    console.log(`User ${userData.email} already exists or error: ${error.message}`);
+                }
+            });
+            
+            showAlert('Sample users generated successfully!', 'success');
+            refreshData();
+        }
+
+        // Refresh data display
+        function refreshData() {
+            updateCurrentUserInfo();
+            updateAllUsersList();
+        }
+
+        // Update current user info
+        function updateCurrentUserInfo() {
+            const currentUser = userManager.getCurrentUser();
+            const currentUserInfo = document.getElementById('currentUserInfo');
+            const currentUserReferralCode = document.getElementById('currentUserReferralCode');
+            
+            if (currentUser) {
+                currentUserInfo.innerHTML = `
+                    <p><strong>Name:</strong> ${currentUser.firstName} ${currentUser.lastName}</p>
+                    <p><strong>Email:</strong> ${currentUser.email}</p>
+                    <p><strong>Phone:</strong> ${currentUser.phone}</p>
+                    <p><strong>Joined:</strong> ${new Date(currentUser.registrationDate).toLocaleDateString()}</p>
+                `;
+                
+                document.getElementById('userReferralCode').textContent = currentUser.referralCode;
+                currentUserReferralCode.style.display = 'block';
+            } else {
+                currentUserInfo.innerHTML = '<p class="text-muted">No user logged in</p>';
+                currentUserReferralCode.style.display = 'none';
+            }
+        }
+
+        // Update all users list
+        function updateAllUsersList() {
+            const users = userManager.getAllUsers();
+            const allUsersList = document.getElementById('allUsersList');
+            
+            if (users.length === 0) {
+                allUsersList.innerHTML = '<p class="text-muted">No users registered yet</p>';
+                return;
+            }
+            
+            allUsersList.innerHTML = users.map(user => `
+                <div class="user-item">
+                    <div>
+                        <strong>${user.firstName} ${user.lastName}</strong><br>
+                        <small class="text-muted">${user.email} | Code: ${user.referralCode}</small>
+                    </div>
+                    <div class="text-end">
+                        <span class="badge bg-primary">${user.referralCount} referrals</span><br>
+                        <small class="text-muted">₹${user.totalEarned} earned</small>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Show alert message
+        function showAlert(message, type) {
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${type} alert-dismissible fade show position-fixed`;
+            alertDiv.style.cssText = 'top: 20px; right: 20px; z-index: 9999; min-width: 300px;';
+            alertDiv.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'warning' ? 'exclamation-triangle' : 'info-circle'} me-2"></i>${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            
+            document.body.appendChild(alertDiv);
+            
+            setTimeout(() => {
+                if (alertDiv.parentNode) {
+                    alertDiv.remove();
+                }
+            }, 3000);
+        }
+
+        // Initialize demo page
+        document.addEventListener('DOMContentLoaded', function() {
+            refreshData();
+        });
+    </script>
+</body>
+</html> 

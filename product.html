@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="Description" content="Product details - Comprehensive supplement information and reviews" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2b6a6c;
+            --secondary-color: #4a90a4;
+            --accent-color: #f39c12;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)) !important;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="white" opacity="0.1"/><circle cx="10" cy="60" r="0.5" fill="white" opacity="0.1"/><circle cx="90" cy="40" r="0.5" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .product-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+        
+        .product-image:hover {
+            transform: scale(1.02);
+        }
+        
+        .product-gallery {
+            position: relative;
+        }
+        
+        .thumbnail-images {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .thumbnail {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .thumbnail:hover {
+            transform: scale(1.1);
+            border-color: var(--accent-color);
+        }
+        
+        .thumbnail.active {
+            border-color: var(--primary-color);
+            transform: scale(1.1);
+        }
+        
+        .product-hero-image {
+            max-height: 450px;
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease;
+        }
+        
+        .product-hero-image:hover {
+            transform: scale(1.02);
+        }
+        
+        .related-product-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+        
+        .related-product-image:hover {
+            transform: scale(1.05);
+        }
+
+        .product-info {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .product-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--dark-color);
+            margin-bottom: 10px;
+        }
+
+        .product-brand {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .product-price {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+
+        .rating-stars {
+            color: #ffc107;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .rating-text {
+            color: #6c757d;
+            font-size: 1rem;
+        }
+
+        .product-description {
+            color: #6c757d;
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .quantity-input {
+            width: 80px;
+            text-align: center;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 8px;
+        }
+
+        .btn-quantity {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid var(--primary-color);
+            background: white;
+            color: var(--primary-color);
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .btn-quantity:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .btn-primary-custom {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border: none;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            color: white;
+        }
+
+        .btn-outline-custom {
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            background: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline-custom:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .product-specs {
+            background: var(--light-color);
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 30px;
+        }
+
+        .spec-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .spec-item:last-child {
+            border-bottom: none;
+        }
+
+        .spec-label {
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+
+        .spec-value {
+            color: #6c757d;
+        }
+
+        .reviews-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .review-item {
+            border-bottom: 1px solid #e9ecef;
+            padding: 20px 0;
+        }
+
+        .review-item:last-child {
+            border-bottom: none;
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .reviewer-name {
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+
+        .review-date {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+
+        .review-rating {
+            color: #ffc107;
+            margin-bottom: 10px;
+        }
+
+        .review-text {
+            color: #6c757d;
+            line-height: 1.6;
+        }
+
+        .related-products {
+            background: var(--light-color);
+            padding: 50px 0;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .product-card h5 {
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .product-card .price {
+            color: var(--accent-color);
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .footer {
+            background: var(--dark-color);
+            color: white;
+            padding: 40px 0 20px;
+        }
+
+        .alert {
+            border-radius: 10px;
+            border: none;
+        }
+
+        .badge {
+            font-size: 0.8rem;
+            padding: 5px 10px;
+        }
+
+        .health-benefits {
+            background: linear-gradient(135deg, #e3f2fd, #f3e5f5);
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 30px;
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .benefit-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+        }
+
+        .ingredients-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .ingredient-tag {
+            background: var(--light-color);
+            color: var(--dark-color);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            border: 1px solid #dee2e6;
+        }
+
+        @media (max-width: 768px) {
+            .product-title {
+                font-size: 2rem;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .quantity-controls {
+                justify-content: center;
+            }
+        }
+    </style>
+    <title>Product Details - NUTRIJUDGE</title>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                NUTRIJUDGE
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation menu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">
+                            <i class="fas fa-home me-1"></i>Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="comparison.html">
+                            Compare
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="wishlist.html">
+                            <i class="fas fa-heart me-1"></i>Wishlist
+                        </a>
+                    </li>
+                </ul>
+                
+                <div class="d-flex align-items-center">
+                    <button class="btn btn-outline-light me-2" onclick="viewCart()">
+                        <i class="fas fa-shopping-cart me-1"></i>Cart
+                        <span class="badge bg-danger ms-1" id="cartCount">0</span>
+                    </button>
+                    
+                    <!-- Right side hamburger menu -->
+                    <div class="navbar-nav ms-auto">
+                        <div class="dropdown">
+                            <button class="btn btn-outline-light btn-sm dropdown-toggle" type="button" id="hamburgerMenu" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Open menu">
+                                <i class="fas fa-bars"></i>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="hamburgerMenu">
+                                <li><a class="dropdown-item" href="#" onclick="openAuthModal('login')"><i class="fas fa-sign-in-alt me-2"></i>Login</a></li>
+                                <li><a class="dropdown-item" href="wishlist.html"><i class="fas fa-heart me-2"></i>Wishlist</a></li>
+                                <li><a class="dropdown-item" href="cart.html"><i class="fas fa-shopping-cart me-2"></i>Cart</a></li>
+                                <li><a class="dropdown-item" href="profile.html"><i class="fas fa-user me-2"></i>Profile</a></li>
+                                <li><a class="dropdown-item" href="orders.html"><i class="fas fa-box me-2"></i>Orders</a></li>
+                                <li><hr class="dropdown-divider"></li>
+        
+                                <li><a class="dropdown-item" href="policies.html"><i class="fas fa-file-contract me-2"></i>Policies</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="https://wa.me/1234567890?text=Hi%20NUTRIJUDGE%20Support,%20I%20need%20help" target="_blank" rel="noopener"><i class="fab fa-whatsapp me-2"></i>WhatsApp Support</a></li>
+                                <li><a class="dropdown-item" href="admin.html"><i class="fas fa-user-cog me-2"></i>Admin</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Product Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="product-gallery">
+                        <img src="" alt="Product Image" class="product-image" id="mainProductImage">
+                        <div class="thumbnail-images" id="thumbnailImages">
+                            <!-- Thumbnails will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="product-info">
+                        <h1 class="product-title" id="productTitle">Product Name</h1>
+                        <div class="product-brand" id="productBrand">Brand Name</div>
+                        
+                        <div class="rating-stars" id="ratingStars">
+                            <!-- Stars will be populated by JavaScript -->
+                        </div>
+                        <div class="rating-text" id="ratingText">4.8 out of 5 (150 reviews)</div>
+                        
+                        <div class="product-price" id="productPrice">₹2,499</div>
+                        
+                        <p class="product-description" id="productDescription">
+                            Product description will be loaded here...
+                        </p>
+                        
+                        <div class="quantity-controls">
+                            <span class="text-muted">Quantity:</span>
+                            <button class="btn-quantity" onclick="decreaseQuantity()" aria-label="Decrease quantity">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <input type="number" class="quantity-input" id="quantity" value="1" min="1" max="10" aria-label="Product quantity">
+                            <button class="btn-quantity" onclick="increaseQuantity()" aria-label="Increase quantity">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="action-buttons">
+                            <button class="btn btn-primary-custom" onclick="addToCart()">
+                                <i class="fas fa-shopping-cart me-2"></i>Add to Cart
+                            </button>
+                            <button class="btn btn-outline-custom" onclick="addToWishlist()">
+                                <i class="fas fa-heart me-2"></i>Add to Wishlist
+                            </button>
+                        </div>
+                        
+                        <div class="d-flex gap-2">
+                            <button class="btn btn-outline-secondary btn-sm" onclick="compareProduct()">
+                                <i class="fas fa-balance-scale me-1"></i>Compare
+                            </button>
+                            <button class="btn btn-outline-secondary btn-sm" onclick="shareProduct()">
+                                <i class="fas fa-share me-1"></i>Share
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Details Section -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <!-- Product Specifications -->
+                    <div class="product-specs">
+                        <h3 class="mb-4">
+                            <i class="fas fa-info-circle me-2"></i>Product Specifications
+                        </h3>
+                        <div id="productSpecs">
+                            <!-- Specifications will be populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- Health Benefits -->
+                    <div class="health-benefits">
+                        <h3 class="mb-4">
+                            <i class="fas fa-heart me-2"></i>Health Benefits
+                        </h3>
+                        <div id="healthBenefits">
+                            <!-- Benefits will be populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- Ingredients -->
+                    <div class="product-specs">
+                        <h3 class="mb-4">
+                            <i class="fas fa-flask me-2"></i>Key Ingredients
+                        </h3>
+                        <div id="ingredientsList">
+                            <!-- Ingredients will be populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- Reviews Section -->
+                    <div class="reviews-section">
+                        <h3 class="mb-4">
+                            <i class="fas fa-star me-2"></i>Customer Reviews
+                        </h3>
+                        <div id="reviewsContainer">
+                            <!-- Reviews will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4">
+                    <!-- Quick Facts -->
+                    <div class="product-specs">
+                        <h4 class="mb-3">
+                            <i class="fas fa-lightbulb me-2"></i>Quick Facts
+                        </h4>
+                        <div id="quickFacts">
+                            <!-- Quick facts will be populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- Shipping Info -->
+                    <div class="product-specs">
+                        <h4 class="mb-3">
+                            <i class="fas fa-shipping-fast me-2"></i>Shipping & Returns
+                        </h4>
+                        <div class="spec-item">
+                            <span class="spec-label">Free Shipping</span>
+                            <span class="spec-value text-success">Orders over ₹4,000</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Delivery Time</span>
+                            <span class="spec-value">3-5 business days</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Returns</span>
+                            <span class="spec-value">30 days money back</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Warranty</span>
+                            <span class="spec-value">1 year manufacturer</span>
+                        </div>
+                    </div>
+
+                    <!-- Certifications -->
+                    <div class="product-specs">
+                        <h4 class="mb-3">
+                            <i class="fas fa-certificate me-2"></i>Certifications
+                        </h4>
+                        <div class="d-flex flex-wrap gap-2">
+                            <span class="badge bg-success">GMP Certified</span>
+                            <span class="badge bg-info">ISO 9001</span>
+                            <span class="badge bg-warning">FDA Approved</span>
+                            <span class="badge bg-primary">Vegan</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Products -->
+    <section class="related-products">
+        <div class="container">
+            <h2 class="text-center mb-5">
+                <i class="fas fa-thumbs-up me-2"></i>You Might Also Like
+            </h2>
+            <div class="row" id="relatedProducts">
+                <!-- Related products will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5><i class="fas fa-balance-scale me-2"></i>NUTRIJUDGE</h5>
+                    <p class="text-muted">Your trusted partner in making informed supplement choices.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="text-muted">&copy; 2025 NUTRIJUDGE. All rights reserved.</p>
+                    <div class="mt-2">
+                        <a href="#" class="text-muted me-3"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-muted me-3"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-muted me-3"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-muted"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login/Register Modal -->
+    <div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="authModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="authModalLabel">
+                        <i class="fas fa-user-circle me-2"></i>Welcome to NUTRIJUDGE
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Tab Navigation -->
+                    <ul class="nav nav-tabs" id="authTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active text-primary fw-bold" id="login-tab" data-bs-toggle="tab" data-bs-target="#login" type="button" role="tab">
+                                <i class="fas fa-sign-in-alt me-2"></i>Login
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link text-primary fw-bold" id="register-tab" data-bs-toggle="tab" data-bs-target="#register" type="button" role="tab">
+                                <i class="fas fa-user-plus me-2"></i>Register
+                            </button>
+                        </li>
+                    </ul>
+                    
+                    <!-- Tab Content -->
+                    <div class="tab-content" id="authTabContent">
+                        <!-- Login Tab -->
+                        <div class="tab-pane fade show active" id="login" role="tabpanel">
+                            <form id="loginForm" class="mt-4">
+                                <div class="mb-3">
+                                    <label for="loginEmail" class="form-label">Email Address <span class="text-danger">*</span></label>
+                                    <input type="email" class="form-control" id="loginEmail" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="loginPassword" class="form-label">Password <span class="text-danger">*</span></label>
+                                    <input type="password" class="form-control" id="loginPassword" required>
+                                </div>
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input" id="rememberMe">
+                                    <label class="form-check-label" for="rememberMe">Remember me</label>
+                                </div>
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fas fa-sign-in-alt me-2"></i>Login
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                        
+                        <!-- Register Tab -->
+                        <div class="tab-pane fade" id="register" role="tabpanel">
+                            <form id="registerForm" class="mt-4">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="firstName" class="form-label">First Name <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="firstName" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="lastName" class="form-label">Last Name <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="lastName" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="registerEmail" class="form-label">Email Address <span class="text-danger">*</span></label>
+                                    <input type="email" class="form-control" id="registerEmail" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="phone" class="form-label">Phone Number <span class="text-danger">*</span></label>
+                                    <input type="tel" class="form-control" id="phone" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="registerPassword" class="form-label">Password <span class="text-danger">*</span></label>
+                                    <input type="password" class="form-control" id="registerPassword" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="confirmPassword" class="form-label">Confirm Password <span class="text-danger">*</span></label>
+                                    <input type="password" class="form-control" id="confirmPassword" required>
+                                </div>
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input" id="agreeTerms" required>
+                                    <label class="form-check-label" for="agreeTerms">
+                                        I agree to the <a href="#" class="text-decoration-none">Terms & Conditions</a> <span class="text-danger">*</span>
+                                    </label>
+                                </div>
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-success">
+                                        <i class="fas fa-user-plus me-2"></i>Create Account
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/js/bootstrap.min.js"></script>
+    <script src="src/data.js"></script>
+    <script src="src/unifiedLogin.js"></script>
+    
+    <script>
+        let currentProduct = null;
+        let cart = [];
+
+        // Load product data based on URL parameter
+        function loadProduct() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const productId = urlParams.get('id');
+            
+            if (productId && window.product) {
+                currentProduct = window.product.find(p => p.id == productId);
+                if (currentProduct) {
+                    displayProduct(currentProduct);
+                    loadRelatedProducts();
+                    loadReviews();
+                } else {
+                    showAlert('Product not found!', 'danger');
+                    window.location.href = 'index.html';
+                }
+            } else {
+                // Default product if no ID provided
+                currentProduct = window.product[1];
+                displayProduct(currentProduct);
+                loadRelatedProducts();
+                loadReviews();
+            }
+        }
+
+        // Display product information
+        function displayProduct(product) {
+            document.getElementById('productTitle').textContent = product.title;
+            document.getElementById('productBrand').textContent = product.brand;
+            document.getElementById('productPrice').textContent = product.price;
+            document.getElementById('productDescription').textContent = product.description;
+            document.getElementById('mainProductImage').src = product.image;
+            document.getElementById('mainProductImage').alt = product.title;
+            
+            // Generate star rating
+            const rating = 4.5 + Math.random() * 0.5; // Random rating between 4.5-5.0
+            document.getElementById('ratingStars').innerHTML = generateStarRating(rating);
+            document.getElementById('ratingText').textContent = `${rating.toFixed(1)} out of 5 (${Math.floor(Math.random() * 200 + 50)} reviews)`;
+            
+            // Populate specifications
+            populateSpecifications(product);
+            
+            // Populate health benefits
+            populateHealthBenefits(product);
+            
+            // Populate ingredients
+            populateIngredients(product);
+            
+            // Populate quick facts
+            populateQuickFacts(product);
+            
+            // Set page title
+            document.title = `${product.title} - NUTRIJUDGE`;
+        }
+
+        // Generate star rating HTML
+        function generateStarRating(rating) {
+            const fullStars = Math.floor(rating);
+            const hasHalfStar = rating % 1 !== 0;
+            const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+            
+            let starsHTML = '';
+            
+            for (let i = 0; i < fullStars; i++) {
+                starsHTML += '<i class="fas fa-star"></i>';
+            }
+            
+            if (hasHalfStar) {
+                starsHTML += '<i class="fas fa-star-half-alt"></i>';
+            }
+            
+            for (let i = 0; i < emptyStars; i++) {
+                starsHTML += '<i class="far fa-star"></i>';
+            }
+            
+            return starsHTML;
+        }
+
+        // Populate product specifications
+        function populateSpecifications(product) {
+            const specs = [
+                { label: 'Serving Size', value: '1 capsule' },
+                { label: 'Servings Per Container', value: '60 servings' },
+                { label: 'Form', value: 'Capsule' },
+                { label: 'Dietary Restrictions', value: 'Vegetarian, Gluten-Free' },
+                { label: 'Storage', value: 'Store in a cool, dry place' },
+                { label: 'Expiry', value: '24 months from manufacturing date' },
+                { label: 'Country of Origin', value: 'India' },
+                { label: 'Manufacturer', value: product.brand }
+            ];
+            
+            const specsContainer = document.getElementById('productSpecs');
+            specsContainer.innerHTML = specs.map(spec => `
+                <div class="spec-item">
+                    <span class="spec-label">${spec.label}</span>
+                    <span class="spec-value">${spec.value}</span>
+                </div>
+            `).join('');
+        }
+
+        // Populate health benefits
+        function populateHealthBenefits(product) {
+            const benefits = [
+                { icon: 'fas fa-heart', text: 'Supports heart health and cardiovascular function' },
+                { icon: 'fas fa-brain', text: 'Enhances cognitive function and mental clarity' },
+                { icon: 'fas fa-dumbbell', text: 'Improves energy levels and physical performance' },
+                { icon: 'fas fa-shield-alt', text: 'Strengthens immune system and overall wellness' }
+            ];
+            
+            const benefitsContainer = document.getElementById('healthBenefits');
+            benefitsContainer.innerHTML = benefits.map(benefit => `
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <i class="${benefit.icon}"></i>
+                    </div>
+                    <span>${benefit.text}</span>
+                </div>
+            `).join('');
+        }
+
+        // Populate ingredients
+        function populateIngredients(product) {
+            const ingredients = [
+                'Vitamin D3', 'Omega-3 Fatty Acids', 'Magnesium', 'Zinc', 
+                'Vitamin B12', 'Folic Acid', 'Iron', 'Calcium'
+            ];
+            
+            const ingredientsContainer = document.getElementById('ingredientsList');
+            ingredientsContainer.innerHTML = `
+                <p class="text-muted mb-3">This supplement contains a carefully formulated blend of essential nutrients:</p>
+                <div class="ingredients-list">
+                    ${ingredients.map(ingredient => `
+                        <span class="ingredient-tag">${ingredient}</span>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        // Populate quick facts
+        function populateQuickFacts(product) {
+            const facts = [
+                { label: 'Best Before', value: '2 years' },
+                { label: 'Suitable For', value: 'Adults 18+' },
+                { label: 'Allergen Info', value: 'Contains no common allergens' },
+                { label: 'Certification', value: 'GMP, ISO 9001' }
+            ];
+            
+            const factsContainer = document.getElementById('quickFacts');
+            factsContainer.innerHTML = facts.map(fact => `
+                <div class="spec-item">
+                    <span class="spec-label">${fact.label}</span>
+                    <span class="spec-value">${fact.value}</span>
+                </div>
+            `).join('');
+        }
+
+        // Load related products
+        function loadRelatedProducts() {
+            const relatedProducts = window.product.slice(1, 5); // Get 4 related products
+            
+            const container = document.getElementById('relatedProducts');
+            container.innerHTML = relatedProducts.map(product => `
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="product-card">
+                        <img src="${product.image}" alt="${product.title}" class="related-product-image">
+                        <h5>${product.title}</h5>
+                        <p class="text-muted small">${product.brand}</p>
+                        <div class="price">${product.price}</div>
+                        <div class="rating-stars mb-2">${generateStarRating(4.0 + Math.random() * 1.0)}</div>
+                        <button class="btn btn-primary btn-sm w-100" onclick="viewProduct(${product.id})">
+                            View Details
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Load reviews
+        function loadReviews() {
+            const reviews = [
+                {
+                    name: 'Rahul Sharma',
+                    rating: 5,
+                    date: '2 days ago',
+                    text: 'Excellent product! I\'ve been using this for 3 months and noticed significant improvement in my energy levels. Highly recommended!'
+                },
+                {
+                    name: 'Priya Patel',
+                    rating: 4,
+                    date: '1 week ago',
+                    text: 'Good quality supplement. The capsules are easy to swallow and I haven\'t experienced any side effects. Will buy again.'
+                },
+                {
+                    name: 'Amit Kumar',
+                    rating: 5,
+                    date: '2 weeks ago',
+                    text: 'Amazing results! My doctor recommended this and I\'m very satisfied with the results. The price is also reasonable.'
+                },
+                {
+                    name: 'Neha Singh',
+                    rating: 4,
+                    date: '3 weeks ago',
+                    text: 'Product arrived on time and in good condition. I\'ve been taking it for a month and feel more energetic throughout the day.'
+                }
+            ];
+            
+            const reviewsContainer = document.getElementById('reviewsContainer');
+            reviewsContainer.innerHTML = reviews.map(review => `
+                <div class="review-item">
+                    <div class="review-header">
+                        <span class="reviewer-name">${review.name}</span>
+                        <span class="review-date">${review.date}</span>
+                    </div>
+                    <div class="review-rating">${generateStarRating(review.rating)}</div>
+                    <div class="review-text">${review.text}</div>
+                </div>
+            `).join('');
+        }
+
+        // Quantity controls
+        function increaseQuantity() {
+            const input = document.getElementById('quantity');
+            const currentValue = parseInt(input.value);
+            if (currentValue < 10) {
+                input.value = currentValue + 1;
+            }
+        }
+
+        function decreaseQuantity() {
+            const input = document.getElementById('quantity');
+            const currentValue = parseInt(input.value);
+            if (currentValue > 1) {
+                input.value = currentValue - 1;
+            }
+        }
+
+        // Add to cart
+        function addToCart() {
+            if (!currentProduct) return;
+            
+            const quantity = parseInt(document.getElementById('quantity').value);
+            
+            // Load existing cart
+            const savedCart = localStorage.getItem('nutrijudgeCart');
+            cart = savedCart ? JSON.parse(savedCart) : [];
+            
+            // Check if product already in cart
+            const existingItem = cart.find(item => item.name === currentProduct.title);
+            
+            if (existingItem) {
+                existingItem.quantity += quantity;
+                showAlert(`Quantity updated for ${currentProduct.title}`, 'success');
+            } else {
+                cart.push({
+                    id: currentProduct.id,
+                    name: currentProduct.title,
+                    price: currentProduct.price,
+                    brand: currentProduct.brand,
+                    quantity: quantity
+                });
+                showAlert(`${currentProduct.title} added to cart!`, 'success');
+            }
+            
+            // Save cart
+            localStorage.setItem('nutrijudgeCart', JSON.stringify(cart));
+            updateCartCount();
+        }
+
+        // Add to wishlist
+        function addToWishlist() {
+            if (!currentProduct) return;
+            
+            // Load existing wishlist
+            const savedWishlist = localStorage.getItem('nutrijudgeWishlist');
+            let wishlist = savedWishlist ? JSON.parse(savedWishlist) : [];
+            
+            // Check if product already in wishlist
+            const existingItem = wishlist.find(item => item.name === currentProduct.title);
+            
+            if (existingItem) {
+                showAlert(`${currentProduct.title} is already in your wishlist!`, 'info');
+            } else {
+                wishlist.push({
+                    id: currentProduct.id,
+                    name: currentProduct.title,
+                    price: currentProduct.price,
+                    brand: currentProduct.brand,
+                    rating: 4.5,
+                    image: currentProduct.image,
+                    description: currentProduct.description
+                });
+                
+                localStorage.setItem('nutrijudgeWishlist', JSON.stringify(wishlist));
+                showAlert(`${currentProduct.title} added to wishlist!`, 'success');
+            }
+        }
+
+        // Compare product
+        function compareProduct() {
+            if (!currentProduct) return;
+            
+            // Store current product for comparison
+            localStorage.setItem('compareProduct', JSON.stringify(currentProduct));
+            
+            // Redirect to comparison page with product parameter
+            window.location.href = `comparison.html?product=${currentProduct.id}`;
+        }
+
+        // Share product
+        function shareProduct() {
+            if (navigator.share) {
+                navigator.share({
+                    title: currentProduct.title,
+                    text: `Check out ${currentProduct.title} on NUTRIJUDGE!`,
+                    url: window.location.href
+                });
+            } else {
+                // Fallback: copy URL to clipboard
+                navigator.clipboard.writeText(window.location.href);
+                showAlert('Product link copied to clipboard!', 'success');
+            }
+        }
+
+        // View product
+        function viewProduct(productId) {
+            window.location.href = `product.html?id=${productId}`;
+        }
+
+        // View cart
+        function viewCart() {
+            window.location.href = 'cart.html';
+        }
+
+        // Update cart count
+        function updateCartCount() {
+            const cartCountElement = document.getElementById('cartCount');
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartCountElement.textContent = totalItems;
+        }
+
+        // Show alert
+        function showAlert(message, type) {
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${type} alert-dismissible fade show position-fixed`;
+            alertDiv.style.cssText = 'top: 20px; right: 20px; z-index: 9999; min-width: 300px;';
+            alertDiv.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'warning' ? 'exclamation-triangle' : 'info-circle'} me-2"></i>${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            
+            document.body.appendChild(alertDiv);
+            
+            setTimeout(() => {
+                if (alertDiv.parentNode) {
+                    alertDiv.remove();
+                }
+            }, 3000);
+        }
+
+        // Authentication functions
+        function openAuthModal(tab = 'login') {
+            const modal = new bootstrap.Modal(document.getElementById('authModal'));
+            modal.show();
+            
+            if (tab === 'register') {
+                const registerTab = document.getElementById('register-tab');
+                const registerTabInstance = new bootstrap.Tab(registerTab);
+                registerTabInstance.show();
+            }
+        }
+
+        // Form handling
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            showAlert('Login successful! Welcome back.', 'success');
+            setTimeout(() => {
+                bootstrap.Modal.getInstance(document.getElementById('authModal')).hide();
+            }, 2000);
+        });
+
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+                            showAlert('Registration successful! Welcome to NUTRIJUDGE.', 'success');
+            setTimeout(() => {
+                bootstrap.Modal.getInstance(document.getElementById('authModal')).hide();
+            }, 2000);
+        });
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            loadProduct();
+            updateCartCount();
+        });
+        
+        // Test function for unified product data on product page
+        function testUnifiedProductData() {
+            console.log('=== Testing Unified Product Data on Product Page ===');
+            
+            // Test 1: Verify product data is loaded
+            if (!window.product || !Array.isArray(window.product)) {
+                console.error('❌ Product data not loaded properly');
+                return;
+            }
+            console.log(`✅ Product data loaded: ${window.product.length} products`);
+            
+            // Test 2: Test product loading
+            const testProduct = window.product[0];
+            if (testProduct) {
+                displayProduct(testProduct);
+                console.log(`✅ Product display: ${testProduct.title}`);
+            }
+            
+            // Test 3: Test related products
+            loadRelatedProducts();
+            console.log('✅ Related products loaded');
+            
+            // Test 4: Test reviews
+            loadReviews();
+            console.log('✅ Reviews loaded');
+            
+            // Test 5: Test product specifications
+            if (testProduct) {
+                populateSpecifications(testProduct);
+                console.log('✅ Product specifications populated');
+            }
+            
+            console.log('=== Product Page Test Complete ===');
+        }
+        
+        // Make test function globally available
+        window.testUnifiedProductData = testUnifiedProductData;
+    </script>
+</body>
+
+</html> 
