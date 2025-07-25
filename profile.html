@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - NUTRIJUDGE</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #000;
+            --secondary-color: #222;
+            --accent-color: #444;
+            --success-color: #222;
+            --warning-color: #444;
+            --danger-color: #000;
+            --dark-color: #000;
+            --light-color: #fff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-color);
+            background: var(--light-color);
+        }
+
+        .navbar {
+            background: var(--light-color) !important;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05) !important;
+            border: none !important;
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
+        }
+
+        .hero-section {
+            background: #000;
+            color: #fff;
+            padding: 120px 0 80px;
+            text-align: center;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            color: #fff;
+        }
+
+        .profile-section {
+            padding: 80px 0;
+        }
+
+        .profile-card {
+            background: var(--light-color);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 1px solid #eee;
+        }
+
+        .profile-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .profile-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: var(--light-color);
+            margin-right: 25px;
+            transition: transform 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            position: relative; /* Added for positioning the image */
+            overflow: hidden; /* Hide overflow for the image */
+        }
+
+        .profile-avatar:hover {
+            transform: scale(1.05);
+        }
+
+        .profile-info h3 {
+            margin-bottom: 5px;
+            color: var(--dark-color);
+        }
+
+        .profile-info p {
+            color: #6c757d;
+            margin-bottom: 10px;
+        }
+
+        .profile-stats {
+            display: flex;
+            gap: 20px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: var(--dark-color);
+            margin-bottom: 8px;
+        }
+
+        .form-control {
+            border-radius: 10px;
+            border: 1px solid #dee2e6;
+            padding: 12px 15px;
+            transition: all 0.3s ease;
+            background: var(--light-color);
+            color: var(--primary-color);
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(0,0,0,0.08);
+        }
+
+        .btn-save, .btn-primary, .btn-outline-primary, .btn-outline-success, .btn-outline-info, .btn-outline-warning, .btn-outline-danger, .btn-outline-secondary, .btn-address, .btn-default, .btn-edit, .btn-delete {
+            background: var(--primary-color) !important;
+            color: var(--light-color) !important;
+            border: none !important;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-save:hover, .btn-primary:hover, .btn-outline-primary:hover, .btn-outline-success:hover, .btn-outline-info:hover, .btn-outline-warning:hover, .btn-outline-danger:hover, .btn-outline-secondary:hover, .btn-address:hover, .btn-default:hover, .btn-edit:hover, .btn-delete:hover {
+            background: var(--secondary-color) !important;
+            color: var(--light-color) !important;
+        }
+
+        .address-card {
+            background: var(--light-color);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border: 2px solid #eee;
+            transition: all 0.3s ease;
+        }
+
+        .address-card:hover {
+            border-color: var(--primary-color);
+        }
+
+        .address-card.default {
+            border-color: var(--primary-color);
+            background: #f3f3f3;
+        }
+
+        .address-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .security-card {
+            background: var(--light-color);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .security-status {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .status-badge {
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            background: var(--primary-color);
+            color: var(--light-color);
+        }
+
+        .status-enabled {
+            background: var(--primary-color);
+            color: var(--light-color);
+        }
+
+        .status-disabled {
+            background: #bbb;
+            color: var(--light-color);
+        }
+
+        .nav-tabs .nav-link {
+            border: none;
+            color: var(--dark-color);
+            font-weight: 600;
+            padding: 12px 20px;
+            transition: all 0.3s ease;
+            background: var(--light-color);
+        }
+
+        .nav-tabs .nav-link:hover {
+            color: var(--primary-color);
+            background-color: #f3f3f3;
+        }
+
+        .nav-tabs .nav-link.active {
+            color: var(--primary-color);
+            background-color: #e7e7e7;
+            border-bottom: 3px solid var(--primary-color);
+        }
+
+        .product-card {
+            transition: transform 0.3s ease;
+            background: var(--light-color);
+            color: var(--primary-color);
+            border: 1px solid #eee;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+        }
+
+        .footer {
+            background: var(--primary-color);
+            color: var(--light-color);
+            padding: 40px 0;
+            margin-top: 80px;
+        }
+
+        .navbar-nav .nav-link {
+            color: #000 !important;
+        }
+
+        .navbar-nav .nav-link:hover, .navbar-nav .nav-link:focus {
+            background: #000 !important;
+            color: #fff !important;
+        }
+        /* Hamburger menu dropdown opens on hover */
+        #hamburgerMenu:hover + .dropdown-menu,
+        .dropdown:hover > .dropdown-menu {
+            display: block !important;
+        }
+
+        /* Auto dropdown for Categories button on hover */
+        .navbar-nav .dropdown:hover .dropdown-menu {
+            display: block !important;
+        }
+
+        .navbar-logo {
+            height: 80px;
+            width: auto;
+            border-radius: 12px;
+            margin: 0;
+            padding: 0;
+            background: var(--light-color) !important;
+            filter: none;
+            opacity: 1;
+        }
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 2.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0;
+            margin: 0;
+            padding: 0;
+            color: var(--primary-color) !important;
+            text-shadow: none;
+            transition: color 0.3s;
+        }
+        .navbar-brand:hover {
+            color: var(--secondary-color) !important;
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            .profile-stats {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            .profile-avatar {
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="src/logo_nav.jpg0000.png" alt="NUTRIJUDGE Logo" class="navbar-logo">
+                NUTRIJUDGE
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation menu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="comparison.html">Compare</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="wishlist.html">Wishlist</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="blog.html"><i class="fas fa-blog me-1"></i>Blog</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- Right side hamburger menu -->
+            <div class="navbar-nav ms-auto">
+                <div class="dropdown">
+                    <button class="btn btn-sm dropdown-toggle" type="button" id="hamburgerMenu" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Open menu">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="hamburgerMenu">
+                        <li><a class="dropdown-item" href="#" onclick="openAuthModal('login')"><i class="fas fa-sign-in-alt me-2"></i>Login</a></li>
+                        <li><a class="dropdown-item" href="wishlist.html"><i class="fas fa-heart me-2"></i>Wishlist</a></li>
+                        <li><a class="dropdown-item" href="blog.html"><i class="fas fa-blog me-2"></i>Blog</a></li>
+                        <li><a class="dropdown-item" href="cart.html"><i class="fas fa-shopping-cart me-2"></i>Cart <span class="badge bg-primary ms-2" id="cartCount">0</span></a></li>
+                        <li><a class="dropdown-item" href="profile.html"><i class="fas fa-user me-2"></i>Profile</a></li>
+                        <li><a class="dropdown-item" href="orders.html"><i class="fas fa-box me-2"></i>Orders</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="policies.html"><i class="fas fa-file-contract me-2"></i>Policies</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="https://wa.me/1234567890?text=Hi%20SuppCompare%20Support,%20I%20need%20help" target="_blank" rel="noopener"><i class="fab fa-whatsapp me-2"></i>WhatsApp Support</a></li>
+                        <li><a class="dropdown-item" href="admin.html"><i class="fas fa-user-cog me-2"></i>Admin</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <h1 class="hero-title">My Profile</h1>
+            <p class="hero-subtitle">Manage your account, track your orders, and personalize your supplement experience</p>
+        </div>
+    </section>
+
+    <!-- Merged Login and Profile Form Section -->
+    <section class="d-flex justify-content-center align-items-center" style="min-height: 70vh;">
+        <div class="card shadow p-4" style="max-width: 500px; width: 100%; border-radius: 16px;">
+            <h2 class="mb-4 text-center">Login & Complete Your Profile</h2>
+            <form id="mergedProfileForm">
+                <div class="mb-3">
+                    <label for="loginEmail" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="loginEmail" required>
+                </div>
+                <div class="mb-3">
+                    <label for="loginPassword" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="loginPassword" required>
+                </div>
+                <div class="mb-3">
+                    <label for="firstName" class="form-label">First Name</label>
+                    <input type="text" class="form-control" id="firstName" required>
+                </div>
+                <div class="mb-3">
+                    <label for="lastName" class="form-label">Last Name</label>
+                    <input type="text" class="form-control" id="lastName" required>
+                </div>
+                <div class="mb-3">
+                    <label for="phone" class="form-label">Phone Number</label>
+                    <input type="tel" class="form-control" id="phone" required>
+                </div>
+                <div class="mb-3">
+                    <label for="address" class="form-label">Address</label>
+                    <textarea class="form-control" id="address" rows="2" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Login & Save Profile</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5><i class=""></i>NUTRIJUDGE</h5>
+                    <p class="text-muted">Your trusted partner in making informed supplement choices.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="text-muted">&copy; 2025 NUTRIJUDGE. All rights reserved.</p>
+                    <div class="mt-2">
+                        <a href="#" class="text-muted me-3"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-muted me-3"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-muted me-3"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-muted"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Remove Password Reset Modal and related JS -->
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/js/bootstrap.min.js"></script>
+    <script src="src/data.js"></script>
+    <script src="src/unifiedLogin.js"></script>
+    <script src="src/userManager.js"></script>
+    <script>
+        // Initialize user manager
+        const userManager = new UserManager();
+        
+        // Profile management functions
+        function addNewAddress() {
+            showAlert('Add new address form would open here.', 'info');
+        }
+
+        function editAddress(addressId) {
+            const card = document.querySelectorAll('.address-card')[addressId - 1];
+            if (!card) return;
+            const detailsDiv = document.getElementById(`addressDetails${addressId}`);
+            const h6 = detailsDiv.querySelector('h6');
+            const lines = detailsDiv.querySelectorAll('p');
+            const name = h6 ? h6.textContent : '';
+            const line1 = lines[0] ? lines[0].textContent : '';
+            const line2 = lines[1] ? lines[1].textContent : '';
+            const phone = lines[2] ? lines[2].textContent.replace('Phone: ', '') : '';
+            detailsDiv.innerHTML = `
+                <input type='text' class='form-control mb-1' value='${name}' id='editName${addressId}'>
+                <input type='text' class='form-control mb-1' value='${line1}' id='editLine1${addressId}'>
+                <input type='text' class='form-control mb-1' value='${line2}' id='editLine2${addressId}'>
+                <input type='text' class='form-control mb-1' value='${phone}' id='editPhone${addressId}'>
+                <button class='btn btn-primary btn-sm mt-2' onclick='saveAddress(${addressId})'><i class='fas fa-save me-1'></i>Save</button>
+                <button class='btn btn-secondary btn-sm mt-2 ms-2' onclick='cancelEditAddress(${addressId})'><i class='fas fa-times me-1'></i>Cancel</button>
+            `;
+        }
+        function saveAddress(addressId) {
+            const card = document.querySelectorAll('.address-card')[addressId - 1];
+            if (!card) return;
+            const detailsDiv = document.getElementById(`addressDetails${addressId}`);
+            const newName = document.getElementById(`editName${addressId}`).value;
+            const newLine1 = document.getElementById(`editLine1${addressId}`).value;
+            const newLine2 = document.getElementById(`editLine2${addressId}`).value;
+            const newPhone = document.getElementById(`editPhone${addressId}`).value;
+            detailsDiv.innerHTML = `
+                <h6>${newName}</h6>
+                <p class='mb-1'>${newLine1}</p>
+                <p class='mb-1'>${newLine2}</p>
+                <p class='mb-0'>Phone: ${newPhone}</p>
+                <button class='btn btn-outline-primary btn-sm mt-2' type='button' onclick='editAddress(${addressId})'><i class='fas fa-edit me-1'></i>Edit</button>
+            `;
+            showAlert('Address updated successfully!', 'success');
+        }
+        function cancelEditAddress(addressId) {
+            const card = document.querySelectorAll('.address-card')[addressId - 1];
+            if (!card) return;
+            const detailsDiv = document.getElementById(`addressDetails${addressId}`);
+            // Restore the original static HTML for each address
+            if (addressId === 1) {
+                detailsDiv.innerHTML = `
+                    <h6>Home Address</h6>
+                    <p class='mb-1'>123 Main Street, Apartment 4B</p>
+                    <p class='mb-1'>Mumbai, Maharashtra 400001</p>
+                    <p class='mb-0'>Phone: +91 98765 43210</p>
+                    <button class='btn btn-outline-primary btn-sm mt-2' type='button' onclick='editAddress(1)'><i class='fas fa-edit me-1'></i>Edit</button>
+                `;
+            } else if (addressId === 2) {
+                detailsDiv.innerHTML = `
+                    <h6>Office Address</h6>
+                    <p class='mb-1'>456 Business Park, Floor 3</p>
+                    <p class='mb-1'>Bangalore, Karnataka 560001</p>
+                    <p class='mb-0'>Phone: +91 98765 43211</p>
+                    <button class='btn btn-outline-primary btn-sm mt-2' type='button' onclick='editAddress(2)'><i class='fas fa-edit me-1'></i>Edit</button>
+                `;
+            }
+        }
+        function deleteAddress(addressId) {
+            const card = document.querySelectorAll('.address-card')[addressId - 1];
+            if (!card) return;
+            card.remove();
+            showAlert(`Address ${addressId} deleted successfully!`, 'success');
+        }
+
+        function setDefaultAddress(addressId) {
+            showAlert(`Address ${addressId} set as default successfully!`, 'success');
+        }
+
+        // Security section modals and logic
+        function openChangePasswordModal() {
+            // Remove any existing modal with the same ID
+            const existingModal = document.getElementById('changePasswordModal');
+            if (existingModal) existingModal.remove();
+            // Check if bootstrap.Modal is available
+            if (typeof bootstrap === 'undefined' || !bootstrap.Modal) {
+                showAlert('Bootstrap modal library not loaded!', 'danger');
+                return;
+            }
+            const modalHtml = `
+                <div class='modal fade' id='changePasswordModal' tabindex='-1' aria-labelledby='changePasswordModalLabel' aria-hidden='true'>
+                  <div class='modal-dialog'>
+                    <div class='modal-content'>
+                      <div class='modal-header'>
+                        <h5 class='modal-title' id='changePasswordModalLabel'>Change Password</h5>
+                        <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+                      </div>
+                      <div class='modal-body'>
+                        <form id='changePasswordForm'>
+                          <div class='mb-3'>
+                            <label for='currentPassword' class='form-label'>Current Password</label>
+                            <input type='password' class='form-control' id='currentPassword' required>
+                          </div>
+                          <div class='mb-3'>
+                            <label for='newPassword' class='form-label'>New Password</label>
+                            <input type='password' class='form-control' id='newPassword' required>
+                          </div>
+                          <div class='mb-3'>
+                            <label for='confirmPassword' class='form-label'>Confirm New Password</label>
+                            <input type='password' class='form-control' id='confirmPassword' required>
+                          </div>
+                          <button type='submit' class='btn btn-primary'>Change Password</button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>`;
+            document.body.insertAdjacentHTML('beforeend', modalHtml);
+            const modal = new bootstrap.Modal(document.getElementById('changePasswordModal'));
+            modal.show();
+            document.getElementById('changePasswordForm').onsubmit = function(e) {
+                e.preventDefault();
+                // Simulate password change
+                showAlert('Password changed successfully!', 'success');
+                modal.hide();
+                setTimeout(() => {
+                    const m = document.getElementById('changePasswordModal');
+                    if (m) m.remove();
+                }, 500);
+            };
+            document.getElementById('changePasswordModal').addEventListener('hidden.bs.modal', function () {
+                const m = document.getElementById('changePasswordModal');
+                if (m) m.remove();
+            });
+        }
+        function openDeleteAccountModal() {
+            const modalHtml = `
+                <div class='modal fade' id='deleteAccountModal' tabindex='-1' aria-labelledby='deleteAccountModalLabel' aria-hidden='true'>
+                  <div class='modal-dialog'>
+                    <div class='modal-content'>
+                      <div class='modal-header'>
+                        <h5 class='modal-title text-danger' id='deleteAccountModalLabel'>Delete Account</h5>
+                        <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+                      </div>
+                      <div class='modal-body'>
+                        <p class='text-danger'>Are you sure you want to delete your account? This action cannot be undone.</p>
+                        <button class='btn btn-danger' id='confirmDeleteAccount'>Yes, Delete My Account</button>
+                        <button class='btn btn-secondary ms-2' data-bs-dismiss='modal'>Cancel</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>`;
+            document.body.insertAdjacentHTML('beforeend', modalHtml);
+            const modal = new bootstrap.Modal(document.getElementById('deleteAccountModal'));
+            modal.show();
+            document.getElementById('confirmDeleteAccount').onclick = function() {
+                // Simulate account deletion
+                showAlert('Your account has been deleted.', 'warning');
+                modal.hide();
+                setTimeout(() => {
+                    document.getElementById('deleteAccountModal').remove();
+                    // Redirect to home page or login
+                    window.location.href = 'index.html';
+                }, 1000);
+            };
+            document.getElementById('deleteAccountModal').addEventListener('hidden.bs.modal', function () {
+                document.getElementById('deleteAccountModal').remove();
+            });
+        }
+
+        // Form submission
+        document.getElementById('mergedProfileForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const phone = document.getElementById('phone').value;
+            const address = document.getElementById('address').value;
+
+            try {
+                const user = userManager.loginUser(email, password);
+                if (user) {
+                    // Simulate successful login and profile update
+                    userManager.updateUserProfile(user.id, {
+                        firstName: firstName,
+                        lastName: lastName,
+                        phone: phone,
+                        address: address
+                    });
+                    showAlert('Profile updated successfully!', 'success');
+                    // Reload profile data
+                    loadProfile();
+                } else {
+                    showAlert('Login failed. Please check your credentials.', 'danger');
+                }
+            } catch (error) {
+                showAlert(error.message, 'danger');
+            }
+        });
+
+        // Check if user is logged in
+        function checkLoginStatus() {
+            const currentUser = userManager.getCurrentUser();
+            if (!currentUser) {
+                // Redirect to login if not logged in
+                window.location.href = 'index.html?redirect=profile';
+                return false;
+            }
+            return currentUser;
+        }
+
+        // Load profile data
+        function loadProfile() {
+            const currentUser = checkLoginStatus();
+            if (!currentUser) return;
+
+            // Populate profile form
+            document.getElementById('loginEmail').value = currentUser.email || '';
+            document.getElementById('firstName').value = currentUser.firstName || '';
+            document.getElementById('lastName').value = currentUser.lastName || '';
+            document.getElementById('phone').value = currentUser.phone || '';
+            document.getElementById('address').value = currentUser.address || '';
+
+            // Update profile display
+            document.getElementById('profileName').textContent = `${currentUser.firstName || 'User'} ${currentUser.lastName || ''}`;
+            document.getElementById('profileEmail').textContent = currentUser.email || 'No email';
+            document.getElementById('profilePhone').textContent = currentUser.phone || 'No phone';
+            document.getElementById('profileAddress').textContent = currentUser.address || 'No address';
+
+            // Update last login
+            if (currentUser.lastLogin) {
+                document.getElementById('profileLastLogin').textContent = new Date(currentUser.lastLogin).toLocaleString();
+            } else {
+                document.getElementById('profileLastLogin').textContent = 'Never';
+            }
+
+            // Set profile image
+            const profileAvatarContainer = document.getElementById('profileAvatarContainer');
+            const profileAvatarIcon = document.getElementById('profileAvatarIcon');
+            const profileAvatarImg = document.getElementById('profileAvatarImg');
+
+            if (currentUser.profileImage) {
+                profileAvatarImg.src = currentUser.profileImage;
+                profileAvatarImg.style.display = 'block';
+                profileAvatarIcon.style.display = 'none';
+            } else {
+                profileAvatarIcon.style.display = 'block';
+                profileAvatarImg.style.display = 'none';
+            }
+        }
+
+        // Update profile
+        function updateProfile() {
+            const currentUser = checkLoginStatus();
+            if (!currentUser) return;
+
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const phone = document.getElementById('phone').value;
+            const address = document.getElementById('address').value;
+
+            try {
+                const updatedUser = userManager.updateUserProfile(currentUser.id, {
+                    firstName,
+                    lastName,
+                    phone,
+                    address
+                });
+
+                showAlert('Profile updated successfully!', 'success');
+                
+                // Reload profile data
+                loadProfile();
+                
+            } catch (error) {
+                showAlert(error.message, 'danger');
+            }
+        }
+
+        // Show alert message
+        function showAlert(message, type) {
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${type} alert-dismissible fade show position-fixed`;
+            alertDiv.style.cssText = 'top: 20px; right: 20px; z-index: 9999; min-width: 300px;';
+            alertDiv.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'warning' ? 'exclamation-triangle' : 'info-circle'} me-2"></i>${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            
+            document.body.appendChild(alertDiv);
+            
+            setTimeout(() => {
+                if (alertDiv.parentNode) {
+                    alertDiv.remove();
+                }
+            }, 3000);
+        }
+
+        // Cart and Wishlist Functions
+        function addToCart(productId) {
+            const product = window.product.find(p => p.id === productId);
+            if (!product) {
+                showAlert('Product not found!', 'danger');
+                return;
+            }
+
+            let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            const existingItem = cart.find(item => item.id === productId);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    id: productId,
+                    title: product.title,
+                    price: product.price,
+                    brand: product.brand,
+                    image: product.image,
+                    quantity: 1
+                });
+            }
+            
+            localStorage.setItem('cart', JSON.stringify(cart));
+            showAlert(`${product.title} added to cart!`, 'success');
+        }
+
+        function addToWishlist(productId) {
+            const product = window.product.find(p => p.id === productId);
+            if (!product) {
+                showAlert('Product not found!', 'danger');
+                return;
+            }
+
+            let wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
+            const existingItem = wishlist.find(item => item.id === productId);
+            
+            if (existingItem) {
+                showAlert(`${product.title} is already in your wishlist!`, 'info');
+                return;
+            }
+            
+            wishlist.push({
+                id: productId,
+                title: product.title,
+                price: product.price,
+                brand: product.brand,
+                image: product.image,
+                rating: product.rating,
+                reviewCount: product.reviewCount
+            });
+            
+            localStorage.setItem('wishlist', JSON.stringify(wishlist));
+            showAlert(`${product.title} added to wishlist!`, 'success');
+        }
+
+        // Handle profile image upload
+        function handleProfileImageUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = document.getElementById('profileAvatarImg');
+                img.src = e.target.result;
+                img.style.display = 'block';
+                document.getElementById('profileAvatarIcon').style.display = 'none';
+                // Optionally, save to localStorage or backend here
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            // Load profile data
+            loadProfile();
+            
+        });
+        
+    </script>
+</body>
+</html> 

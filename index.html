@@ -1,0 +1,3371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="Description" content="NUTRIJUDGE - Find the best supplements for your health goals" />
+    <script src="src/data.js"></script>
+    <script src="src/unifiedLogin.js"></script>
+    <script src="main.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #000;
+            --secondary-color: #222;
+            --accent-color: #444;
+            --light-color: #fff;
+            --dark-color: #000;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--light-color);
+            color: var(--primary-color);
+        }
+        
+        .navbar {
+            background: var(--light-color) !important;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05) !important;
+            border: none !important;
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
+        }
+        
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 2.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0;
+            margin: 0;
+            padding: 0;
+            color: var(--primary-color) !important;
+            text-shadow: none;
+            transition: color 0.3s;
+        }
+        .navbar-brand:hover {
+            color: var(--secondary-color) !important;
+        }
+        
+        .navbar-logo {
+            height: 80px;
+            width: auto;
+            border-radius: 12px;
+            margin: 0;
+            padding: 0;
+            background: var(--light-color) !important;
+            filter: none;
+            opacity: 1;
+        }
+        
+        .nav-link, .navbar-nav .dropdown-toggle {
+            color: var(--primary-color) !important;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-shadow: none;
+        }
+        
+        .nav-link:hover, .navbar-nav .dropdown-toggle:hover, .nav-link.active, .navbar-nav .dropdown-toggle.active {
+            color: var(--light-color) !important;
+            background: var(--primary-color) !important;
+        }
+        
+        .hero-section {
+            height: 110vh !important;
+            min-height: 600px;
+            max-height: 110vh;
+            position: relative;
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+            margin-top: 70px;
+            background: var(--light-color);
+        }
+        #homepageWallpaperCarousel,
+        #homepageWallpaperCarousel .carousel-inner,
+        #homepageWallpaperCarousel .carousel-item {
+            height: 100%;
+            min-height: 100%;
+            background: #fff;
+        }
+        #homepageWallpaperCarousel img {
+            width: 100vw;
+            max-width: 100%;
+            height: 100%;
+            max-height: 100vh;
+            object-fit: contain;
+            min-height: unset;
+            min-width: unset;
+            background: #fff;
+        }
+        @media (max-width: 1200px) {
+            #homepageWallpaperCarousel img {
+                height: 60vw;
+                max-height: 60vw;
+            }
+        }
+        @media (max-width: 768px) {
+            #homepageWallpaperCarousel img {
+                width: 100vw;
+                height: 220px !important;
+                max-height: 220px;
+                object-fit: cover !important;
+                min-width: 100vw;
+                min-height: 220px;
+                background: #fff;
+            }
+            #homepageWallpaperCarousel {
+                max-height: 220px;
+            }
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-image-container {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            padding: 20px;
+        }
+        
+        .hero-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background: transparent;
+        }
+        
+        .hero-image:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+        }
+        
+
+        
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--secondary-color);
+            margin-bottom: 2rem;
+        }
+        
+        .btn-primary-custom {
+            background: var(--primary-color);
+            color: var(--light-color);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(43, 106, 108, 0.3);
+        }
+        
+        .btn-primary-custom:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(43, 106, 108, 0.4);
+            color: var(--light-color);
+        }
+        
+        .features-section {
+            padding: 80px 0;
+            background: var(--light-color);
+        }
+        
+        .feature-card {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            height: 100%;
+            background: var(--light-color);
+            color: var(--primary-color);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            background: var(--secondary-color);
+            color: var(--light-color);
+        }
+        
+        .feature-actions {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover .feature-actions {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .feature-actions .btn {
+            transition: all 0.3s ease;
+        }
+        
+        .feature-actions .btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        /* Mobile Preview Styles */
+        .mobile-preview {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .mobile-frame {
+            width: 200px;
+            height: 350px;
+            border: 8px solid #333;
+            border-radius: 25px;
+            background: #000;
+            padding: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .mobile-screen {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            padding: 15px;
+            color: white;
+            font-size: 12px;
+        }
+        
+        .mobile-header {
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+        
+        .mobile-search {
+            background: rgba(255,255,255,0.2);
+            padding: 8px 12px;
+            border-radius: 20px;
+            margin-bottom: 15px;
+            font-size: 11px;
+        }
+        
+        .mobile-product {
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            padding: 10px;
+        }
+        
+        .mobile-product-img {
+            width: 100%;
+            height: 60px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 8px;
+            margin-bottom: 8px;
+        }
+        
+        .mobile-product-info h6 {
+            margin: 0;
+            font-size: 12px;
+        }
+        
+        .mobile-product-info p {
+            margin: 5px 0;
+            font-size: 11px;
+        }
+        
+        .mobile-stars {
+            font-size: 10px;
+        }
+        
+        /* Quality Score Styles */
+        .quality-score {
+            background: var(--primary-color);
+            color: var(--light-color);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+        
+        .quality-metrics {
+            background: #eee;
+            padding: 15px;
+            border-radius: 10px;
+            color: #000;
+        }
+        
+        /* Review Styles */
+        .reviews-container {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .review-item {
+            transition: all 0.3s ease;
+        }
+        
+        .review-item:hover {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 10px;
+            margin: -10px;
+        }
+        
+        /* Navbar Search Styles */
+        .dropdown-menu-center {
+            left: 50% !important;
+            transform: translateX(-50%) !important;
+            min-width: 300px;
+        }
+        
+        .dropdown-item .input-group {
+            margin: 0;
+        }
+        
+        .dropdown-item .form-control {
+            border-radius: 20px 0 0 20px;
+            border: 1px solid #dee2e6;
+        }
+        
+        .dropdown-item .btn {
+            border-radius: 0 20px 20px 0;
+            border: 1px solid #dee2e6;
+            border-left: none;
+        }
+        
+        .dropdown-item .btn:hover {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: white;
+        }
+        
+        .search-suggestions {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        
+        .search-suggestion-item {
+            padding: 8px 15px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .search-suggestion-item:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .search-suggestion-item .suggestion-category {
+            font-size: 0.8rem;
+            color: #6c757d;
+        }
+        
+        /* Categories Menu Styles */
+        .categories-menu {
+            min-width: 250px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .category-item {
+            padding: 10px 15px;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+        
+        .category-item:hover {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-left-color: var(--accent-color);
+            transform: translateX(5px);
+        }
+        
+        .category-item i {
+            width: 20px;
+            text-align: center;
+        }
+        
+        .category-item.protein:hover {
+            background: linear-gradient(135deg, #28a745, #20c997);
+        }
+        
+        .category-item.gainers:hover {
+            background: linear-gradient(135deg, #ffc107, #fd7e14);
+        }
+        
+        .category-item.pre-workout:hover {
+            background: linear-gradient(135deg, #dc3545, #fd7e14);
+        }
+        
+        .category-item.post-workout:hover {
+            background: linear-gradient(135deg, #6f42c1, #e83e8c);
+        }
+        
+        .category-item.ayurveda:hover {
+            background: linear-gradient(135deg, #28a745, #20c997);
+        }
+        
+        .category-item.supplement:hover {
+            background: linear-gradient(135deg, #17a2b8, #6f42c1);
+        }
+        
+        .category-item.fat-burner:hover {
+            background: linear-gradient(135deg, #dc3545, #fd7e14);
+        }
+        
+        /* Hover Dropdown Styles */
+        .navbar-nav .dropdown:hover .dropdown-menu {
+            display: block !important;
+        }
+        
+        .navbar-nav .dropdown .dropdown-menu {
+            margin-top: 0;
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            border: none;
+            animation: fadeInDown 0.3s ease;
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Ensure dropdown stays open when hovering over menu items */
+        .dropdown-menu:hover {
+            display: block !important;
+        }
+        
+
+        
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--primary-color);
+            color: var(--light-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+        }
+        
+        .cta-section {
+            background: var(--primary-color);
+            color: var(--light-color);
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .footer {
+            background: var(--primary-color);
+            color: var(--light-color);
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        .footer h5,
+        .footer p,
+        .footer a,
+        .footer i {
+            color: var(--light-color) !important;
+        }
+        
+        .footer a:hover {
+            color: #ccc !important;
+        }
+        
+        .search-box {
+            background: var(--light-color);
+            border-radius: 50px;
+            padding: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            margin-bottom: 2rem;
+        }
+        
+        .search-input {
+            border: none;
+            outline: none;
+            padding: 12px 20px;
+            width: 100%;
+            border-radius: 25px;
+            background: var(--light-color);
+            color: var(--primary-color);
+        }
+        
+        .search-btn {
+            background: var(--primary-color);
+            color: var(--light-color);
+            border: none;
+            padding: 12px 25px;
+            border-radius:  25px;
+            font-weight: 600;
+            
+        }
+        
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+                
+            }
+            .hero-subtitle {
+                font-size: 1.1rem;
+                
+            }
+            .hero-image-container {
+                margin-top: 0.5rem;
+            }
+            .hero-image {
+                max-width: 80%;
+            }
+            .navbar-logo {
+                width: 60px;
+                height: 60px;
+                background: transparent !important;
+                filter: brightness(1.1) contrast(1.1);
+            }
+            .navbar-brand {
+                font-size: 1.5rem;
+                
+            }
+            .hero-section { height: 70vh !important; min-height: 320px; margin-top: 56px; }
+            #homepageWallpaperCarousel img { height: 100% !important; }
+        }
+        
+        /* Modal title styling */
+        #authModalLabel {
+            color: #0d6efd !important;
+            font-weight: 700;
+        }
+        
+        /* Form labels styling */
+        .form-label {
+            color: #0d6efd;
+            font-weight: 600;
+        }
+        
+        /* Required field asterisk */
+        .text-danger {
+            color: #dc3545 !important;
+            font-weight: bold;
+        }
+        
+        /* Comparison Preview Styles */
+        .comparison-preview {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+        }
+        
+        .placeholder-content {
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        /* Moving Brand Strip Styles */
+        .brand-strip-section {
+            position: relative;
+            background: #fff;
+            overflow: hidden;
+        }
+        
+        .brand-strip {
+            display: flex;
+            animation: slideBrands 30s linear infinite;
+            width: max-content;
+            background: #fff;
+        }
+        
+        @keyframes slideBrands {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+        
+        .brand-item {
+            flex-shrink: 0;
+            margin: 0 20px;
+            min-width: 280px;
+        }
+        
+        .brand-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        
+        .brand-card {
+            background: var(--light-color);
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        
+        .brand-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            border-color: var(--secondary-color);
+            color: var(--light-color);
+        }
+        
+        .brand-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.5rem;
+            color: #fff;
+            transition: all 0.3s ease;
+        }
+        
+        .brand-item:nth-child(6n+1) .brand-icon {
+            background: linear-gradient(135deg, #28a745, #20c997);
+        }
+        
+        .brand-item:nth-child(6n+2) .brand-icon {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+        }
+        
+        .brand-item:nth-child(6n+3) .brand-icon {
+            background: linear-gradient(135deg, #fd7e14, #e55a00);
+        }
+        
+        .brand-item:nth-child(6n+4) .brand-icon {
+            background: linear-gradient(135deg, #dc3545, #c82333);
+        }
+        
+        .brand-item:nth-child(6n+5) .brand-icon {
+            background: linear-gradient(135deg, #6f42c1, #5a2d91);
+        }
+        
+        .brand-item:nth-child(6n+6) .brand-icon {
+            background: linear-gradient(135deg, #17a2b8, #138496);
+        }
+        
+        .brand-card:hover .brand-icon {
+            transform: scale(1.1);
+        }
+        
+        .brand-name {
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .brand-tagline {
+            color: #6c757d;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        .brand-badge {
+            background: var(--primary-color);
+            color: var(--light-color);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        
+        .brand-card:hover .brand-badge {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(43, 106, 108, 0.3);
+        }
+        
+        /* Pause animation on hover */
+        .brand-strip-section:hover .brand-strip {
+            animation-play-state: paused;
+        }
+        
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .brand-item {
+                min-width: 240px;
+                margin: 0 15px;
+            }
+            
+            .brand-card {
+                padding: 1rem;
+            }
+            
+            .brand-name {
+                font-size: 1rem;
+            }
+            
+            .brand-tagline {
+                font-size: 0.8rem;
+            }
+        }
+        
+        /* Product Image Styles */
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background: var(--light-color);
+            /* filter: grayscale(1); */
+        }
+        
+        .product-image:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        
+        .product-card .product-image {
+            margin-bottom: 15px;
+        }
+        
+        /* Fallback for missing images */
+        .product-image-placeholder {
+            width: 100%;
+            height: 200px;
+            background: #eee;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            color: var(--secondary-color);
+        }
+        
+        /* Comparison Image Styles */
+        .comparison-image-container {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            background: var(--light-color);
+            padding: 1rem;
+            border: 1px solid var(--primary-color);
+        }
+        
+        .comparison-image-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .comparison-image {
+            width: 100%;
+            height: 150px;
+            object-fit: contain;
+            display: block;
+            transition: transform 0.3s ease;
+            background: var(--light-color);
+            /* filter: grayscale(1); */
+        }
+        
+        .comparison-image-container:hover .comparison-image {
+            transform: scale(1.05);
+        }
+        
+        .comparison-overlay {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 2;
+        }
+        
+        .comparison-overlay .badge {
+            font-size: 0.7rem;
+            padding: 0.4rem 0.6rem;
+            border-radius: 20px;
+            font-weight: 600;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        
+        /* Mobile responsiveness for comparison images */
+        @media (max-width: 768px) {
+            .comparison-image {
+                height: 120px;
+            }
+            
+            .comparison-overlay .badge {
+                font-size: 0.6rem;
+                padding: 0.3rem 0.5rem;
+            }
+        }
+
+        .dropdown-menu,
+        .dropdown-menu-end {
+            background: var(--light-color) !important;
+            color: var(--primary-color);
+        }
+        .dropdown-menu .dropdown-item {
+            color: var(--primary-color);
+        }
+        .dropdown-menu .dropdown-item:hover, .dropdown-menu .dropdown-item:focus {
+            background: var(--primary-color);
+            color: var(--light-color);
+        }
+
+        .navbar-nav .dropdown-toggle:hover,
+        #hamburgerMenu:hover {
+            background: var(--primary-color) !important;
+            color: var(--light-color) !important;
+            border-color: var(--primary-color) !important;
+        }
+        .navbar-nav .dropdown-toggle:focus,
+        #hamburgerMenu:focus {
+            background: var(--primary-color) !important;
+            color: var(--light-color) !important;
+            border-color: var(--primary-color) !important;
+        }
+        
+        /* OTP Input Styling */
+        .otp-input-container {
+            position: relative;
+        }
+        
+        .otp-input-container input {
+            font-size: 1.5rem;
+            font-weight: bold;
+            letter-spacing: 0.5rem;
+            text-align: center;
+            border: 2px solid #dee2e6;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .otp-input-container input:focus {
+            border-color: #222;
+            box-shadow: 0 0 0 0.2rem rgba(0,0,0,0.10);
+        }
+        
+        .otp-input-container input::placeholder {
+            letter-spacing: 0.5rem;
+            color: #adb5bd;
+        }
+
+        .modal-header.bg-primary, .modal-header.bg-primary.text-white, #authModal .modal-header {
+            background: var(--primary-color) !important;
+            color: var(--light-color) !important;
+            border-top-left-radius: 0.5rem;
+            border-top-right-radius: 0.5rem;
+        }
+        #authModal .modal-title {
+            color: var(--light-color) !important;
+        }
+        #authModal .modal-body {
+            background: var(--light-color);
+        }
+        #authModal .btn.btn-primary {
+            background: var(--primary-color) !important;
+            border: none !important;
+            color: var(--light-color) !important;
+            font-weight: 600;
+            border-radius: 25px;
+            transition: background 0.2s, color 0.2s;
+        }
+        #authModal .btn.btn-primary:hover, #authModal .btn.btn-primary:focus {
+            background: var(--secondary-color) !important;
+            color: var(--light-color) !important;
+        }
+        #authModal .form-control:focus {
+            border-color: var(--primary-color) !important;
+            box-shadow: 0 0 0 0.2rem rgba(0,0,0,0.15) !important;
+        }
+        #authModal .input-group-text {
+            background: var(--primary-color);
+            color: var(--light-color);
+            border: none;
+        }
+        #authModal .form-label {
+            color: var(--primary-color) !important;
+            font-weight: 600;
+        }
+        #authModal .text-primary,
+        #authModal h5.text-primary,
+        #authModal .fw-bold.text-primary {
+            color: var(--primary-color) !important;
+        }
+        #authModal .modal-title i.fas {
+            color: var(--primary-color) !important;
+        }
+        #homepageWallpaperCarousel {
+          background: var(--light-color);
+        }
+        @media (max-width: 768px) {
+          #homepageWallpaperCarousel img {
+            height: 200px !important;
+          }
+          #homepageWallpaperCarousel {
+            max-height: 200px;
+          }
+        }
+
+        #authModal .modal-header,
+        #authModal .modal-body,
+        #authModal .modal-footer,
+        #authModal .modal-content {
+            background: var(--light-color) !important;
+            color: var(--primary-color) !important;
+        }
+        #authModal .form-label,
+        #authModal .modal-title,
+        #authModal .fw-bold,
+        #authModal .text-primary {
+            color: var(--primary-color) !important;
+        }
+        #authModal .form-control {
+            background: var(--light-color);
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+        }
+        #authModal .form-control:focus {
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 0.2rem rgba(0,0,0,0.10);
+        }
+        #authModal .input-group-text {
+            background: var(--light-color);
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+        }
+        #authModal .btn.btn-primary {
+            background: var(--primary-color) !important;
+            color: var(--light-color) !important;
+            border: none !important;
+        }
+        #authModal .btn.btn-primary:hover, #authModal .btn.btn-primary:focus {
+            background: var(--secondary-color) !important;
+            color: var(--light-color) !important;
+        }
+
+        #authModal .btn,
+        #authModal .btn-primary,
+        #authModal .btn-outline-secondary {
+            background: var(--primary-color) !important;
+            color: var(--light-color) !important;
+            border: none !important;
+        }
+        #authModal .btn:hover,
+        #authModal .btn:focus,
+        #authModal .btn-primary:hover,
+        #authModal .btn-primary:focus,
+        #authModal .btn-outline-secondary:hover,
+        #authModal .btn-outline-secondary:focus {
+            background: var(--secondary-color) !important;
+            color: var(--light-color) !important;
+        }
+
+        .dark-theme {
+            background: #222 !important;
+            color: #fff !important;
+        }
+        .light-theme {
+            background: #fff !important;
+            color: #000 !important;
+        }
+    </style>
+    <title>NUTRI JUDGE - Find Your Perfect Supplements</title>
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="src/logo_nav.jpg0000.png" alt="NUTRIJUDGE Logo" class="navbar-logo">
+                NUTRIJUDGE
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation menu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="comparison.html">Compare</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="categories.html"><i class="fas fa-th-large me-1"></i>Categories</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="blog.html"><i class="fas fa-blog me-1"></i>Blog</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- Right side hamburger menu -->
+            <div class="navbar-nav ms-auto">
+                <div class="dropdown">
+                    <button class="btn btn-outline-light btn-sm dropdown-toggle" type="button" id="hamburgerMenu" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Open menu">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="hamburgerMenu">
+                        <li><a class="dropdown-item" href="#" onclick="openAuthModal()"><i class="fas fa-sign-in-alt me-2"></i>Login</a></li>
+                        <li><a class="dropdown-item" href="wishlist.html"><i class="fas fa-heart me-2"></i>Wishlist</a></li>
+                        <li><a class="dropdown-item" href="cart.html"><i class="fas fa-shopping-cart me-2"></i>Cart</a></li>
+                        <li><a class="dropdown-item" href="profile.html"><i class="fas fa-user me-2"></i>Profile</a></li>
+                        <li><a class="dropdown-item" href="orders.html"><i class="fas fa-box me-2"></i>Orders</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="policies.html"><i class="fas fa-file-contract me-2"></i>Policies</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="https://wa.me/1234567890?text=Hi%20NUTRIJUDGE%20Support,%20I%20need%20help" target="_blank" rel="noopener"><i class="fab fa-whatsapp me-2"></i>WhatsApp Support</a></li>
+                        <li><a class="dropdown-item" href="admin.html"><i class="fas fa-user-cog me-2"></i>Admin</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section with Fullscreen Sliding Wallpaper -->
+    <section id="home" class="hero-section p-0 m-0 position-relative w-100" style="height: 110vh; min-height: 600px; overflow: hidden;">
+      <!-- Carousel as background (absolutely positioned) -->
+      <div id="homepageWallpaperCarousel" class="carousel slide carousel-fade position-absolute top-0 start-0 w-100 h-100 m-0 p-0" data-bs-ride="carousel" data-bs-interval="2000" style="z-index: 1;">
+        <div class="carousel-inner w-100 h-100 m-0 p-0">
+          <div class="carousel-item active w-100 h-100 m-0 p-0">
+            <img src="src/1.home.jpg.jpg" class="d-block w-100 h-100 m-0 p-0" alt="Wallpaper 1" style="object-fit:cover;" loading="eager">
+          </div>
+          <div class="carousel-item w-100 h-100 m-0 p-0">
+            <img src="src/2home.jpg.jpg" class="d-block w-100 h-100 m-0 p-0" alt="Wallpaper 2" style="object-fit:cover;" loading="eager">
+          </div>
+          <div class="carousel-item w-100 h-100 m-0 p-0">
+            <img src="src/3home.jpg.jpg" class="d-block w-100 h-100 m-0 p-0" alt="Wallpaper 3" style="object-fit:cover;" loading="eager">
+          </div>
+          <!-- Add this block for the new image -->
+        </div>
+        <!-- Overlay for readability -->
+        <div class="position-absolute top-0 start-0 w-100 h-100 m-0 p-0" style="background:rgba(0,0,0,0.45);z-index:2;"></div>
+      </div>
+      <!-- Centered content on top of carousel -->
+      <div class="container-fluid h-100 position-relative d-flex flex-column justify-content-center align-items-center px-0 mx-0" style="z-index: 5;">
+        <div class="hero-content text-center w-100" style="max-width: 600px; margin: 0 auto;">
+          <div class="search-box mb-4 mx-auto" style="max-width: 420px; box-shadow: 0 4px 24px rgba(0,0,0,0.15);">
+            <div class="row g-0">
+              <div class="col-8">
+                <input type="text" class="search-input" id="searchInput" placeholder="Search by brand, goal, or product..." onkeypress="handleSearchKeyPress(event)">
+              </div>
+              <div class="col-4">
+                <button class="search-btn w-100" onclick="performSearch()" id="searchBtn">
+                  <i class="fas fa-search me-2"></i>Search
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="d-flex flex-column flex-md-row justify-content-center align-items-center gap-3">
+            <a href="brands.html" class="btn btn-primary-custom px-4 py-2">
+              Buy Direct From Trusted Brands
+            </a>
+            <a href="comparison.html" class="btn btn-outline-primary btn-lg px-4 py-2" style="border-color: #000; color: #000; background: rgba(255,255,255,0.15);" onmouseover="this.style.backgroundColor='#000'; this.style.color='white';" onmouseout="this.style.backgroundColor='rgba(255,255,255,0.15)'; this.style.color='#000';">
+              Compare
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="brand-strip-section py-4" style="background: #fff; overflow: hidden;">
+        <div class="container-fluid">
+            <div class="brand-strip">
+                <div class="brand-item">
+                    <a href="https://www.muscleblaze.com/" rel="noopener" class="brand-link">
+                        <div class="brand-card">
+                            <div class="brand-icon">
+                                <i class="fas fa-dumbbell"></i>
+                            </div>
+                            <h5 class="brand-name">MUSCLEBLAZE</h5>
+                            <p class="brand-tagline">Premium Protein & Supplements</p>
+                            <div class="brand-badge">Visit Store</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="brand-item">
+                    <a href="https://www.guardian.in/" rel="noopener" class="brand-link">
+                        <div class="brand-card">
+                            <div class="brand-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <h5 class="brand-name">GNC</h5>
+                            <p class="brand-tagline">Trusted Health & Nutrition</p>
+                            <div class="brand-badge">Visit Store</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="brand-item">
+                    <a href="https://nutrabay.com/" rel="noopener" class="brand-link">
+                        <div class="brand-card">
+                            <div class="brand-icon">
+                                <i class="fas fa-leaf"></i>
+                            </div>
+                            <h5 class="brand-name">NUTRABAY</h5>
+                            <p class="brand-tagline">Authentic Supplements</p>
+                            <div class="brand-badge">Visit Store</div>
+                        </div>
+                    </a>
+                </div>
+                <!--
+                <div class="brand-item">
+                    <a href="https://www.bigmusclesnutrition.com/" rel="noopener" class="brand-link">
+                        <div class="brand-card">
+                            <div class="brand-icon">
+                                <i class="fas fa-fire"></i>
+                            </div>
+                            <h5 class="brand-name">BIG MUSCLES</h5>
+                            <p class="brand-tagline">Premium Nutrition</p>
+                            <div class="brand-badge">Visit Store</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="brand-item">
+                    <a href="https://www.optimumnutrition.co.in/" rel="noopener" class="brand-link">
+                        <div class="brand-card">
+                            <div class="brand-icon">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <h5 class="brand-name">OPTIMUM NUTRITION</h5>
+                            <p class="brand-tagline">Gold Standard Quality</p>
+                            <div class="brand-badge">Visit Store</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="brand-item">
+                    <a href="https://www.healthkart.com/" rel="noopener" class="brand-link">
+                        <div class="brand-card">
+                            <div class="brand-icon">
+                                <i class="fas fa-heartbeat"></i>
+                            </div>
+                            <h5 class="brand-name">HEALTHKART</h5>
+                            <p class="brand-tagline">Health & Wellness</p>
+                            <div class="brand-badge">Visit Store</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="brand-item">
+                    <a href="https://dymatize.com/" rel="noopener" class="brand-link">
+                        <div class="brand-card">
+                            <div class="brand-icon">
+                                <i class="fas fa-bolt"></i>
+                            </div>
+                            <h5 class="brand-name">DYMATIZE</h5>
+                            <p class="brand-tagline">Elite Performance</p>
+                            <div class="brand-badge">Visit Store</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="brand-item">
+                    <a href="https://scitron.com/" rel="noopener" class="brand-link">
+                        <div class="brand-card">
+                            <div class="brand-icon">
+                                <i class="fas fa-atom"></i>
+                            </div>
+                            <h5 class="brand-name">SCITRON</h5>
+                            <p class="brand-tagline">Scientific Nutrition</p>
+                            <div class="brand-badge">Visit Store</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="brand-item">
+                    <a href="https://www.muscletech.in/" rel="noopener" class="brand-link">
+                        <div class="brand-card">
+                            <div class="brand-icon">
+                                <i class="fas fa-cogs"></i>
+                            </div>
+                            <h5 class="brand-name">MUSCLETECH</h5>
+                            <p class="brand-tagline">Advanced Technology</p>
+                            <div class="brand-badge">Visit Store</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="brand-item">
+                    <a href="https://www.muscleblaze.com/" rel="noopener" class="brand-link">
+                        <div class="brand-card">
+                            <div class="brand-icon">
+                                <i class="fas fa-dumbbell"></i>
+                            </div>
+                            <h5 class="brand-name">MUSCLEBLAZE</h5>
+                            <p class="brand-tagline">Premium Protein & Supplements</p>
+                            <div class="brand-badge">Visit Store</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="brand-item">
+                    <a href="https://www.guardian.in/" rel="noopener" class="brand-link">
+                        <div class="brand-card">
+                            <div class="brand-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <h5 class="brand-name">GNC</h5>
+                            <p class="brand-tagline">Trusted Health & Nutrition</p>
+                            <div class="brand-badge">Visit Store</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="brand-item">
+                    <a href="https://nutrabay.com/" rel="noopener" class="brand-link">
+                        <div class="brand-card">
+                            <div class="brand-icon">
+                                <i class="fas fa-leaf"></i>
+                            </div>
+                            <h5 class="brand-name">NUTRABAY</h5>
+                            <p class="brand-tagline">Authentic Supplements</p>
+                            <div class="brand-badge">Visit Store</div>
+                        </div>
+                    </a>
+                </div>
+                -->
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+    <!-- Featured Products Section -->
+    <section class="py-5" style="background: #fff;">
+        <div class="container">
+            <div class="row text-center mb-5">
+                <div class="col-lg-8 mx-auto">
+                    <h2 class="display-5 fw-bold mb-3" style="color: #000;">Featured Products</h2>
+                    <p class="lead text-muted">Discover our top-rated supplements with detailed comparisons</p>
+                </div>
+            </div>
+            
+            <div class="row g-4" id="featuredProducts">
+                <!-- Featured products will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>NUTRIJUDGE</h5>
+                    <p class="text-muted">Your trusted partner in making informed supplement choices.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="text-muted">&copy; 2025 NUTRIJUDGE. All rights reserved.</p>
+                    <div class="mt-2">
+                        <a href="#" class="text-muted me-3"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-muted me-3"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-muted me-3"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-muted"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Ensure Bootstrap JS and Popper are loaded at the end of body -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/js/bootstrap.min.js"></script>
+    <script src="src/data.js"></script>
+    <script src="src/userManager.js"></script>
+    <script src="src/cartManager.js"></script>
+    
+    <!-- Login/Register Modal -->
+    <div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="authModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="authModalLabel">
+                        <i class="fas fa-user-circle me-2"></i>Welcome to NUTRIJUDGE
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Login Section -->
+                    <div class="text-center mb-4">
+                        <h5 class="text-primary fw-bold">
+                            <i class="fas fa-sign-in-alt me-2"></i>Login with Phone Number
+                        </h5>
+                        <p class="text-muted">Enter your phone number to receive OTP</p>
+                    </div>
+                    
+                    <!-- Login Form -->
+                    <form id="loginForm" class="mt-4">
+                        <div class="mb-3">
+                            <label for="loginPhone" class="form-label">
+                                Phone Number <span class="text-danger">*</span>
+                            </label>
+                            <div class="input-group">
+                                <span class="input-group-text">+91</span>
+                                <input type="tel" class="form-control" id="loginPhone" placeholder="Enter your 10-digit phone number" required maxlength="10" pattern="[0-9]{10}">
+                            </div>
+                            <div class="invalid-feedback">
+                                Please enter a valid 10-digit phone number.
+                            </div>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-mobile-alt me-2"></i>Send OTP
+                            </button>
+                        </div>
+                        <div class="text-center mt-3">
+                            <small class="text-muted">We'll send a 6-digit OTP to your phone number</small>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- OTP Verification Modal -->
+    <div class="modal fade" id="otpModal" tabindex="-1" aria-labelledby="otpModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="otpModalLabel">
+                        <i class="fas fa-shield-alt me-2"></i>Verify OTP
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center mb-4">
+                        <div class="mb-3">
+                            <i class="fas fa-mobile-alt fa-3x text-primary"></i>
+                        </div>
+                        <h6>OTP Sent Successfully!</h6>
+                        <p class="text-muted">We've sent a 6-digit OTP to <strong id="otpPhoneNumber"></strong></p>
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle me-2"></i>
+                            <strong>Demo OTP:</strong> <span id="demoOTP" class="fw-bold">123456</span>
+                        </div>
+                    </div>
+                    
+                    <form id="otpForm">
+                        <div class="mb-4">
+                            <label for="otpInput" class="form-label">Enter 6-digit OTP</label>
+                            <div class="otp-input-container">
+                                <input type="text" class="form-control form-control-lg text-center" id="otpInput" 
+                                       placeholder="000000" maxlength="6" pattern="[0-9]{6}" required>
+                            </div>
+                            <div class="invalid-feedback">
+                                Please enter the 6-digit OTP.
+                            </div>
+                        </div>
+                        
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="fas fa-check me-2"></i>Verify & Login
+                            </button>
+                            <button type="button" class="btn btn-outline-secondary" onclick="resendOTP()">
+                                <i class="fas fa-redo me-2"></i>Resend OTP
+                            </button>
+                        </div>
+                    </form>
+                    
+                    <div class="text-center mt-3">
+                        <small class="text-muted">
+                            <i class="fas fa-clock me-1"></i>
+                            OTP expires in <span id="otpTimer" class="fw-bold">05:00</span>
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Modal -->
+    <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="contactModalLabel">
+                        <i class="fas fa-phone me-2"></i>Contact NUTRIJUDGE
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6 class="text-primary mb-3"><i class="fas fa-info-circle me-2"></i>Get in Touch</h6>
+                            <div class="contact-info">
+                                <div class="d-flex align-items-center mb-3">
+                                    <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px;">
+                                        <i class="fas fa-phone"></i>
+                                    </div>
+                                    <div>
+                                        <strong>Phone</strong><br>
+                                        <a href="tel:+1234567890" class="text-decoration-none" rel="noopener">+1 (234) 567-890</a>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center mb-3">
+                                    <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px;">
+                                        <i class="fas fa-envelope"></i>
+                                    </div>
+                                    <div>
+                                        <strong>Email</strong><br>
+                                        <a href="mailto:contact@nutrijudge.com" class="text-decoration-none" rel="noopener">contact@nutrijudge.com</a>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center mb-3">
+                                    <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px;">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                    </div>
+                                    <div>
+                                        <strong>Address</strong><br>
+                                        123 Fitness Street<br>
+                                        Health City, HC 12345
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px;">
+                                        <i class="fab fa-whatsapp"></i>
+                                    </div>
+                                    <div>
+                                        <strong>WhatsApp</strong><br>
+                                        <a href="https://wa.me/1234567890?text=Hi%20NUTRIJUDGE%20Support,%20I%20need%20help" target="_blank" class="text-decoration-none" rel="noopener">+1 (234) 567-890</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="text-primary mb-3"><i class="fas fa-paper-plane me-2"></i>Send Message</h6>
+                            <form id="contactForm">
+                                <div class="mb-3">
+                                    <label for="contactName" class="form-label">Name <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="contactName" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="contactEmail" class="form-label">Email <span class="text-danger">*</span></label>
+                                    <input type="email" class="form-control" id="contactEmail" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="contactSubject" class="form-label">Subject</label>
+                                    <input type="text" class="form-control" id="contactSubject">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="contactMessage" class="form-label">Message <span class="text-danger">*</span></label>
+                                    <textarea class="form-control" id="contactMessage" rows="4" required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary w-100">
+                                    <i class="fas fa-paper-plane me-2"></i>Send Message
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const target = document.querySelector(targetId);
+                if (target) {
+                    const navbar = document.querySelector('.navbar');
+                    const navbarHeight = navbar ? navbar.offsetHeight : 0;
+                    const elementPosition = target.getBoundingClientRect().top + window.pageYOffset;
+                    window.scrollTo({
+                        top: elementPosition - navbarHeight,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Navbar background change on scroll
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            navbar.style.background = 'rgba(255, 255, 255, 0.15)';
+            navbar.style.boxShadow = 'none';
+            navbar.style.backdropFilter = 'blur(12px)';
+            navbar.style.webkitBackdropFilter = 'blur(12px)';
+        });
+
+        // Authentication Modal Functions
+        function openAuthModal() {
+            const modal = new bootstrap.Modal(document.getElementById('authModal'));
+            modal.show();
+        }
+
+        function togglePassword(inputId) {
+            const input = document.getElementById(inputId);
+            const button = input.nextElementSibling;
+            const icon = button.querySelector('i');
+            
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+
+        // OTP-based login system
+        let currentOTP = '';
+        let otpTimer = null;
+        let currentPhone = '';
+
+        // Generate a random 6-digit OTP
+        function generateOTP() {
+            return Math.floor(100000 + Math.random() * 900000).toString();
+        }
+
+        // Start OTP timer
+        function startOTPTimer() {
+            let timeLeft = 300; // 5 minutes in seconds
+            const timerElement = document.getElementById('otpTimer');
+            
+            otpTimer = setInterval(() => {
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                timerElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(otpTimer);
+                    timerElement.textContent = '00:00';
+                    showAlert('OTP has expired. Please request a new one.', 'warning');
+                }
+                timeLeft--;
+            }, 1000);
+        }
+
+        // Form validation and submission for phone number
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const phone = document.getElementById('loginPhone').value.trim();
+            
+            // Basic validation
+            if (!phone) {
+                showAlert('Please enter your phone number.', 'danger');
+                return;
+            }
+            
+            if (!/^[0-9]{10}$/.test(phone)) {
+                showAlert('Please enter a valid 10-digit phone number.', 'danger');
+                return;
+            }
+            
+            // Generate OTP
+            currentOTP = generateOTP();
+            currentPhone = phone;
+            
+            // Show OTP modal
+            document.getElementById('otpPhoneNumber').textContent = `+91 ${phone}`;
+            document.getElementById('demoOTP').textContent = currentOTP;
+            
+            // Hide login modal and show OTP modal
+            bootstrap.Modal.getInstance(document.getElementById('authModal')).hide();
+            
+            setTimeout(() => {
+                const otpModal = new bootstrap.Modal(document.getElementById('otpModal'));
+                otpModal.show();
+                
+                // Start timer
+                startOTPTimer();
+                
+                // Focus on OTP input
+                setTimeout(() => {
+                    document.getElementById('otpInput').focus();
+                }, 500);
+            }, 500);
+            
+            showAlert(`OTP sent to +91 ${phone}`, 'success');
+        });
+
+        // OTP form submission
+        document.getElementById('otpForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const enteredOTP = document.getElementById('otpInput').value.trim();
+            
+            if (!enteredOTP) {
+                showAlert('Please enter the OTP.', 'danger');
+                return;
+            }
+            
+            if (enteredOTP !== currentOTP) {
+                showAlert('Invalid OTP. Please check and try again.', 'danger');
+                document.getElementById('otpInput').value = '';
+                document.getElementById('otpInput').focus();
+                return;
+            }
+            
+            // OTP is correct - simulate user login
+            const mockUser = {
+                firstName: 'User',
+                lastName: 'Demo',
+                phone: currentPhone,
+                email: `user${currentPhone}@demo.com`
+            };
+            
+            // Store user in localStorage
+            localStorage.setItem('currentUser', JSON.stringify(mockUser));
+            
+            // Clear timer
+            if (otpTimer) {
+                clearInterval(otpTimer);
+            }
+            
+            // Show success message
+            showAlert(`Login successful! Welcome back, ${mockUser.firstName}.`, 'success');
+            
+            // Clear forms
+            document.getElementById('loginForm').reset();
+            document.getElementById('otpForm').reset();
+            
+            // Hide OTP modal
+            bootstrap.Modal.getInstance(document.getElementById('otpModal')).hide();
+            
+            // Update UI to show logged-in state
+            updateLoginState();
+            
+            // Reset OTP variables
+            currentOTP = '';
+            currentPhone = '';
+        });
+
+        // Resend OTP function
+        function resendOTP() {
+            if (!currentPhone) {
+                showAlert('Please enter your phone number first.', 'warning');
+                return;
+            }
+            
+            // Generate new OTP
+            currentOTP = generateOTP();
+            document.getElementById('demoOTP').textContent = currentOTP;
+            
+            // Reset timer
+            if (otpTimer) {
+                clearInterval(otpTimer);
+            }
+            startOTPTimer();
+            
+            showAlert(`New OTP sent to +91 ${currentPhone}`, 'success');
+        }
+
+
+
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        function showAlert(message, type) {
+            // Create alert element
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${type} alert-dismissible fade show position-fixed`;
+            alertDiv.style.cssText = 'top: 20px; right: 20px; z-index: 9999; min-width: 300px;';
+            alertDiv.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-triangle'} me-2"></i>${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            
+            document.body.appendChild(alertDiv);
+            
+            // Auto remove after 4 seconds
+            setTimeout(() => {
+                if (alertDiv.parentNode) {
+                    alertDiv.remove();
+                }
+            }, 4000);
+        }
+
+        // Search functionality
+        function performSearch() {
+            const searchTerm = document.getElementById('searchInput').value.trim().toLowerCase();
+            
+            if (!searchTerm) {
+                showAlert('Please enter a search term.', 'warning');
+                return;
+            }
+            
+            // Search in product data
+            const searchResults = searchProducts(searchTerm);
+   
+            if (searchResults.length > 0) {
+                // Store search results in localStorage for comparison page
+                localStorage.setItem('searchResults', JSON.stringify(searchResults));
+                
+                // Redirect to comparison page with search results
+                window.location.href = `comparison.html?search=${encodeURIComponent(searchTerm)}`;
+            } else {
+                showAlert(`No products found for "${searchTerm}". Try different keywords like "protein", "vitamin", "omega", etc.`, 'info');
+            }
+        }
+
+        function handleSearchKeyPress(event) {
+            if (event.key === 'Enter') {
+                performSearch();
+            }
+        }
+
+        function searchProducts(searchTerm) {
+            // Import product data from data.js
+            const products = window.product || [];
+            const results = [];
+            
+            products.forEach(product => {
+                if (product.title && product.title.toLowerCase().includes(searchTerm)) {
+                    results.push(product);
+                } else if (product.brand && product.brand.toLowerCase().includes(searchTerm)) {
+                    results.push(product);
+                } else if (product.description && product.description.toLowerCase().includes(searchTerm)) {
+                    results.push(product);
+                }
+            });
+            
+            return results;
+        }
+
+        // Update login state in UI
+        function updateLoginState() {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
+            const hamburgerMenu = document.getElementById('hamburgerMenu');
+            
+            if (currentUser) {
+                // Update hamburger menu for logged-in user
+                hamburgerMenu.innerHTML = `
+                    <i class="fas fa-user-circle me-1"></i>${currentUser.firstName}
+                `;
+                
+                // Update dropdown menu
+                const dropdownMenu = hamburgerMenu.nextElementSibling;
+                dropdownMenu.innerHTML = `
+                    <li><a class="dropdown-item" href="profile.html"><i class="fas fa-user me-2"></i>Profile</a></li>
+                    <li><a class="dropdown-item" href="wishlist.html">
+                        <i class="fas fa-heart me-2"></i>Wishlist
+                        <span class="badge bg-danger ms-2 wishlist-count" style="display: none;">0</span>
+                    </a></li>
+                    <li><a class="dropdown-item" href="cart.html">
+                        <i class="fas fa-shopping-cart me-2"></i>Cart
+                        <span class="badge bg-primary ms-2 cart-count" style="display: none;">0</span>
+                    </a></li>
+                    <li><a class="dropdown-item" href="orders.html"><i class="fas fa-box me-2"></i>Orders</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="policies.html"><i class="fas fa-file-contract me-2"></i>Policies</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="https://wa.me/1234567890?text=Hi%20NUTRIJUDGE%20Support,%20I%20need%20help" target="_blank" rel="noopener"><i class="fab fa-whatsapp me-2"></i>WhatsApp Support</a></li>
+                    <li><a class="dropdown-item" href="admin.html"><i class="fas fa-user-cog me-2"></i>Admin</a></li>
+                `;
+            } else {
+                // Reset to default state
+                hamburgerMenu.innerHTML = '<i class="fas fa-bars"></i>';
+                
+                const dropdownMenu = hamburgerMenu.nextElementSibling;
+                dropdownMenu.innerHTML = `
+                    <li><a class="dropdown-item" href="#" onclick="openAuthModal()"><i class="fas fa-sign-in-alt me-2"></i>Login</a></li>
+                    <li><a class="dropdown-item" href="wishlist.html">
+                        <i class="fas fa-heart me-2"></i>Wishlist
+                        <span class="badge bg-danger ms-2 wishlist-count" style="display: none;">0</span>
+                    </a></li>
+                    <li><a class="dropdown-item" href="cart.html">
+                        <i class="fas fa-shopping-cart me-2"></i>Cart
+                        <span class="badge bg-primary ms-2 cart-count" style="display: none;">0</span>
+                    </a></li>
+                    <li><a class="dropdown-item" href="profile.html"><i class="fas fa-user me-2"></i>Profile</a></li>
+                    <li><a class="dropdown-item" href="orders.html"><i class="fas fa-box me-2"></i>Orders</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="policies.html"><i class="fas fa-file-contract me-2"></i>Policies</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="https://wa.me/1234567890?text=Hi%20NUTRIJUDGE%20Support,%20I%20need%20help" target="_blank" rel="noopener"><i class="fab fa-whatsapp me-2"></i>WhatsApp Support</a></li>
+                    <li><a class="dropdown-item" href="admin.html"><i class="fas fa-user-cog me-2"></i>Admin</a></li>
+                `;
+            }
+        }
+
+        // Logout function
+        function logoutUser() {
+            localStorage.removeItem('currentUser');
+            updateLoginState();
+            showAlert('Logged out successfully.', 'info');
+        }
+
+        // Feature Demo Functions
+        function openFeatureDemo(feature) {
+            const demos = {
+                'comparison': () => window.location.href = 'comparison.html',
+                'price-analysis': () => showPriceAnalysis(),
+                'quality': () => showQualityStandards(),
+                'search': () => openSmartSearch(),
+                'reviews': () => showCommunityReviews(),
+                'mobile': () => testMobileResponsiveness()
+            };
+            
+            if (demos[feature]) {
+                demos[feature]();
+            }
+        }
+
+        function showFeatureDetails(feature) {
+            const details = {
+                'comparison': {
+                    title: 'Side-by-Side Comparison',
+                    content: `
+                        <h5>How it works:</h5>
+                        <ul>
+                            <li>Select up to 4 products to compare</li>
+                            <li>View detailed specifications side by side</li>
+                            <li>Compare prices, ratings, and features</li>
+                            <li>Get instant price analysis and savings</li>
+                            <li>Add products to cart or wishlist</li>
+                        </ul>
+                        <h5>Benefits:</h5>
+                        <ul>
+                            <li>Make informed decisions quickly</li>
+                            <li>Find the best value for your money</li>
+                            <li>Save time on research</li>
+                            <li>Access detailed product information</li>
+                        </ul>
+                    `
+                },
+                'price-analysis': {
+                    title: 'Price Analysis',
+                    content: `
+                        <h5>Features:</h5>
+                        <ul>
+                            <li>Real-time price comparison</li>
+                            <li>Savings calculations</li>
+                            <li>Price history tracking</li>
+                            <li>Value-for-money analysis</li>
+                            <li>Best deal recommendations</li>
+                        </ul>
+                        <h5>Analysis includes:</h5>
+                        <ul>
+                            <li>Price per serving/unit</li>
+                            <li>Percentage savings</li>
+                            <li>Price range analysis</li>
+                            <li>Market price comparison</li>
+                        </ul>
+                    `
+                },
+                'quality': {
+                    title: 'Quality Assurance',
+                    content: `
+                        <h5>Our Standards:</h5>
+                        <ul>
+                            <li>Verified product information</li>
+                            <li>Authentic user reviews</li>
+                            <li>Third-party testing results</li>
+                            <li>FDA compliance verification</li>
+                            <li>GMP certification checks</li>
+                        </ul>
+                        <h5>Quality Checks:</h5>
+                        <ul>
+                            <li>Ingredient verification</li>
+                            <li>Manufacturing standards</li>
+                            <li>Safety testing results</li>
+                            <li>Purity analysis</li>
+                        </ul>
+                    `
+                },
+                'search': {
+                    title: 'Smart Search',
+                    content: `
+                        <h5>Search Options:</h5>
+                        <ul>
+                            <li>Search by brand name</li>
+                            <li>Filter by health goals</li>
+                            <li>Search by ingredients</li>
+                            <li>Price range filtering</li>
+                            <li>Rating-based search</li>
+                        </ul>
+                        <h5>Advanced Features:</h5>
+                        <ul>
+                            <li>Auto-complete suggestions</li>
+                            <li>Search history</li>
+                            <li>Saved searches</li>
+                            <li>Smart recommendations</li>
+                        </ul>
+                    `
+                },
+                'reviews': {
+                    title: 'Community Reviews',
+                    content: `
+                        <h5>Review Features:</h5>
+                        <ul>
+                            <li>Authentic user experiences</li>
+                            <li>Detailed rating system</li>
+                            <li>Photo and video reviews</li>
+                            <li>Helpful vote system</li>
+                            <li>Review verification</li>
+                        </ul>
+                        <h5>Community Benefits:</h5>
+                        <ul>
+                            <li>Real user feedback</li>
+                            <li>Unbiased opinions</li>
+                            <li>Detailed experiences</li>
+                            <li>Helpful insights</li>
+                        </ul>
+                    `
+                },
+                'mobile': {
+                    title: 'Mobile Friendly',
+                    content: `
+                        <h5>Mobile Features:</h5>
+                        <ul>
+                            <li>Responsive design</li>
+                            <li>Touch-friendly interface</li>
+                            <li>Fast loading times</li>
+                            <li>Offline capabilities</li>
+                            <li>Push notifications</li>
+                        </ul>
+                        <h5>Cross-Platform:</h5>
+                        <ul>
+                            <li>iOS and Android support</li>
+                            <li>Tablet optimization</li>
+                            <li>Desktop compatibility</li>
+                            <li>Progressive Web App</li>
+                        </ul>
+                    `
+                }
+            };
+
+            const detail = details[feature];
+            if (detail) {
+                showModal(detail.title, detail.content);
+            }
+        }
+
+        function showPriceAnalysis() {
+            const sampleProducts = [
+                { name: 'Protein Powder A', price: 2499, savings: 500, rating: 4.8 },
+                { name: 'Protein Powder B', price: 2999, savings: 0, rating: 4.6 },
+                { name: 'Protein Powder C', price: 3599, savings: 200, rating: 4.7 }
+            ];
+
+            const content = `
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5>Price Comparison</h5>
+                        <div class="table-responsive">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Product</th>
+                                        <th>Price</th>
+                                        <th>Savings</th>
+                                        <th>Rating</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    ${sampleProducts.map(product => `
+                                        <tr class="${product.savings > 0 ? 'table-success' : ''}">
+                                            <td>${product.name}</td>
+                                            <td>₹${product.price}</td>
+                                            <td>${product.savings > 0 ? `₹${product.savings}` : '-'}</td>
+                                            <td>${'⭐'.repeat(Math.floor(product.rating))} ${product.rating}</td>
+                                        </tr>
+                                    `).join('')}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <h5>Price Analysis Chart</h5>
+                        <div class="text-center">
+                            <canvas id="priceChart" width="300" height="200"></canvas>
+                        </div>
+                        <div class="mt-3">
+                            <p><strong>Best Value:</strong> Protein Powder A - 20% savings</p>
+                            <p><strong>Average Price:</strong> ₹3,032</p>
+                            <p><strong>Total Savings:</strong> ₹700</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            showModal('Price Analysis Demo', content);
+            
+            // Simple chart simulation
+            setTimeout(() => {
+                const canvas = document.getElementById('priceChart');
+                if (canvas) {
+                    const ctx = canvas.getContext('2d');
+                    ctx.fillStyle = '#28a745';
+                    ctx.fillRect(20, 150, 60, 50);
+                    ctx.fillStyle = '#ffc107';
+                    ctx.fillRect(100, 120, 60, 80);
+                    ctx.fillStyle = '#dc3545';
+                    ctx.fillRect(180, 100, 60, 100);
+                    
+                    ctx.fillStyle = '#000';
+                    ctx.font = '12px Arial';
+                    ctx.fillText('A', 45, 210);
+                    ctx.fillText('B', 125, 210);
+                    ctx.fillText('C', 205, 210);
+                }
+            }, 100);
+        }
+
+        function showQualityStandards() {
+            const content = `
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5>Quality Certifications</h5>
+                        <div class="quality-badges">
+                            <div class="badge bg-success me-2 mb-2">FDA Approved</div>
+                            <div class="badge bg-primary me-2 mb-2">GMP Certified</div>
+                            <div class="badge bg-info me-2 mb-2">ISO 9001</div>
+                            <div class="badge bg-warning me-2 mb-2">USP Verified</div>
+                            <div class="badge bg-secondary me-2 mb-2">Third-Party Tested</div>
+                        </div>
+                        
+                        <h6 class="mt-3">Testing Standards</h6>
+                        <ul>
+                            <li>Purity testing (99%+ purity)</li>
+                            <li>Heavy metal testing</li>
+                            <li>Microbial testing</li>
+                            <li>Potency verification</li>
+                            <li>Contamination screening</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <h5>Quality Score</h5>
+                        <div class="text-center">
+                            <div class="quality-score">
+                                <span class="display-4 text-success">9.8/10</span>
+                                <p class="text-muted">Overall Quality Rating</p>
+                            </div>
+                        </div>
+                        
+                        <h6 class="mt-3">Quality Metrics</h6>
+                        <div class="quality-metrics">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>Purity</span>
+                                <span class="text-success">99.2%</span>
+                            </div>
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>Potency</span>
+                                <span class="text-success">98.5%</span>
+                            </div>
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>Safety</span>
+                                <span class="text-success">100%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            showModal('Quality Assurance Standards', content);
+        }
+
+        function openSmartSearch() {
+            const content = `
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5>Smart Search Demo</h5>
+                        <div class="mb-3">
+                            <label class="form-label">Search by Goal</label>
+                            <select class="form-control" id="goalSearch">
+                                <option value="">Select Health Goal</option>
+                                <option value="muscle">Muscle Building</option>
+                                <option value="weight-loss">Weight Loss</option>
+                                <option value="energy">Energy Boost</option>
+                                <option value="immunity">Immunity Support</option>
+                                <option value="heart">Heart Health</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Search by Brand</label>
+                            <input type="text" class="form-control" id="brandSearch" placeholder="Enter brand name">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Price Range</label>
+                            <div class="d-flex gap-2">
+                                <input type="number" class="form-control" placeholder="Min" id="minPrice">
+                                <input type="number" class="form-control" placeholder="Max" id="maxPrice">
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" onclick="performSmartSearch()">
+                            <i class="fas fa-search me-2"></i>Search
+                        </button>
+                    </div>
+                    <div class="col-md-6">
+                        <h5>Search Results</h5>
+                        <div id="smartSearchResults">
+                            <p class="text-muted">Enter search criteria to see results</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            showModal('Smart Search', content);
+        }
+
+        function performSmartSearch() {
+            const goal = document.getElementById('goalSearch').value;
+            const brand = document.getElementById('brandSearch').value;
+            const minPrice = document.getElementById('minPrice').value;
+            const maxPrice = document.getElementById('maxPrice').value;
+
+            // Simulate search results
+            const results = [
+                { name: 'Whey Protein Isolate', brand: 'MuscleMax', price: 2499, goal: 'muscle', rating: 4.8 },
+                { name: 'BCAA Complex', brand: 'PowerFuel', price: 1299, goal: 'muscle', rating: 4.6 },
+                { name: 'Green Tea Extract', brand: 'HealthFirst', price: 899, goal: 'weight-loss', rating: 4.5 },
+                { name: 'Vitamin D3', brand: 'PureHealth', price: 599, goal: 'immunity', rating: 4.7 }
+            ];
+
+            let filteredResults = results;
+
+            if (goal) {
+                filteredResults = filteredResults.filter(item => item.goal === goal);
+            }
+            if (brand) {
+                filteredResults = filteredResults.filter(item => 
+                    item.brand.toLowerCase().includes(brand.toLowerCase())
+                );
+            }
+            if (minPrice) {
+                filteredResults = filteredResults.filter(item => item.price >= parseInt(minPrice));
+            }
+            if (maxPrice) {
+                filteredResults = filteredResults.filter(item => item.price <= parseInt(maxPrice));
+            }
+
+            const resultsHtml = filteredResults.length > 0 ? 
+                filteredResults.map(item => `
+                    <div class="card mb-2">
+                        <div class="card-body p-2">
+                            <h6 class="card-title mb-1">${item.name}</h6>
+                            <p class="card-text small mb-1">${item.brand} • ₹${item.price}</p>
+                            <div class="text-warning">${'⭐'.repeat(Math.floor(item.rating))} ${item.rating}</div>
+                        </div>
+                    </div>
+                `).join('') :
+                '<p class="text-muted">No products found matching your criteria</p>';
+
+            document.getElementById('smartSearchResults').innerHTML = resultsHtml;
+        }
+
+        function showCommunityReviews() {
+            const reviews = [
+                {
+                    user: 'John D.',
+                    rating: 5,
+                    date: '2 days ago',
+                    title: 'Excellent Quality',
+                    content: 'This protein powder exceeded my expectations. Great taste and mixes well.',
+                    helpful: 12
+                },
+                {
+                    user: 'Sarah M.',
+                    rating: 4,
+                    date: '1 week ago',
+                    title: 'Good Value',
+                    content: 'Good quality for the price. Would recommend to others.',
+                    helpful: 8
+                },
+                {
+                    user: 'Mike R.',
+                    rating: 5,
+                    date: '2 weeks ago',
+                    title: 'Amazing Results',
+                    content: 'Been using this for 3 months and seeing great results in my workouts.',
+                    helpful: 15
+                }
+            ];
+
+            const content = `
+                <h5>Community Reviews</h5>
+                <div class="reviews-container">
+                    ${reviews.map(review => `
+                        <div class="review-item border-bottom pb-3 mb-3">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div>
+                                    <h6 class="mb-1">${review.title}</h6>
+                                    <div class="text-warning mb-1">${'⭐'.repeat(review.rating)}</div>
+                                    <p class="text-muted small mb-2">By ${review.user} • ${review.date}</p>
+                                </div>
+                                <button class="btn btn-sm btn-outline-primary">
+                                    <i class="fas fa-thumbs-up me-1"></i>${review.helpful}
+                                </button>
+                            </div>
+                            <p class="mb-0">${review.content}</p>
+                        </div>
+                    `).join('')}
+                </div>
+                <div class="text-center">
+                    <button class="btn btn-primary" onclick="showMoreReviews()">
+                        <i class="fas fa-plus me-2"></i>Load More Reviews
+                    </button>
+                </div>
+            `;
+
+            showModal('Community Reviews', content);
+        }
+
+        function showMoreReviews() {
+            showAlert('Loading more reviews...', 'info');
+        }
+
+        function testMobileResponsiveness() {
+            const content = `
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5>Mobile Responsiveness Test</h5>
+                        <div class="mobile-preview">
+                            <div class="mobile-frame">
+                                <div class="mobile-screen">
+                                    <div class="mobile-header">
+                                        NUTRIJUDGE
+                                    </div>
+                                    <div class="mobile-content">
+                                        <div class="mobile-search">
+                                            <i class="fas fa-search"></i> Search supplements...
+                                        </div>
+                                        <div class="mobile-product">
+                                            <div class="mobile-product-img"></div>
+                                            <div class="mobile-product-info">
+                                                <h6>Protein Powder</h6>
+                                                <p>₹2,499</p>
+                                                <div class="mobile-stars">⭐⭐⭐⭐⭐</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <h5>Responsive Features</h5>
+                        <ul>
+                            <li>✅ Touch-friendly buttons</li>
+                            <li>✅ Swipe gestures</li>
+                            <li>✅ Responsive images</li>
+                            <li>✅ Fast loading</li>
+                            <li>✅ Offline support</li>
+                            <li>✅ Push notifications</li>
+                        </ul>
+                        
+                        <h6 class="mt-3">Device Support</h6>
+                        <div class="device-badges">
+                            <span class="badge bg-primary me-2">iPhone</span>
+                            <span class="badge bg-primary me-2">Android</span>
+                            <span class="badge bg-primary me-2">iPad</span>
+                            <span class="badge bg-primary me-2">Tablet</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            showModal('Mobile Responsiveness Test', content);
+        }
+
+        function showModal(title, content) {
+            // Remove existing modal if any
+            const existingModal = document.getElementById('featureModal');
+            if (existingModal) {
+                existingModal.remove();
+            }
+
+            const modalHtml = `
+                <div class="modal fade" id="featureModal" tabindex="-1">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">${title}</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+                                ${content}
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            document.body.insertAdjacentHTML('beforeend', modalHtml);
+            
+            const modal = new bootstrap.Modal(document.getElementById('featureModal'));
+            modal.show();
+            
+            // Clean up modal after it's hidden
+            document.getElementById('featureModal').addEventListener('hidden.bs.modal', function() {
+                this.remove();
+            });
+        }
+
+        // Navbar Search Functions
+        function handleNavbarSearchKeyPress(event) {
+            if (event.key === 'Enter') {
+                performNavbarSearch();
+            } else {
+                // Show search suggestions as user types
+                showSearchSuggestions();
+            }
+        }
+
+        function performNavbarSearch() {
+            const searchTerm = document.getElementById('navbarSearch').value.trim();
+            
+            if (!searchTerm) {
+                showAlert('Please enter a search term.', 'warning');
+                return;
+            }
+            
+            // Save search to history
+            saveSearchToHistory(searchTerm);
+            
+            // Perform search and redirect to comparison page
+            const searchResults = searchProducts(searchTerm);
+            
+            if (searchResults.length > 0) {
+                localStorage.setItem('searchResults', JSON.stringify(searchResults));
+                window.location.href = 'comparison.html?search=' + encodeURIComponent(searchTerm);
+            } else {
+                showAlert('No products found for your search.', 'info');
+            }
+        }
+
+        function showSearchSuggestions() {
+            const searchTerm = document.getElementById('navbarSearch').value.toLowerCase();
+            const suggestions = getSearchSuggestions(searchTerm);
+            
+            // Create suggestions dropdown
+            let suggestionsHtml = '';
+            if (suggestions.length > 0) {
+                suggestionsHtml = suggestions.map(item => `
+                    <div class="search-suggestion-item" onclick="selectSuggestion('${item.title}')">
+                        <i class="fas fa-search me-2"></i>${item.title}
+                    </div>
+                `).join('');
+            }
+            
+            // Update suggestions container
+            const suggestionsContainer = document.getElementById('searchSuggestions');
+            if (suggestionsContainer) {
+                suggestionsContainer.innerHTML = suggestionsHtml;
+                suggestionsContainer.style.display = suggestions.length > 0 ? 'block' : 'none';
+            }
+        }
+
+        function getSearchSuggestions(query) {
+            if (!query || query.length < 2) return [];
+            
+            const suggestions = [
+                { title: 'Protein Powder', category: 'protein' },
+                { title: 'Creatine Monohydrate', category: 'pre-workout' },
+                { title: 'Vitamin D3', category: 'supplement' },
+                { title: 'Omega-3 Fish Oil', category: 'supplement' },
+                { title: 'Ashwagandha', category: 'ayurveda' },
+                { title: 'B-Complex Vitamins', category: 'supplement' },
+                { title: 'Magnesium Complex', category: 'supplement' },
+                { title: 'Collagen Peptides', category: 'gainers' }
+            ];
+            
+            return suggestions.filter(item => 
+                item.title.toLowerCase().includes(query) ||
+                item.category.toLowerCase().includes(query)
+            ).slice(0, 5);
+        }
+
+        function selectSuggestion(title) {
+            document.getElementById('navbarSearch').value = title;
+            performNavbarSearch();
+        }
+
+        function saveSearchToHistory(searchTerm) {
+            let searchHistory = JSON.parse(localStorage.getItem('searchHistory') || '[]');
+            searchHistory = searchHistory.filter(term => term !== searchTerm);
+            searchHistory.unshift(searchTerm);
+            searchHistory = searchHistory.slice(0, 10); // Keep only last 10 searches
+            localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
+        }
+
+        function showSearchHistory() {
+            const searchHistory = JSON.parse(localStorage.getItem('searchHistory') || '[]');
+            
+            const content = `
+                <h5>Recent Searches</h5>
+                ${searchHistory.length > 0 ? 
+                    searchHistory.map(term => `
+                        <div class="search-history-item" onclick="performSearch('${term}')">
+                            <i class="fas fa-history me-2"></i>${term}
+                        </div>
+                    `).join('') :
+                    '<p class="text-muted">No recent searches</p>'
+                }
+                <div class="mt-3">
+                    <button class="btn btn-outline-danger btn-sm" onclick="clearSearchHistory()">
+                        <i class="fas fa-trash me-2"></i>Clear History
+                    </button>
+                </div>
+            `;
+            
+            showModal('Search History', content);
+        }
+
+        function clearSearchHistory() {
+            localStorage.removeItem('searchHistory');
+            showAlert('Search history cleared!', 'success');
+            bootstrap.Modal.getInstance(document.getElementById('featureModal')).hide();
+        }
+
+        function showPopularSearches() {
+            const popularSearches = [
+                'Protein Powder',
+                'Creatine',
+                'Vitamin D3',
+                'Omega-3',
+                'Ashwagandha',
+                'B-Complex',
+                'Magnesium',
+                'Collagen'
+            ];
+            
+            const content = `
+                <h5>Popular Searches</h5>
+                <div class="popular-searches">
+                    ${popularSearches.map(term => `
+                        <span class="badge bg-primary me-2 mb-2" style="cursor: pointer;" onclick="performSearch('${term}')">
+                            ${term}
+                        </span>
+                    `).join('')}
+                </div>
+            `;
+            
+            showModal('Popular Searches', content);
+        }
+
+        function performSearch(searchTerm) {
+            if (searchTerm) {
+                document.getElementById('navbarSearch').value = searchTerm;
+            }
+            performNavbarSearch();
+        }
+
+        function searchProducts(query) {
+            // This would typically search through the product database
+            // For now, return mock results
+            return product.filter(p => 
+                p.title.toLowerCase().includes(query.toLowerCase()) ||
+                p.brand.toLowerCase().includes(query.toLowerCase()) ||
+                p.description.toLowerCase().includes(query.toLowerCase())
+            );
+        }
+
+        // Enhanced Filtering Functions
+        function filterByGoal(goal) {
+            const goalProducts = getProductsByGoal(goal);
+            showFilterResults(goal, goalProducts, 'Goal');
+        }
+
+        function filterBySupplement(supplement) {
+            const supplementProducts = getProductsBySupplement(supplement);
+            showFilterResults(supplement, supplementProducts, 'Supplement');
+        }
+
+        function filterByForm(form) {
+            const formProducts = getProductsByForm(form);
+            showFilterResults(form, formProducts, 'Form');
+        }
+
+        function filterByCollection(collection) {
+            const collectionProducts = getProductsByCollection(collection);
+            showFilterResults(collection, collectionProducts, 'Collection');
+        }
+
+        // Legacy function for backward compatibility
+        function filterByCategory(category) {
+            const categoryProducts = getProductsByCategory(category);
+            showFilterResults(category, categoryProducts, 'Category');
+        }
+
+        function getProductsByGoal(goal) {
+            const products = window.product || [];
+            
+            const goalMap = {
+                'muscle-building': [2, 11], // Protein Plus, Creatine
+                'weight-loss': [1, 6], // Green Jar, Probiotic
+                'energy-boost': [11, 12], // Creatine, Ashwagandha
+                'immunity': [3, 7, 9], // VitaBoost, Vitamin D3, B-Complex
+                'heart-health': [10], // Zinc
+                'brain-health': [12] // Ashwagandha
+            };
+            
+            const productIds = goalMap[goal] || [];
+            return productIds.map(id => products.find(p => p.id === id)).filter(Boolean);
+        }
+
+        function getProductsBySupplement(supplement) {
+            const products = window.product || [];
+            
+            const supplementMap = {
+                'protein': [2, 11], // Protein Plus, Creatine
+                'vitamins': [3, 7, 9], // VitaBoost, Vitamin D3, B-Complex
+                'minerals': [8, 10], // Magnesium, Zinc
+                'amino-acids': [11], // Creatine
+                'omega-3': [5] // Collagen
+            };
+            
+            const productIds = supplementMap[supplement] || [];
+            return productIds.map(id => products.find(p => p.id === id)).filter(Boolean);
+        }
+
+        function getProductsByForm(form) {
+            const products = window.product || [];
+            
+            const formMap = {
+                'powder': [2, 11], // Protein Plus, Creatine
+                'tablets': [7, 9, 10], // Vitamin D3, B-Complex, Zinc
+                'capsules': [3, 8], // VitaBoost, Magnesium
+                'gummies': [1], // Green Jar
+                'liquids': [5, 6] // Collagen, Probiotic
+            };
+            
+            const productIds = formMap[form] || [];
+            return productIds.map(id => products.find(p => p.id === id)).filter(Boolean);
+        }
+
+        function getProductsByCollection(collection) {
+            const products = window.product || [];
+            
+            const collectionMap = {
+                'new-arrivals': [12], // Ashwagandha
+                'best-sellers': [2, 11], // Protein Plus, Creatine
+                'deals': [1, 5], // Green Jar, Collagen
+                'bundles': [3, 7], // VitaBoost, Vitamin D3
+                'seasonal': [6, 9] // Probiotic, B-Complex
+            };
+            
+            const productIds = collectionMap[collection] || [];
+            return productIds.map(id => products.find(p => p.id === id)).filter(Boolean);
+        }
+
+        function getProductsByCategory(category) {
+            const categoryMap = {
+                'protein': [2, 11], // Protein Plus, Creatine
+                'gainers': [1, 5], // Green Jar, Collagen
+                'pre-workout': [11, 12], // Creatine, Ashwagandha
+                'post-workout': [2, 8], // Protein Plus, Magnesium
+                'ayurveda': [12], // Ashwagandha
+                'supplement': [3, 7, 9, 10], // VitaBoost, Vitamin D3, B-Complex, Zinc
+                'fat-burner': [1, 6], // Green Jar, Probiotic
+            };
+            
+            const productIds = categoryMap[category] || [];
+            return productIds.map(id => product.find(p => p.id === id)).filter(Boolean);
+        }
+
+        function showFilterResults(filterType, products, filterCategory) {
+            const modal = document.createElement('div');
+            modal.className = 'modal fade';
+            
+            // Format the filter type for display
+            const displayName = filterType.split('-').map(word => 
+                word.charAt(0).toUpperCase() + word.slice(1)
+            ).join(' ');
+            
+            modal.innerHTML = `
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header bg-primary text-white">
+                            <h5 class="modal-title">
+                                <i class="fas fa-filter me-2"></i>${filterCategory}: ${displayName}
+                            </h5>
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                ${products.map(item => `
+                                    <div class="col-md-6 col-lg-4 mb-4">
+                                        <div class="card h-100">
+                                            <img src="${item.image}" class="card-img-top product-image" alt="${item.title}" style="height: 200px;">
+                                            <div class="card-body">
+                                                <h5 class="card-title">${item.title}</h5>
+                                                <p class="card-text">${item.description}</p>
+                                                <p class="card-text"><strong>${item.brand || 'Unknown Brand'}</strong> - ₹${item.price || 0}</p>
+                                                <div class="d-flex gap-2">
+                                                    <button class="btn btn-primary btn-sm" onclick="addToCart(${item.id})">Add to Cart</button>
+                                                    <button class="btn btn-outline-primary btn-sm" onclick="addToWishlist(${item.id})">Wishlist</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                            <div class="text-center mt-4">
+                                <button class="btn btn-success btn-lg" onclick="compareCategoryProducts('${category}')">
+                                    Compare ${category.charAt(0).toUpperCase() + category.slice(1)} Products
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+            const modalInstance = new bootstrap.Modal(modal);
+            modalInstance.show();
+            
+            modal.addEventListener('hidden.bs.modal', function() {
+                document.body.removeChild(modal);
+            });
+        }
+        
+        // Function to redirect to comparison page with category products
+        function compareCategoryProducts(category) {
+            // Store category products in localStorage for comparison page
+            const products = getProductsByCategory(category);
+            localStorage.setItem('categoryProducts', JSON.stringify(products));
+            
+            // Redirect to comparison page with category parameter
+            window.location.href = `comparison.html?category=${encodeURIComponent(category)}`;
+        }
+
+        // Contact Functions
+        function openContactModal() {
+            const modal = new bootstrap.Modal(document.getElementById('contactModal'));
+            modal.show();
+        }
+
+        // Contact form submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('contactName').value;
+            const email = document.getElementById('contactEmail').value;
+            const subject = document.getElementById('contactSubject').value;
+            const message = document.getElementById('contactMessage').value;
+            
+            if (!name || !email || !message) {
+                showAlert('Please fill in all required fields.', 'danger');
+                return;
+            }
+            
+            if (!isValidEmail(email)) {
+                showAlert('Please enter a valid email address.', 'danger');
+                return;
+            }
+            
+            // Simulate form submission
+            showAlert('Thank you for your message! We will get back to you soon.', 'success');
+            document.getElementById('contactForm').reset();
+            
+            setTimeout(() => {
+                bootstrap.Modal.getInstance(document.getElementById('contactModal')).hide();
+            }, 2000);
+        });
+
+        // Authentication Functions
+        function openAuthModal(tab = 'login') {
+            const modal = new bootstrap.Modal(document.getElementById('authModal'));
+            modal.show();
+            
+            if (tab === 'register') {
+                const registerTab = document.getElementById('register-tab');
+                const registerTabInstance = new bootstrap.Tab(registerTab);
+                registerTabInstance.show();
+            }
+        }
+
+        // Form submission handlers
+        document.addEventListener('DOMContentLoaded', function() {
+            // Login form handler
+            const loginForm = document.getElementById('loginForm');
+            if (loginForm) {
+                loginForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const email = document.getElementById('loginEmail').value;
+                    const phone = document.getElementById('loginPhone').value;
+                    const password = document.getElementById('loginPassword').value;
+                    
+                    try {
+                        const user = userManager.loginUser(email, phone, password);
+                        showAlert(`Login successful! Welcome back, ${user.firstName}.`, 'success');
+                        loginForm.reset();
+                        setTimeout(() => {
+                            bootstrap.Modal.getInstance(document.getElementById('authModal')).hide();
+                            updateUserInterface();
+                        }, 2000);
+                    } catch (error) {
+                        showAlert(error.message, 'danger');
+                    }
+                });
+            }
+
+            // Register form handler
+            const registerForm = document.getElementById('registerForm');
+            if (registerForm) {
+                registerForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const firstName = document.getElementById('firstName').value;
+                    const lastName = document.getElementById('lastName').value;
+                    const email = document.getElementById('registerEmail').value;
+                    const phone = document.getElementById('phone').value;
+                    const password = document.getElementById('registerPassword').value;
+                    const confirmPassword = document.getElementById('confirmPassword').value;
+                    const referralCode = document.getElementById('referralCode').value.trim();
+                    const agreeTerms = document.getElementById('agreeTerms').checked;
+                    
+                    if (!firstName || !lastName || !email || !phone || !password || !confirmPassword) {
+                        showAlert('Please fill in all required fields.', 'danger');
+                        return;
+                    }
+                    
+                    if (password.length < 8) {
+                        showAlert('Password must be at least 8 characters long.', 'danger');
+                        return;
+                    }
+                    
+                    if (password !== confirmPassword) {
+                        showAlert('Passwords do not match.', 'danger');
+                        return;
+                    }
+                    
+                    if (!agreeTerms) {
+                        showAlert('You must agree to the terms and conditions.', 'danger');
+                        return;
+                    }
+                    
+                    if (referralCode && !userManager.getUserByReferralCode(referralCode)) {
+                        showAlert('Invalid referral code. Please check and try again.', 'danger');
+                        return;
+                    }
+                    
+                    try {
+                        const newUser = userManager.registerUser({
+                            firstName,
+                            lastName,
+                            email,
+                            phone,
+                            password,
+                            referredBy: referralCode || null
+                        });
+                        
+                        showAlert(`Registration successful! Your referral code: ${newUser.referralCode}`, 'success');
+                        registerForm.reset();
+                        setTimeout(() => {
+                            bootstrap.Modal.getInstance(document.getElementById('authModal')).hide();
+                            updateUserInterface();
+                        }, 3000);
+                    } catch (error) {
+                        showAlert(error.message, 'danger');
+                    }
+                });
+            }
+
+            // Initialize search functionality
+            initializeSearch();
+            
+            // Initialize category filtering
+            initializeCategoryFilter();
+            
+            // Load featured products
+            loadFeaturedProducts();
+            
+            // Update cart and wishlist counts
+            if (cartManager) {
+                updateCartCount();
+            }
+            updateWishlistCount();
+            
+            // Update user interface if logged in
+            const currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
+            if (currentUser) {
+                updateLoginState();
+            }
+        });
+
+        // Utility Functions
+        function showAlert(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `alert alert-${type} alert-dismissible fade show position-fixed`;
+            notification.style.cssText = 'top: 20px; right: 20px; z-index: 9999; min-width: 300px;';
+            notification.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'warning' ? 'exclamation-triangle' : 'info-circle'} me-2"></i>${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.remove();
+                }
+            }, 3000);
+        }
+
+        function updateUserInterface() {
+            const user = userManager.getCurrentUser();
+            if (user) {
+                // Update any user-specific UI elements
+                const userElements = document.querySelectorAll('.user-name');
+                userElements.forEach(element => {
+                    element.textContent = `${user.firstName} ${user.lastName}`;
+                });
+            }
+        }
+
+        // Initialize search functionality
+        function initializeSearch() {
+            const searchInput = document.getElementById('searchInput');
+            if (searchInput) {
+                searchInput.addEventListener('input', function() {
+                    const query = this.value.toLowerCase();
+                    if (query.length > 2) {
+                        showSearchSuggestions(query);
+                    } else {
+                        hideSearchSuggestions();
+                    }
+                });
+            }
+        }
+
+        function hideSearchSuggestions() {
+            const suggestionsContainer = document.getElementById('searchSuggestions');
+            if (suggestionsContainer) {
+                suggestionsContainer.style.display = 'none';
+            }
+        }
+
+        // Initialize category filtering
+        function initializeCategoryFilter() {
+            const categoryButtons = document.querySelectorAll('.category-item');
+            categoryButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const category = this.getAttribute('onclick').match(/'([^']+)'/)[1];
+                    filterByCategory(category);
+                });
+            });
+        }
+
+        // Handle search key press
+        function handleSearchKeyPress(event) {
+            if (event.key === 'Enter') {
+                performSearch();
+            }
+        }
+
+        function performSearch() {
+            const searchInput = document.getElementById('searchInput');
+            const query = searchInput ? searchInput.value : '';
+            
+            if (query.trim()) {
+                const results = searchProducts(query);
+                showSearchResults(results, query);
+            }
+        }
+
+        function showSearchResults(results, query) {
+            const modal = document.createElement('div');
+            modal.className = 'modal fade';
+            modal.innerHTML = `
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Search Results for "${query}"</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            ${results.length > 0 ? results.map(item => `
+                                <div class="card mb-3">
+                                    <div class="row g-0">
+                                        <div class="col-md-3">
+                                            <img src="${item.image}" class="img-fluid rounded-start" alt="${item.title}">
+                                        </div>
+                                        <div class="col-md-9">
+                                            <div class="card-body">
+                                                <h5 class="card-title">${item.title}</h5>
+                                                <p class="card-text">${item.description}</p>
+                                                <p class="card-text"><small class="text-muted">${item.brand || 'Unknown Brand'} - ₹${item.price || 0}</p>
+                                                <button class="btn btn-primary btn-sm" onclick="addToCart(${item.id})">Add to Cart</button>
+                                                <button class="btn btn-outline-primary btn-sm" onclick="addToWishlist(${item.id})">Add to Wishlist</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            `).join('') : '<p class="text-center">No products found matching your search.</p>'}
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+            const modalInstance = new bootstrap.Modal(modal);
+            modalInstance.show();
+            
+            modal.addEventListener('hidden.bs.modal', function() {
+                document.body.removeChild(modal);
+            });
+        }
+
+        // Cart and Wishlist Functions
+        function addToCart(productId) {
+            try {
+                const product = cartManager.addToCart(productId, 1);
+                cartManager.showAlert(`${product.title} added to cart!`, 'success');
+            } catch (error) {
+                cartManager.showAlert('Product not found!', 'error');
+            }
+        }
+
+        function addToWishlist(productId) {
+            const product = window.product.find(p => p.id === productId);
+            if (!product) {
+                showAlert('Product not found!', 'error');
+                return;
+            }
+
+            let wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
+            const existingItem = wishlist.find(item => item.id === productId);
+            
+            if (existingItem) {
+                showAlert(`${product.title} is already in your wishlist!`, 'info');
+                return;
+            }
+            
+            wishlist.push({
+                id: productId,
+                title: product.title,
+                price: product.price,
+                brand: product.brand,
+                image: product.image,
+                rating: product.rating,
+                reviewCount: product.reviewCount
+            });
+            
+            localStorage.setItem('wishlist', JSON.stringify(wishlist));
+            showAlert(`${product.title} added to wishlist!`, 'success');
+            updateWishlistCount();
+        }
+
+        // Enhanced cart and wishlist functions with better error handling
+        function removeFromCart(productId) {
+            cartManager.removeFromCart(productId);
+            cartManager.showAlert('Item removed from cart', 'success');
+        }
+
+        function removeFromWishlist(productId) {
+            let wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
+            wishlist = wishlist.filter(item => item.id !== productId);
+            localStorage.setItem('wishlist', JSON.stringify(wishlist));
+            updateWishlistCount();
+            showAlert('Item removed from wishlist', 'success');
+        }
+
+        function clearCart() {
+            cartManager.clearCart();
+            cartManager.showAlert('Cart cleared successfully', 'success');
+        }
+
+        function clearWishlist() {
+            localStorage.removeItem('wishlist');
+            updateWishlistCount();
+            showAlert('Wishlist cleared successfully', 'success');
+        }
+
+        function updateCartCount() {
+            if (cartManager) {
+                const cartCount = cartManager.getCartCount();
+                
+                // Update cart count in navbar if it exists
+                const cartBadge = document.querySelector('.cart-count');
+                if (cartBadge) {
+                    cartBadge.textContent = cartCount || 0;
+                    cartBadge.style.display = (cartCount || 0) > 0 ? 'inline' : 'none';
+                }
+            }
+        }
+
+        function updateWishlistCount() {
+            const wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
+            const wishlistCount = wishlist.length;
+            
+            // Update wishlist count in navbar if it exists
+            const wishlistBadge = document.querySelector('.wishlist-count');
+            if (wishlistBadge) {
+                wishlistBadge.textContent = wishlistCount || 0;
+                wishlistBadge.style.display = (wishlistCount || 0) > 0 ? 'inline' : 'none';
+            }
+        }
+
+        function loadFeaturedProducts() {
+            const featuredProductsContainer = document.getElementById('featuredProducts');
+            if (!featuredProductsContainer) return;
+
+            // Get top-rated products (rating >= 4.5)
+            const featuredProducts = window.product
+                .filter(p => p.rating >= 4.5)
+                .slice(0, 6);
+
+            const productsHTML = featuredProducts.map(product => `
+                <div class="col-lg-4 col-md-6">
+                    <div class="card h-100 product-card" style="border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); transition: transform 0.3s ease; background: white; border: 2px solid transparent;">
+                        <div class="card-body d-flex flex-column">
+                            <div class="text-center mb-3">
+                                <img src="${product.image}" alt="${product.title}" class="product-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <div class="product-image-placeholder" style="display: none;">
+                                    <i class="fas fa-pills fa-3x"></i>
+                                </div>
+                            </div>
+                            
+                            <h5 class="card-title text-center mb-2" style="color: #000;">${product.title}</h5>
+                            <p class="card-text text-muted text-center small mb-2">${product.brand}</p>
+                            
+                            <div class="text-center mb-3">
+                                <div class="text-warning mb-1">
+                                    ${'⭐'.repeat(Math.floor(product.rating || 4))} ${product.rating || 4.0}
+                                </div>
+                                <small class="text-muted">(${product.reviewCount || 0} reviews)</small>
+                            </div>
+                            
+                            <div class="text-center mb-3">
+                                <span class="h5 fw-bold" style="color: #000;">₹${product.price || 0}</span>
+                                ${product.originalPrice ? `<span class="text-muted text-decoration-line-through ms-2">${product.originalPrice}</span>` : ''}
+                                ${product.discount ? `<span class="badge ms-2" style="background: #000;">${product.discount} OFF</span>` : ''}
+                            </div>
+                            
+                            <p class="card-text text-center small mb-3">${product.description.substring(0, 100)}...</p>
+                            
+                            <div class="mt-auto">
+                                <div class="d-grid gap-2">
+                                    <button class="btn btn-secondary" onclick="compareProduct(${product.id})" style="background: #4e9a9b; color: white; border: none;">
+                                        Compare Now
+                                    </button>
+                                    <button class="btn" onclick="addToCart(${product.id})" style="background: #000; color: white; border: none;">
+                                        <i class="fas fa-shopping-cart me-2"></i>Add to Cart
+                                    </button>
+                                    <button class="btn btn-outline-primary" onclick="addToWishlist(${product.id})" style="border-color: #000; color: #000;">
+                                        <i class="fas fa-heart me-2"></i>Add to Wishlist
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            featuredProductsContainer.innerHTML = productsHTML;
+        }
+        
+        // Compare Now functionality for featured products
+        function compareProduct(productId) {
+            let compareList = JSON.parse(localStorage.getItem('compareList') || '[]');
+            if (!Array.isArray(compareList)) compareList = [];
+            if (compareList.find(id => id === productId)) {
+                showAlert('Product already added for comparison.', 'info');
+                return;
+            }
+            if (compareList.length >= 4) {
+                showAlert('You can compare up to 4 products only.', 'warning');
+                return;
+            }
+            compareList.push(productId);
+            localStorage.setItem('compareList', JSON.stringify(compareList));
+            showAlert('Product added for comparison.', 'success');
+            if (compareList.length >= 2) {
+                // Redirect to comparison page with selected products
+                window.location.href = 'comparison.html?compare=' + compareList.join(',');
+            }
+        }
+        
+        // Comprehensive test function for unified product data
+        function testUnifiedProductData() {
+            console.log('=== Testing Unified Product Data on Index Page ===');
+            
+            // Test 1: Verify product data is loaded
+            if (!window.product || !Array.isArray(window.product)) {
+                console.error('❌ Product data not loaded properly');
+                return;
+            }
+            console.log(`✅ Product data loaded: ${window.product.length} products`);
+            
+            // Test 2: Test search functionality
+            const searchResults = searchProducts('protein');
+            console.log(`✅ Search functionality: ${searchResults.length} results for 'protein'`);
+            
+            // Test 3: Test category filtering
+            const proteinProducts = getProductsByCategory('protein');
+            console.log(`✅ Category filtering: ${proteinProducts.length} protein products`);
+            
+            // Test 4: Test featured products loading
+            const featuredProducts = window.product.filter(p => p.rating >= 4.5).slice(0, 6);
+            console.log(`✅ Featured products: ${featuredProducts.length} high-rated products`);
+            
+            // Test 5: Test cart and wishlist integration
+            console.log('✅ Cart and wishlist functions available');
+            
+            // Test 6: Test utility functions
+            if (window.productUtils) {
+                console.log('✅ Product utilities available');
+                const topRated = window.productUtils.getTopRatedProducts(5);
+                console.log(`  Top 5 rated: ${topRated.map(p => p.title).join(', ')}`);
+            }
+            
+            console.log('=== Index Page Test Complete ===');
+        }
+        
+        // Make test function globally available
+        window.testUnifiedProductData = testUnifiedProductData;
+        
+        // Refer & Earn Functions
+        function showReferralPreview() {
+            const content = `
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5><i class="fas fa-gift me-2"></i>How Refer & Earn Works</h5>
+                        <div class="mb-4">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px;">1</div>
+                                <div>
+                                    <h6 class="mb-1">Get Your Code</h6>
+                                    <p class="text-muted mb-0">Copy your unique referral code</p>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px;">2</div>
+                                <div>
+                                    <h6 class="mb-1">Share with Friends</h6>
+                                    <p class="text-muted mb-0">Share via WhatsApp, social media, or email</p>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px;">3</div>
+                                <div>
+                                    <h6 class="mb-1">Friend Signs Up</h6>
+                                    <p class="text-muted mb-0">Your friend uses your code to create an account</p>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px;">4</div>
+                                <div>
+                                    <h6 class="mb-1">Earn Rewards</h6>
+                                    <p class="text-muted mb-0">Both of you get rewards when they make their first purchase</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <h5><i class="fas fa-trophy me-2"></i>Rewards Structure</h5>
+                        <div class="reward-cards">
+                            <div class="card mb-3 border-success">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <h6 class="text-success mb-1">₹500</h6>
+                                            <small class="text-muted">You earn for each referral</small>
+                                        </div>
+                                        <i class="fas fa-gift text-success fa-2x"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card mb-3 border-info">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <h6 class="text-info mb-1">₹200</h6>
+                                            <small class="text-muted">Your friend gets off first order</small>
+                                        </div>
+                                        <i class="fas fa-user-friends text-info fa-2x"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card mb-3 border-warning">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <h6 class="text-warning mb-1">₹500 Bonus</h6>
+                                            <small class="text-muted">After 5 successful referrals</small>
+                                        </div>
+                                        <i class="fas fa-star text-warning fa-2x"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card border-danger">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <h6 class="text-danger mb-1">₹1,000 Bonus</h6>
+                                            <small class="text-muted">After 10 successful referrals</small>
+                                        </div>
+                                        <i class="fas fa-crown text-danger fa-2x"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center mt-4">
+                    <a href="refer-earn.html" class="btn btn-primary btn-lg">
+                        <i class="fas fa-rocket me-2"></i>Start Earning Now
+                    </a>
+                </div>
+            `;
+            
+            showModal('Refer & Earn Program', content);
+        }
+
+        // Show login modal automatically for new users
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
+            if (!currentUser) {
+                setTimeout(() => {
+                    openAuthModal();
+                }, 500); // slight delay for smoothness
+            }
+        });
+
+        // Initialize the homepage carousel with faster interval and no pause
+        const homepageCarousel = document.getElementById('homepageWallpaperCarousel');
+        if (homepageCarousel) {
+          const carousel = new bootstrap.Carousel(homepageCarousel, {
+            interval: 2000,
+            pause: false,
+            ride: 'carousel'
+          });
+        }
+
+        // Settings Modal Functions
+        function openSettingsModal() {
+            const modal = new bootstrap.Modal(document.getElementById('settingsModal'));
+            modal.show();
+        }
+
+        // Apply theme function
+        function applyTheme(theme) {
+            if (theme === 'dark') {
+                document.body.classList.add('dark-theme');
+                document.body.classList.remove('light-theme');
+                document.documentElement.style.setProperty('--primary-color', '#fff');
+                document.documentElement.style.setProperty('--secondary-color', '#222');
+                document.documentElement.style.setProperty('--accent-color', '#444');
+                document.documentElement.style.setProperty('--light-color', '#000');
+                document.documentElement.style.setProperty('--dark-color', '#fff');
+                document.body.style.background = '#222';
+                document.body.style.color = '#fff';
+            } else {
+                document.body.classList.remove('dark-theme');
+                document.body.classList.add('light-theme');
+                document.documentElement.style.setProperty('--primary-color', '#000');
+                document.documentElement.style.setProperty('--secondary-color', '#222');
+                document.documentElement.style.setProperty('--accent-color', '#444');
+                document.documentElement.style.setProperty('--light-color', '#fff');
+                document.documentElement.style.setProperty('--dark-color', '#000');
+                document.body.style.background = '#fff';
+                document.body.style.color = '#000';
+            }
+        }
+
+        // Listen for theme change in settings modal
+        document.getElementById('themeSelect').addEventListener('change', function() {
+            applyTheme(this.value);
+        });
+
+        document.getElementById('settingsForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const theme = document.getElementById('themeSelect').value;
+            const notifications = document.getElementById('notificationsToggle').value;
+            // Save settings to localStorage (or handle as needed)
+            localStorage.setItem('userTheme', theme);
+            localStorage.setItem('userNotifications', notifications);
+            applyTheme(theme);
+            showAlert('Settings saved!', 'success');
+            setTimeout(() => {
+                bootstrap.Modal.getInstance(document.getElementById('settingsModal')).hide();
+            }, 1000);
+        });
+
+        // On page load, apply saved theme
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('userTheme') || 'light';
+            applyTheme(savedTheme);
+            // Set the select value in settings modal
+            const themeSelect = document.getElementById('themeSelect');
+            if (themeSelect) themeSelect.value = savedTheme;
+        });
+    </script>
+
+    <!-- Settings Modal -->
+    <div class="modal fade" id="settingsModal" tabindex="-1" aria-labelledby="settingsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="settingsModalLabel">
+                        <i class="fas fa-cog me-2"></i>Settings
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h6 class="mb-3">User Preferences</h6>
+                    <form id="settingsForm">
+                        <div class="mb-3">
+                            <label for="themeSelect" class="form-label">Theme</label>
+                            <select class="form-control" id="themeSelect">
+                                <option value="light">Light</option>
+                                <option value="dark">Dark</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="notificationsToggle" class="form-label">Notifications</label>
+                            <select class="form-control" id="notificationsToggle">
+                                <option value="on">On</option>
+                                <option value="off">Off</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save me-2"></i>Save Settings
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gainers Products - NUTRIJUDGE</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body { background: #f8f9fa; }
+        .hero-section { background: #000; color: #fff; padding: 60px 0 40px 0; text-align: center; }
+        .product-card { border-radius: 15px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); background: #fff; overflow: hidden; transition: box-shadow 0.2s; }
+        .product-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.15); }
+        .product-card img { width: 100%; height: 200px; object-fit: cover; }
+        .product-card-body { padding: 1.5rem; }
+        .product-title { font-size: 1.3rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .product-price { color: #f39c12; font-weight: bold; font-size: 1.1rem; }
+        .product-desc { color: #555; font-size: 1rem; margin-bottom: 1rem; }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="src/logo_nav.jpg0000.png" alt="NUTRIJUDGE Logo" class="navbar-logo" style="height: 60px; border-radius: 12px; margin-right: 8px;">NUTRIJUDGE
+            </a>
+        </div>
+    </nav>
+    <section class="hero-section">
+        <div class="container">
+            <h1 class="display-4 fw-bold mb-3">Gainers Products</h1>
+            <p class="lead mb-0">Explore all mass and weight gainers with full details and reviews.</p>
+        </div>
+    </section>
+    <section class="py-5">
+        <div class="container">
+            <div class="row g-4" id="productsContainer">
+                <!-- Products will be loaded here -->
+            </div>
+        </div>
+    </section>
+    <script src="src/data.js"></script>
+    <script>
+        function addToCart(product) {
+            let cart = JSON.parse(localStorage.getItem('nutrijudgeCart') || '[]');
+            const existing = cart.find(item => item.name === product.title);
+            if (existing) {
+                existing.quantity += 1;
+            } else {
+                cart.push({name: product.title, price: product.price, image: product.image, quantity: 1});
+            }
+            localStorage.setItem('nutrijudgeCart', JSON.stringify(cart));
+            alert(product.title + ' added to cart!');
+        }
+        function renderProducts() {
+            const container = document.getElementById('productsContainer');
+            if (!window.product) {
+                container.innerHTML = '<div class="col-12 text-center">No products found.</div>';
+                return;
+            }
+            const gainersProducts = window.product.filter(p => p.category && p.category.toLowerCase() === 'gainers');
+            if (gainersProducts.length === 0) {
+                container.innerHTML = '<div class="col-12 text-center">No gainers products found.</div>';
+                return;
+            }
+            container.innerHTML = gainersProducts.map(product => `
+                <div class="col-md-6 col-lg-4">
+                    <div class="product-card">
+                        <img src="${product.image}" alt="${product.title}">
+                        <div class="product-card-body">
+                            <div class="product-title">${product.title}</div>
+                            <div class="product-price">${product.price}</div>
+                            <div class="product-desc">${product.description || ''}</div>
+                            <div class="mb-2 text-warning">${'⭐'.repeat(Math.round(product.rating || 4))} ${(product.rating || 4).toFixed(1)}/5</div>
+                            <button class="btn btn-primary w-100" onclick='addToCart(${JSON.stringify(product)})'>Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+        document.addEventListener('DOMContentLoaded', renderProducts);
+    </script>
+</body>
+</html> 

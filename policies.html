@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Policies - NUTRIJUDGE</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #fff;
+            --secondary-color: #fff;
+            --accent-color: #fff;
+            --success-color: #fff;
+            --warning-color: #fff;
+            --danger-color: #fff;
+            --dark-color: #fff;
+            --light-color: #fff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #000;
+            background: #fff;
+        }
+
+        .navbar {
+            background: #fff !important;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .navbar-brand,
+        .navbar-nav .nav-link {
+            color: #000 !important;
+        }
+        .navbar-nav .nav-link.active,
+        .navbar-nav .nav-link:focus,
+        .navbar-nav .nav-link:hover {
+            color: #000 !important;
+        }
+
+        .navbar-toggler {
+            border-color: #000 !important;
+            background: #000 !important;
+            color: #fff !important;
+        }
+        .btn#hamburgerMenu {
+            background: #000 !important;
+            border-color: #000 !important;
+            color: #fff !important;
+        }
+        .btn#hamburgerMenu .fas.fa-bars {
+            color: #fff !important;
+        }
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255,1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E") !important;
+        }
+
+        .hero-section {
+            background: #000;
+            color: #fff;
+            padding: 120px 0 80px;
+            text-align: center;
+        }
+        .hero-title {
+            color: #fff;
+        }
+        .hero-subtitle {
+            color: #fff;
+        }
+
+        .policy-section {
+            padding: 80px 0;
+            background: #fff;
+        }
+
+        .policy-card {
+            background: #fff;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .policy-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+        }
+
+        .policy-icon {
+            width: 60px;
+            height: 60px;
+            background: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            color: #fff;
+            border: 1px solid #fff;
+        }
+
+        .policy-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #000;
+        }
+
+        .policy-content {
+            color: #000;
+            line-height: 1.8;
+        }
+
+        .policy-content h4 {
+            color: #000;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+
+        .policy-content ul {
+            padding-left: 20px;
+        }
+
+        .policy-content li {
+            margin-bottom: 8px;
+        }
+
+        .nav-pills .nav-link {
+            color: #000;
+            background: #fff;
+            border-radius: 25px;
+            padding: 12px 25px;
+            margin: 5px;
+            transition: all 0.3s ease;
+            border: 1px solid #fff;
+        }
+
+        .nav-pills .nav-link.active {
+            background: #fff;
+            color: #000;
+        }
+
+        .nav-pills .nav-link:hover,
+        .nav-pills .nav-link:focus {
+            background: #000 !important;
+            color: #fff !important;
+        }
+
+        .footer {
+            background: #000;
+            color: #fff;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .contact-info {
+            background: #fff;
+            padding: 40px 0;
+        }
+
+        .contact-item {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: #fff;
+            color: #000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 1.2rem;
+            border: 1px solid #fff;
+        }
+
+        /* Auto open hamburger dropdown on hover */
+        .dropdown:hover .dropdown-menu[aria-labelledby="hamburgerMenu"] {
+            display: block !important;
+        }
+        .dropdown-menu[aria-labelledby="hamburgerMenu"] {
+            margin-top: 0;
+        }
+        .dropdown-menu[aria-labelledby="hamburgerMenu"] .dropdown-item:hover,
+        .dropdown-menu[aria-labelledby="hamburgerMenu"] .dropdown-item:focus {
+            background: #000 !important;
+            color: #fff !important;
+        }
+
+        /* Auto dropdown for Categories button on hover */
+        .navbar-nav .dropdown:hover .dropdown-menu {
+            display: block !important;
+        }
+
+        /* Home and Compare button active/hover/focus: black background, white text */
+        .navbar-nav .nav-link[href="index.html"].active,
+        .navbar-nav .nav-link[href="index.html"]:focus,
+        .navbar-nav .nav-link[href="index.html"]:hover,
+        .navbar-nav .nav-link[href="comparison.html"].active,
+        .navbar-nav .nav-link[href="comparison.html"]:focus,
+        .navbar-nav .nav-link[href="comparison.html"]:hover {
+            background: #000 !important;
+            color: #fff !important;
+            border-radius: 0 !important;
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            .policy-card {
+                padding: 20px;
+            }
+        }
+        
+
+        
+
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <div class="d-flex w-100 align-items-center justify-content-between">
+                <!-- Brand Left -->
+                <a class="navbar-brand me-3" href="index.html">
+                    <img src="src/logo_nav.jpg0000.png" alt="NUTRIJUDGE Logo" class="navbar-logo" style="height: 60px; border-radius: 12px; margin-right: 8px;">NUTRIJUDGE
+                </a>
+                <!-- Centered Nav -->
+                <div class="flex-grow-1 d-flex justify-content-center">
+                    <ul class="navbar-nav flex-row gap-3">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">
+                                <i class="fas fa-home me-1"></i>Home
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="categories.html"><i class="fas fa-th-large me-1"></i>Categories</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="comparison.html">
+                                <i class=""></i>Compare
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="blog.html"><i class="fas fa-blog me-1"></i>Blog</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Hamburger Right -->
+                <div class="d-flex align-items-center ms-3">
+                    <div class="navbar-nav">
+                        <div class="dropdown">
+                            <button class="btn btn-outline-light btn-sm dropdown-toggle" type="button" id="hamburgerMenu" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Open menu">
+                                <i class="fas fa-bars"></i>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="hamburgerMenu">
+                                <li><a class="dropdown-item" href="#" onclick="openAuthModal('login')"><i class="fas fa-sign-in-alt me-2"></i>Login</a></li>
+                                <li><a class="dropdown-item" href="wishlist.html"><i class="fas fa-heart me-2"></i>Wishlist</a></li>
+                                <li><a class="dropdown-item" href="cart.html"><i class="fas fa-shopping-cart me-2"></i>Cart</a></li>
+                                <li><a class="dropdown-item" href="profile.html"><i class="fas fa-user me-2"></i>Profile</a></li>
+                                <li><a class="dropdown-item" href="orders.html"><i class="fas fa-box me-2"></i>Orders</a></li>
+                                <li><hr class="dropdown-divider"></li>
+        
+                                <li><a class="dropdown-item active" href="policies.html"><i class="fas fa-file-contract me-2"></i>Policies</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="https://wa.me/1234567890?text=Hi%20NUTRIJUDGE%20Support,%20I%20need%20help" target="_blank" rel="noopener"><i class="fab fa-whatsapp me-2"></i>WhatsApp Support</a></li>
+                                <li><a class="dropdown-item" href="admin.html"><i class="fas fa-user-cog me-2"></i>Admin</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+        <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-lg-8">
+                    <h1 class="hero-title">
+                        <i class="fas fa-file-contract me-3"></i>Our Policies
+                    </h1>
+                    <p class="hero-subtitle">Transparent, fair, and customer-focused policies for your peace of mind</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Policy Navigation -->
+    <section class="py-4" style="background: var(--light-color);">
+        <div class="container">
+            <ul class="nav nav-pills justify-content-center" id="policyTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="privacy-tab" data-bs-toggle="pill" data-bs-target="#privacy" type="button" role="tab">
+                        <i class="fas fa-shield-alt me-2"></i>Privacy Policy
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="terms-tab" data-bs-toggle="pill" data-bs-target="#terms" type="button" role="tab">
+                        <i class="fas fa-gavel me-2"></i>Terms of Service
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="shipping-tab" data-bs-toggle="pill" data-bs-target="#shipping" type="button" role="tab">
+                        <i class="fas fa-shipping-fast me-2"></i>Shipping Policy
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="return-tab" data-bs-toggle="pill" data-bs-target="#return" type="button" role="tab">
+                        <i class="fas fa-undo me-2"></i>Return Policy
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="refund-tab" data-bs-toggle="pill" data-bs-target="#refund" type="button" role="tab">
+                        <i class="fas fa-money-bill-wave me-2"></i>Refund Policy
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Policy Content -->
+    <section class="policy-section">
+        <div class="container">
+            <div class="tab-content" id="policyTabContent">
+                <!-- Privacy Policy -->
+                <div class="tab-pane fade show active" id="privacy" role="tabpanel">
+                    <div class="policy-card">
+                        <div class="policy-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h2 class="policy-title">Privacy Policy</h2>
+                        <div class="policy-content">
+                            <p><strong>Last updated:</strong> January 15, 2025</p>
+                            
+                            <h4>Information We Collect</h4>
+                            <p>We collect information you provide directly to us, such as when you create an account, make a purchase, or contact us for support.</p>
+                            <ul>
+                                <li>Personal information (name, email, phone number)</li>
+                                <li>Billing and shipping addresses</li>
+                                <li>Payment information (processed securely through our payment partners)</li>
+                                <li>Order history and preferences</li>
+                            </ul>
+                            
+
+
+                            <h4>How We Use Your Information</h4>
+                            <ul>
+                                <li>Process and fulfill your orders</li>
+                                <li>Send order confirmations and updates</li>
+                                <li>Provide customer support</li>
+                                <li>Send marketing communications (with your consent)</li>
+                                <li>Improve our services and user experience</li>
+                            </ul>
+
+                            <h4>Information Sharing</h4>
+                            <p>We do not sell, trade, or rent your personal information to third parties. We may share information with:</p>
+                            <ul>
+                                <li>Payment processors to complete transactions</li>
+                                <li>Shipping partners to deliver your orders</li>
+                                <li>Service providers who assist in our operations</li>
+                                <li>Legal authorities when required by law</li>
+                            </ul>
+
+                            <h4>Data Security</h4>
+                            <p>We implement appropriate security measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction.</p>
+                            
+
+
+                            <h4>Your Rights</h4>
+                            <p>You have the right to:</p>
+                            <ul>
+                                <li>Access your personal information</li>
+                                <li>Correct inaccurate information</li>
+                                <li>Request deletion of your information</li>
+                                <li>Opt-out of marketing communications</li>
+                            </ul>
+                            
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Terms of Service -->
+                <div class="tab-pane fade" id="terms" role="tabpanel">
+                    <div class="policy-card">
+                        <div class="policy-icon">
+                            <i class="fas fa-gavel"></i>
+                        </div>
+                        <h2 class="policy-title">Terms of Service</h2>
+                        <div class="policy-content">
+                            <p><strong>Last updated:</strong> January 15, 2025</p>
+                            
+                            <h4>Acceptance of Terms</h4>
+                            <p>By accessing and using NUTRIJUDGE, you accept and agree to be bound by the terms and provision of this agreement.</p>
+
+                            <h4>Use License</h4>
+                            <p>Permission is granted to temporarily download one copy of the materials on NUTRIJUDGE for personal, non-commercial transitory viewing only.</p>
+
+                            <h4>User Account</h4>
+                            <ul>
+                                <li>You are responsible for maintaining the confidentiality of your account</li>
+                                <li>You must be at least 18 years old to create an account</li>
+                                <li>You agree to provide accurate and complete information</li>
+                                <li>You are responsible for all activities under your account</li>
+                            </ul>
+                            
+
+
+                            <h4>Prohibited Uses</h4>
+                            <p>You may not use our service to:</p>
+                            <ul>
+                                <li>Violate any applicable laws or regulations</li>
+                                <li>Infringe on intellectual property rights</li>
+                                <li>Transmit harmful or malicious code</li>
+                                <li>Attempt to gain unauthorized access to our systems</li>
+                                <li>Interfere with the proper functioning of our service</li>
+                            </ul>
+
+                            <h4>Product Information</h4>
+                            <p>While we strive to provide accurate product information, we do not guarantee the accuracy, completeness, or usefulness of any information on our platform.</p>
+
+                            <h4>Limitation of Liability</h4>
+                            <p>NUTRIJUDGE shall not be liable for any indirect, incidental, special, consequential, or punitive damages resulting from your use of our service.</p>
+                            
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Shipping Policy -->
+                <div class="tab-pane fade" id="shipping" role="tabpanel">
+                    <div class="policy-card">
+                        <div class="policy-icon">
+                            <i class="fas fa-shipping-fast"></i>
+                        </div>
+                        <h2 class="policy-title">Shipping Policy</h2>
+                        <div class="policy-content">
+                            <p><strong>Last updated:</strong> January 15, 2025</p>
+                            
+                            <h4>Shipping Methods</h4>
+                            <ul>
+                                <li><strong>Standard Delivery:</strong> 3-5 business days - ₹99</li>
+                                <li><strong>Express Delivery:</strong> 1-2 business days - ₹199</li>
+                                <li><strong>Free Shipping:</strong> Orders above ₹1,999</li>
+                            </ul>
+
+                            <h4>Processing Time</h4>
+                            <p>Orders are typically processed within 24 hours of payment confirmation. Processing may take longer during peak seasons or sales.</p>
+                            
+
+
+                            <h4>Delivery Areas</h4>
+                            <p>We currently ship to all major cities and towns across India. Delivery to remote areas may take additional time.</p>
+
+                            <h4>Tracking Your Order</h4>
+                            <p>Once your order ships, you will receive a tracking number via email and SMS. You can track your order status in your account dashboard.</p>
+
+                            <h4>Delivery Attempts</h4>
+                            <p>We make up to 3 delivery attempts. If delivery fails, your package will be returned to our warehouse and you will be contacted for rescheduling.</p>
+
+                            <h4>Shipping Restrictions</h4>
+                            <p>Some products may have shipping restrictions due to:</p>
+                            <ul>
+                                <li>Temperature sensitivity</li>
+                                <li>Regulatory requirements</li>
+                                <li>Geographic restrictions</li>
+                            </ul>
+                            
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Return Policy -->
+                <div class="tab-pane fade" id="return" role="tabpanel">
+                    <div class="policy-card">
+                        <div class="policy-icon">
+                            <i class="fas fa-undo"></i>
+                        </div>
+                        <h2 class="policy-title">Return Policy</h2>
+                        <div class="policy-content">
+                            <p><strong>Last updated:</strong> January 15, 2025</p>
+                            
+                            <h4>Return Window</h4>
+                            <p>You have 30 days from the date of delivery to return most items for a full refund or exchange.</p>
+
+                            <h4>Return Conditions</h4>
+                            <p>To be eligible for return, items must be:</p>
+                            <ul>
+                                <li>In original, unopened packaging</li>
+                                <li>Not used or damaged</li>
+                                <li>In resalable condition</li>
+                                <li>Returned with all original accessories and documentation</li>
+                            </ul>
+
+                            <h4>Non-Returnable Items</h4>
+                            <p>The following items cannot be returned:</p>
+                            <ul>
+                                <li>Personal care items (for hygiene reasons)</li>
+                                <li>Perishable goods</li>
+                                <li>Items marked as "Final Sale"</li>
+                                <li>Custom or personalized items</li>
+                            </ul>
+
+                            <h4>Return Process</h4>
+                            <ol>
+                                <li>Log into your account and go to "Orders"</li>
+                                <li>Select the order you want to return</li>
+                                <li>Choose the items and reason for return</li>
+                                <li>Print the return label or schedule pickup</li>
+                                <li>Package the items securely</li>
+                                <li>Ship or hand over to our courier partner</li>
+                            </ol>
+
+                            <h4>Return Shipping</h4>
+                            <p>Return shipping is free for items returned due to our error or defective products. For other returns, shipping costs are the responsibility of the customer.</p>
+                            
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Refund Policy -->
+                <div class="tab-pane fade" id="refund" role="tabpanel">
+                    <div class="policy-card">
+                        <div class="policy-icon">
+                            <i class="fas fa-money-bill-wave"></i>
+                        </div>
+                        <h2 class="policy-title">Refund Policy</h2>
+                        <div class="policy-content">
+                            <p><strong>Last updated:</strong> January 15, 2025</p>
+                            
+                            <h4>Refund Processing Time</h4>
+                            <ul>
+                                <li><strong>Credit/Debit Cards:</strong> 5-10 business days</li>
+                                <li><strong>UPI:</strong> 2-3 business days</li>
+                                <li><strong>Net Banking:</strong> 3-5 business days</li>
+                                <li><strong>Wallets:</strong> 1-2 business days</li>
+                            </ul>
+                            
+
+
+                            <h4>Refund Amount</h4>
+                            <p>Refunds include:</p>
+                            <ul>
+                                <li>Full product price</li>
+                                <li>Original shipping charges (if applicable)</li>
+                                <li>Return shipping charges (if we covered them)</li>
+                            </ul>
+
+                            <h4>Partial Refunds</h4>
+                            <p>Partial refunds may be issued for:</p>
+                            <ul>
+                                <li>Items returned in less than perfect condition</li>
+                                <li>Missing accessories or documentation</li>
+                                <li>Returns after the 30-day window</li>
+                            </ul>
+
+                            <h4>Refund Methods</h4>
+                            <p>Refunds are processed to the original payment method used for the purchase.</p>
+
+                            <h4>Refund Status</h4>
+                            <p>You can track your refund status in your account dashboard. You will also receive email notifications at each step of the process.</p>
+
+                            <h4>Disputes</h4>
+                            <p>If you have any concerns about your refund, please contact our customer support team within 60 days of the refund transaction.</p>
+                            
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+        <!-- Contact Information -->
+    <section class="contact-info">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <h3 class="text-center mb-5">
+                        <i class="fas fa-headset me-2"></i>Need Help?
+                    </h3>
+                    <div class="row justify-content-center">
+                        <div class="col-md-4">
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-phone"></i>
+                                </div>
+                                <h5>Call Us</h5>
+                                <p>+91 1234567890<br>Mon-Sat: 9 AM - 6 PM</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <h5>Email Us</h5>
+                                <p>support@nutrijudge.com<br>We reply within 24 hours</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fab fa-whatsapp"></i>
+                                </div>
+                                <h5>WhatsApp</h5>
+                                <p>+91 1234567890<br>24/7 instant support</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5><i class=""></i>NUTRIJUDGE</h5>
+                    <p class="text-muted">Your trusted partner in making informed supplement choices.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="text-muted">&copy; 2025 NUTRIJUDGE. All rights reserved.</p>
+                    <div class="mt-2">
+                        <a href="#" class="text-muted me-3"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-muted me-3"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-muted me-3"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-muted"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/js/bootstrap.min.js"></script>
+    <script src="src/data.js"></script>
+    <script src="src/unifiedLogin.js"></script>
+    <script src="main.js"></script>
+    <!-- No test/demo scripts needed for production -->
+    <script>
+        // Cart and Wishlist Functions
+        function addToCart(productId) {
+            const product = window.product.find(p => p.id === productId);
+            if (!product) {
+                showAlert('Product not found!', 'error');
+                return;
+            }
+
+            let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            const existingItem = cart.find(item => item.id === productId);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    id: productId,
+                    title: product.title,
+                    price: product.price,
+                    brand: product.brand,
+                    image: product.image,
+                    quantity: 1
+                });
+            }
+            
+            localStorage.setItem('cart', JSON.stringify(cart));
+            showAlert(`${product.title} added to cart!`, 'success');
+        }
+
+        function addToWishlist(productId) {
+            const product = window.product.find(p => p.id === productId);
+            if (!product) {
+                showAlert('Product not found!', 'error');
+                return;
+            }
+
+            let wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
+            const existingItem = wishlist.find(item => item.id === productId);
+            
+            if (existingItem) {
+                showAlert(`${product.title} is already in your wishlist!`, 'info');
+                return;
+            }
+            
+            wishlist.push({
+                id: productId,
+                title: product.title,
+                price: product.price,
+                brand: product.brand,
+                image: product.image,
+                rating: product.rating,
+                reviewCount: product.reviewCount
+            });
+            
+            localStorage.setItem('wishlist', JSON.stringify(wishlist));
+            showAlert(`${product.title} added to wishlist!`, 'success');
+        }
+
+
+
+        // Show alert message
+        function showAlert(message, type) {
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${type} alert-dismissible fade show position-fixed`;
+            alertDiv.style.cssText = 'top: 20px; right: 20px; z-index: 9999; min-width: 300px;';
+            alertDiv.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'warning' ? 'exclamation-triangle' : 'info-circle'} me-2"></i>${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            
+            document.body.appendChild(alertDiv);
+            
+            setTimeout(() => {
+                if (alertDiv.parentNode) {
+                    alertDiv.remove();
+                }
+            }, 3000);
+        }
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Page initialization complete
+        });
+    </script>
+</body>
+</html> 

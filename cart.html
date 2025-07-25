@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="Description" content="Your Shopping Cart - NUTRIJUDGE" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #000;
+            --secondary-color: #222;
+            --accent-color: #444;
+            --light-color: #fff;
+            --dark-color: #000;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light-color);
+        }
+        
+        .navbar {
+            background: var(--light-color) !important;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05) !important;
+            border: none !important;
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
+        }
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 2.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0;
+            margin: 0;
+            padding: 0;
+            color: var(--primary-color) !important;
+            text-shadow: none;
+            transition: color 0.3s;
+        }
+        .navbar-brand:hover {
+            color: var(--secondary-color) !important;
+        }
+        .navbar-logo {
+            height: 80px;
+            width: auto;
+            border-radius: 12px;
+            margin: 0;
+            padding: 0;
+            background: var(--light-color) !important;
+            filter: none;
+            opacity: 1;
+        }
+        .nav-link, .navbar-nav .dropdown-toggle {
+            color: var(--primary-color) !important;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-shadow: none;
+        }
+        .nav-link:hover, .navbar-nav .dropdown-toggle:hover, .nav-link.active, .navbar-nav .dropdown-toggle.active {
+            color: var(--light-color) !important;
+            background: var(--primary-color) !important;
+        }
+        .cart-container {
+            margin-top: 100px;
+            min-height: calc(100vh - 200px);
+        }
+        .cart-item {
+            background: var(--light-color);
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+        .cart-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        .product-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 10px;
+            background: var(--light-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .quantity-btn {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            border: 2px solid var(--primary-color);
+            background: var(--light-color);
+            color: var(--primary-color);
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        .quantity-btn:hover {
+            background: var(--primary-color);
+            color: var(--light-color);
+        }
+        .quantity-input {
+            width: 60px;
+            text-align: center;
+            border: 2px solid var(--accent-color);
+            border-radius: 8px;
+            padding: 5px;
+        }
+        .summary-card {
+            background: var(--light-color);
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            padding: 25px;
+            position: sticky;
+            top: 120px;
+        }
+        .price-breakdown {
+            border-top: 1px solid #dee2e6;
+            padding-top: 15px;
+        }
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .total-row {
+            border-top: 2px solid var(--primary-color);
+            padding-top: 15px;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        .btn-checkout {
+            background: var(--primary-color);
+            border: none;
+            color: var(--light-color);
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .btn-checkout:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+            color: var(--light-color);
+        }
+        .empty-cart {
+            text-align: center;
+            padding: 60px 20px;
+        }
+        .empty-cart i {
+            font-size: 4rem;
+            color: #dee2e6;
+            margin-bottom: 20px;
+        }
+        .coupon-section {
+            background: var(--light-color);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        .coupon-input {
+            border-radius: 25px;
+            border: 2px solid var(--accent-color);
+        }
+        .coupon-btn {
+            border-radius: 25px;
+            background: var(--primary-color);
+            border: none;
+            color: var(--light-color);
+        }
+        .savings-badge {
+            background: var(--accent-color);
+            color: var(--light-color);
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+        }
+        .remove-btn {
+            color: var(--primary-color);
+            background: none;
+            border: none;
+            transition: all 0.3s ease;
+        }
+        .remove-btn:hover {
+            color: var(--secondary-color);
+            transform: scale(1.1);
+        }
+        .continue-shopping {
+            background: var(--light-color);
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .continue-shopping:hover {
+            background: var(--primary-color);
+            color: var(--light-color);
+        }
+        @media (max-width: 768px) {
+            .cart-container {
+                margin-top: 80px;
+            }
+            .product-image {
+                width: 80px;
+                height: 80px;
+            }
+            .quantity-controls {
+                flex-direction: column;
+                gap: 5px;
+            }
+            .navbar-logo {
+                width: 60px;
+                height: 60px;
+                background: var(--light-color) !important;
+                filter: none;
+            }
+            .navbar-brand {
+                font-size: 1.5rem;
+            }
+        }
+        /* Categories Menu Styles */
+        .categories-menu {
+            min-width: 250px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .category-item {
+            padding: 10px 15px;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+        .category-item:hover {
+            background: var(--primary-color);
+            color: var(--light-color);
+            border-left-color: var(--accent-color);
+            transform: translateX(5px);
+        }
+        .category-item i {
+            width: 20px;
+            text-align: center;
+        }
+        /* Hover Dropdown Styles */
+        .navbar-nav .dropdown:hover .dropdown-menu {
+            display: block !important;
+        }
+        .navbar-nav .dropdown .dropdown-menu {
+            margin-top: 0;
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            border: none;
+            animation: fadeInDown 0.3s ease;
+        }
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        /* Ensure dropdown stays open when hovering over menu items */
+        .dropdown-menu:hover {
+            display: block !important;
+        }
+        .dropdown-menu,
+        .dropdown-menu-end {
+            background: var(--light-color) !important;
+            color: var(--primary-color);
+        }
+        .dropdown-menu .dropdown-item {
+            color: var(--primary-color);
+        }
+        .dropdown-menu .dropdown-item:hover, .dropdown-menu .dropdown-item:focus {
+            background: var(--primary-color);
+            color: var(--light-color);
+        }
+        .navbar-nav .dropdown-toggle:hover,
+        #hamburgerMenu:hover {
+            background: var(--primary-color) !important;
+            color: var(--light-color) !important;
+            border-color: var(--primary-color) !important;
+        }
+        .navbar-nav .dropdown-toggle:focus,
+        #hamburgerMenu:focus {
+            background: var(--primary-color) !important;
+            color: var(--light-color) !important;
+            border-color: var(--primary-color) !important;
+        }
+        .footer {
+            background: #000;
+            color: #fff;
+            padding: 40px 0;
+            text-align: center;
+        }
+        .footer h5,
+        .footer p,
+        .footer a,
+        .footer i {
+            color: #fff !important;
+        }
+        .footer a:hover {
+            color: #ccc !important;
+        }
+        .text-primary, .fs-6, h2.text-primary, h4.text-primary, .badge.bg-primary, .bg-primary {
+            color: #000 !important;
+            /* background-color: #000 !important; */
+        }
+        .btn, .btn-primary, .btn-checkout, .coupon-btn, .continue-shopping {
+            background: #000 !important;
+            color: #fff !important;
+            border: none !important;
+        }
+        .btn:hover, .btn-primary:hover, .btn-checkout:hover, .coupon-btn:hover, .continue-shopping:hover {
+            background: #222 !important;
+            color: #fff !important;
+        }
+        /* Remove background from Shopping Cart heading */
+        h2.text-primary {
+            background: none !important;
+        }
+        /* Remove background from item count badge */
+        #cartItemCount, .badge.bg-primary {
+            background: none !important;
+            color: #000 !important;
+            border: 1px solid #000 !important;
+        }
+        /* Remove background from Order Summary heading */
+        h4.text-primary {
+            background: none !important;
+        }
+        /* Make hamburger menu icon white */
+        .navbar-toggler .navbar-toggler-icon, .navbar-toggler-icon {
+            background-image: none !important;
+            position: relative;
+            width: 1.5em;
+            height: 1.5em;
+            display: inline-block;
+        }
+        .navbar-toggler .navbar-toggler-icon:before, .navbar-toggler .navbar-toggler-icon:after, .navbar-toggler .navbar-toggler-icon span,
+        .navbar-toggler-icon:before, .navbar-toggler-icon:after, .navbar-toggler-icon span {
+            content: '';
+            display: block;
+            height: 3px;
+            width: 100%;
+            background: #fff;
+            margin: 5px 0;
+            border-radius: 2px;
+        }
+        /* For Bootstrap default icon, override filter */
+        .navbar-toggler .navbar-toggler-icon, .navbar-toggler-icon {
+            filter: invert(1) grayscale(1) brightness(2) !important;
+        }
+        /* Hamburger Menu Button - White by default, black on hover, no border */
+        #hamburgerMenu.btn {
+            background: #fff !important;
+            color: #000 !important;
+            border-radius: 8px;
+            border: none !important;
+            transition: background 0.2s, color 0.2s;
+        }
+        #hamburgerMenu.btn:hover,
+        #hamburgerMenu.btn:focus,
+        #hamburgerMenu.btn.show {
+            background: #000 !important;
+            color: #fff !important;
+            border: none !important;
+        }
+        /* Remove custom .navbar-toggler-icon styles */
+        .navbar-toggler .navbar-toggler-icon, .navbar-toggler-icon {
+            background-image: none !important;
+            width: auto;
+            height: auto;
+            display: none;
+        }
+    </style>
+    <title>Shopping Cart - NUTRIJUDGE</title>
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="src/logo_nav.jpg0000.png" alt="NUTRIJUDGE Logo" class="navbar-logo">
+                NUTRIJUDGE
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation menu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="comparison.html">Compare</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="wishlist.html">Wishlist</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="categories.html"><i class="fas fa-th-large me-1"></i>Categories</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="blog.html"><i class="fas fa-blog me-1"></i>Blog</a>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Right side hamburger menu -->
+            <div class="navbar-nav ms-auto">
+                <div class="dropdown">
+                    <button class="btn btn-sm dropdown-toggle" type="button" id="hamburgerMenu" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Open menu">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="hamburgerMenu">
+                        <li><a class="dropdown-item" href="#" onclick="openAuthModal('login')"><i class="fas fa-sign-in-alt me-2"></i>Login</a></li>
+                        <li><a class="dropdown-item" href="wishlist.html"><i class="fas fa-heart me-2"></i>Wishlist</a></li>
+                        <li><a class="dropdown-item active" href="cart.html"><i class="fas fa-shopping-cart me-2"></i>Cart <span class="badge bg-primary ms-2" id="cartCount">0</span></a></li>
+                        <li><a class="dropdown-item" href="profile.html"><i class="fas fa-user me-2"></i>Profile</a></li>
+                        <li><a class="dropdown-item" href="orders.html"><i class="fas fa-box me-2"></i>Orders</a></li>
+                        <li><hr class="dropdown-divider"></li>
+
+                        <li><a class="dropdown-item" href="policies.html"><i class="fas fa-file-contract me-2"></i>Policies</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="https://wa.me/1234567890?text=Hi%20SuppCompare%20Support,%20I%20need%20help" target="_blank" rel="noopener"><i class="fab fa-whatsapp me-2"></i>WhatsApp Support</a></li>
+                        <li><a class="dropdown-item" href="admin.html"><i class="fas fa-user-cog me-2"></i>Admin</a></li>
+                        <li><a class="dropdown-item" href="blog.html"><i class="fas fa-blog me-2"></i>Blog</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Cart Section -->
+    <div class="cart-container">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h2 class="text-primary">
+                            Shopping Cart
+                        </h2>
+                        <span class="badge bg-primary fs-6" id="cartItemCount">0 items</span>
+                    </div>
+                    <div id="cartItems">
+                        <!-- Cart items will be loaded here -->
+                    </div>
+                    <div id="emptyCart" class="empty-cart" style="display: none;">
+                        <h3 class="text-muted">Your cart is empty</h3>
+                        <p class="text-muted">Looks like you haven't added any products to your cart yet.</p>
+                        <a href="index.html" class="btn continue-shopping">
+                            Continue Shopping
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="summary-card">
+                        <h4 class="text-primary mb-3">
+                            Order Summary
+                        </h4>
+                        <div class="coupon-section">
+                            <h6 class="mb-2">Have a coupon?</h6>
+                            <div class="input-group">
+                                <input type="text" class="form-control coupon-input" id="couponCode" placeholder="Enter coupon code">
+                                <button class="btn coupon-btn" type="button" onclick="applyCoupon()" title="Apply coupon">
+                                    Apply
+                                </button>
+                            </div>
+                            <div id="couponMessage" class="mt-2"></div>
+                        </div>
+                        <div class="price-breakdown">
+                            <div class="price-row">
+                                <span>Subtotal:</span>
+                                <span id="subtotal">₹0</span>
+                            </div>
+                            <div class="price-row">
+                                <span>Discount:</span>
+                                <span id="discount" class="text-success">-₹0</span>
+                            </div>
+                            <div class="price-row">
+                                <span>Shipping:</span>
+                                <span id="shipping">₹0</span>
+                            </div>
+                            <div class="price-row total-row">
+                                <span>Total:</span>
+                                <span id="total">₹0</span>
+                            </div>
+                        </div>
+                        <div class="d-grid gap-2 mt-4">
+                            <button class="btn btn-checkout" onclick="proceedToCheckout()" id="checkoutBtn" disabled>
+                                Proceed to Checkout
+                            </button>
+                            <!-- <a href="index.html" class="btn continue-shopping">
+                                Continue Shopping
+                            </a> -->
+                        </div>
+                        <div class="mt-3">
+                            <small class="text-muted">
+                                Secure checkout powered by Stripe
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>NUTRIJUDGE</h5>
+                    <p class="text-muted">Your trusted partner in making informed supplement choices.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="text-muted">&copy; 2025 NUTRIJUDGE. All rights reserved.</p>
+                    <div class="mt-2">
+                        <a href="#" class="text-muted me-3"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-muted me-3"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-muted me-3"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-muted"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/js/bootstrap.min.js"></script>
+    <script src="src/data.js"></script>
+    <script src="src/unifiedLogin.js"></script>
+    <script src="src/userManager.js"></script>
+    <script src="src/cartManager.js"></script>
+    <script>
+        // Cart page specific functions using the centralized cart manager
+        
+        // Load cart on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Cart manager is already initialized in cartManager.js
+            // The cart display and summary will be automatically updated
+        });
+
+        // Listen for cart changes from other tabs/windows
+        window.addEventListener('storage', function(event) {
+            if (event.key === 'nutrijudgeCart' || event.key === 'cart') {
+                if (window.cartManager) {
+                    cartManager.cart = cartManager.loadCart();
+                    cartManager.updateUI();
+                }
+            }
+        });
+        
+        function applyCoupon() {
+            const couponCode = document.getElementById('couponCode').value.trim();
+            const couponMessage = document.getElementById('couponMessage');
+            
+            try {
+                const coupon = cartManager.applyCoupon(couponCode);
+                couponMessage.innerHTML = `<small class="text-success">✓ ${coupon.description} applied!</small>`;
+                cartManager.showAlert(`Coupon applied! ${coupon.description}`, 'success');
+            } catch (error) {
+                couponMessage.innerHTML = `<small class="text-danger">${error.message}</small>`;
+            }
+        }
+        
+        function proceedToCheckout() {
+            const summary = cartManager.calculateOrderSummary();
+            
+            if (summary.itemCount === 0) {
+                cartManager.showAlert('Your cart is empty', 'warning');
+                return;
+            }
+            
+            // Check if user is logged in
+            if (!userManager || !userManager.isLoggedIn()) {
+                cartManager.showAlert('Please login to proceed with checkout', 'warning');
+                return;
+            }
+            
+            cartManager.showAlert('Redirecting to checkout...', 'info');
+            
+            // In a real application, you would redirect to a checkout page
+            // window.location.href = 'checkout.html';
+        }
+    </script>
+</body>
+</html> 

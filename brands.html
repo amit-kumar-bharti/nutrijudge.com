@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="Description" content="NUTRIJUDGE Brands - Direct links to trusted supplement brands and stores" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #000;
+            --secondary-color: #222;
+            --accent-color: #444;
+            --light-color: #fff;
+            --dark-color: #000;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .navbar {
+            background: #fff !important;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05) !important;
+            border: none !important;
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
+        }
+        .navbar-brand,
+        .navbar-nav .nav-link,
+        .navbar-nav .nav-link i,
+        .navbar-toggler,
+        .navbar-toggler-icon {
+            color: #000 !important;
+            text-shadow: none;
+        }
+        .navbar-nav .nav-link.active,
+        .navbar-nav .nav-link:focus,
+        .navbar-nav .nav-link:hover {
+            color: #fff !important;
+            background: #000 !important;
+            border-radius: 8px;
+            transition: background 0.2s, color 0.2s;
+        }
+        .btn#hamburgerMenu,
+        .btn#hamburgerMenu:focus,
+        .btn#hamburgerMenu:hover {
+            background: #000 !important;
+            color: #fff !important;
+            border: none !important;
+        }
+        #hamburgerMenu i {
+            color: #fff !important;
+        }
+        
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 2.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0;
+            margin: 0;
+            padding: 0;
+            color: #111 !important;
+            text-shadow: 0 1px 4px rgba(255,255,255,0.7);
+            transition: color 0.3s;
+        }
+        .navbar-brand:hover {
+            color: #e53935 !important;
+        }
+        
+        .navbar-logo {
+            height: 80px;
+            width: auto;
+            border-radius: 12px;
+            margin: 0;
+            padding: 0;
+            background: transparent !important;
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
+            filter: brightness(1.1) contrast(1.1);
+        }
+        
+        .nav-link, .navbar-nav .dropdown-toggle {
+            color: #111 !important;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-shadow: 0 1px 4px rgba(255,255,255,0.7);
+        }
+        
+        .nav-link:hover, .navbar-nav .dropdown-toggle:hover, .nav-link.active, .navbar-nav .dropdown-toggle.active {
+            color: #e53935 !important;
+            background: none !important;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, var(--light-color), var(--accent-color));
+            padding: 120px 0 80px;
+            text-align: center;
+        }
+        
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--dark-color);
+            margin-bottom: 2rem;
+        }
+        
+        .brand-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 2rem;
+            height: 100%;
+            border: 2px solid transparent;
+        }
+        
+        .brand-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+            border-color: var(--primary-color);
+        }
+        
+        .brand-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .brand-card:hover .brand-icon {
+            transform: scale(1.1);
+        }
+        
+        .brand-name {
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+        
+        .brand-tagline {
+            color: #6c757d;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        .brand-description {
+            color: #495057;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        
+        .brand-specialties {
+            margin-bottom: 1.5rem;
+        }
+        
+        .specialty-tag {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin: 0.2rem;
+            display: inline-block;
+        }
+        
+        .brand-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-weight: bold;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+        }
+        
+        .stat-label {
+            font-size: 0.8rem;
+            color: #6c757d;
+        }
+        
+        .visit-btn {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+        }
+        
+        .visit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(43, 106, 108, 0.3);
+            color: white;
+            text-decoration: none;
+        }
+        
+        .search-box {
+            background: white;
+            border-radius: 50px;
+            padding: 8px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .search-input {
+            border: none;
+            outline: none;
+            padding: 12px 20px;
+            width: 100%;
+            border-radius: 25px;
+        }
+        
+        .search-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: 600;
+        }
+        
+        .filter-section {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .footer {
+            background: var(--dark-color);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            .navbar-logo {
+                width: 60px;
+                height: 60px;
+                background: transparent !important;
+                filter: brightness(1.1) contrast(1.1);
+            }
+            .navbar-brand {
+                font-size: 1.5rem;
+            }
+        }
+        
+        /* Categories Menu Styles */
+        .categories-menu {
+            min-width: 250px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .category-item {
+            padding: 10px 15px;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+        
+        .category-item:hover {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-left-color: var(--accent-color);
+            transform: translateX(5px);
+        }
+        
+        .category-item i {
+            width: 20px;
+            text-align: center;
+        }
+        
+        /* Hover Dropdown Styles */
+        .navbar-nav .dropdown:hover .dropdown-menu {
+            display: block !important;
+        }
+        
+        .navbar-nav .dropdown .dropdown-menu {
+            margin-top: 0;
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            border: none;
+            animation: fadeInDown 0.3s ease;
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Ensure dropdown stays open when hovering over menu items */
+        .dropdown-menu:hover {
+            display: block !important;
+        }
+        
+        .dropdown-menu,
+        .dropdown-menu-end {
+            background: var(--primary-color) !important;
+            color: #fff;
+        }
+        .dropdown-menu .dropdown-item {
+            color: #fff;
+        }
+        .dropdown-menu .dropdown-item:hover, .dropdown-menu .dropdown-item:focus {
+            background: rgba(0,0,0,0.08);
+            color: #fff;
+        }
+
+        .navbar-nav .dropdown-toggle:hover,
+        #hamburgerMenu:hover {
+            background: #88304E !important;
+            color: #fff !important;
+            border-color: #88304E !important;
+        }
+        .navbar-nav .dropdown-toggle:focus,
+        #hamburgerMenu:focus {
+            background: #88304E !important;
+            color: #fff !important;
+            border-color: #88304E !important;
+        }
+    </style>
+    <title>Brands - NUTRIJUDGE</title>
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="src/logo_nav.jpg0000.png" alt="NUTRIJUDGE Logo" class="navbar-logo">
+                NUTRIJUDGE
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation menu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="brands.html">Brands</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="comparison.html">Compare</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="categories.html"><i class="fas fa-th-large me-1"></i>Categories</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="blog.html"><i class="fas fa-blog me-1"></i>Blog</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- Right side hamburger menu -->
+            <div class="navbar-nav ms-auto">
+                <div class="dropdown">
+                    <button class="btn btn-outline-light btn-sm dropdown-toggle" type="button" id="hamburgerMenu" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Open menu">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="hamburgerMenu">
+                        <li><a class="dropdown-item" href="#" onclick="openAuthModal()"><i class="fas fa-sign-in-alt me-2"></i>Login</a></li>
+                        <li><a class="dropdown-item" href="wishlist.html"><i class="fas fa-heart me-2"></i>Wishlist<span class="badge bg-danger ms-2 wishlist-count" style="display: none;">0</span></a></li>
+                        <li><a class="dropdown-item" href="cart.html"><i class="fas fa-shopping-cart me-2"></i>Cart<span class="badge bg-primary ms-2 cart-count" style="display: none;">0</span></a></li>
+                        <li><a class="dropdown-item" href="profile.html"><i class="fas fa-user me-2"></i>Profile</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="openSettingsModal()"><i class="fas fa-cog me-2"></i>Settings</a></li>
+                        <li><a class="dropdown-item" href="orders.html"><i class="fas fa-box me-2"></i>Orders</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="policies.html"><i class="fas fa-file-contract me-2"></i>Policies</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="https://wa.me/1234567890?text=Hi%20NUTRIJUDGE%20Support,%20I%20need%20help" target="_blank" rel="noopener"><i class="fab fa-whatsapp me-2"></i>WhatsApp Support</a></li>
+                        <li><a class="dropdown-item" href="admin.html"><i class="fas fa-user-cog me-2"></i>Admin</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#" onclick="openContactModal()"><i class="fas fa-phone me-2"></i>Contact Us</a></li>
+                        <li><a class="dropdown-item" href="blog.html"><i class="fas fa-blog me-2"></i>Blog</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <h1 class="hero-title">Trusted Supplement Brands</h1>
+            <p class="hero-subtitle">Direct links to authentic supplement brands and stores. Find your perfect products from trusted sources.</p>
+            
+            <!-- Search Box -->
+            <div class="search-box">
+                <div class="row g-0">
+                    <div class="col-8">
+                        <input type="text" class="search-input" id="searchInput" placeholder="Search brands by name or specialty..." onkeypress="handleSearchKeyPress(event)">
+                    </div>
+                    <div class="col-4">
+                        <button class="search-btn w-100" onclick="performSearch()" id="searchBtn">
+                            <i class="fas fa-search me-2"></i>Search
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filter Section -->
+    <section class="py-5">
+        <div class="container">
+            <div class="filter-section">
+                <h3 class="text-primary mb-4"><i class="fas fa-filter me-2"></i>Filter Brands</h3>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label class="form-label">Specialty</label>
+                        <select class="form-control" id="specialtyFilter" title="Specialty">
+                            <option value="">All Specialties</option>
+                            <option value="protein">Protein & Muscle</option>
+                            <option value="vitamins">Vitamins & Minerals</option>
+                            <option value="fitness">Fitness & Performance</option>
+                            <option value="health">Health & Wellness</option>
+                            <option value="weight-loss">Weight Loss</option>
+                            <option value="immunity">Immunity Support</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Price Range</label>
+                        <select class="form-control" id="priceFilter" title="Price Range">
+                            <option value="">All Prices</option>
+                            <option value="budget">Budget Friendly</option>
+                            <option value="mid-range">Mid Range</option>
+                            <option value="premium">Premium</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Rating</label>
+                        <select class="form-control" id="ratingFilter" title="Rating">
+                            <option value="">All Ratings</option>
+                            <option value="4.5+">4.5+ Stars</option>
+                            <option value="4.0+">4.0+ Stars</option>
+                            <option value="3.5+">3.5+ Stars</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Sort By</label>
+                        <select class="form-control" id="sortFilter" title="Sort By">
+                            <option value="name">Name A-Z</option>
+                            <option value="rating">Rating</option>
+                            <option value="popularity">Popularity</option>
+                            <option value="newest">Newest</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="text-center mt-3">
+                    <button class="btn btn-primary" onclick="applyFilters()">
+                        <i class="fas fa-filter me-2"></i>Apply Filters
+                    </button>
+                    <button class="btn btn-outline-secondary ms-2" onclick="clearFilters()">
+                        <i class="fas fa-times me-2"></i>Clear All
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brands Section -->
+    <section class="py-5" style="background: var(--light-color);">
+        <div class="container">
+            <div class="row text-center mb-5">
+                <div class="col-lg-8 mx-auto">
+                    <h2 class="display-4 fw-bold text-primary mb-3">All Brands</h2>
+                    <p class="lead text-muted">Explore our comprehensive collection of trusted supplement brands</p>
+                </div>
+            </div>
+            
+            <div class="row" id="brandsContainer">
+                <!-- Brand cards will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5><i class="#"></i>NUTRIJUDGE</h5>
+                    <p class="text-muted">Your trusted partner in making informed supplement choices.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="text-muted">&copy; 2025 NUTRIJUDGE. All rights reserved.</p>
+                    <div class="mt-2">
+                        <a href="#" class="text-muted me-3"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-muted me-3"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-muted me-3"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-muted"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/js/bootstrap.min.js"></script>
+    <script src="src/data.js"></script>
+    <script src="src/unifiedLogin.js"></script>
+    <script>
+        // Brand data
+        const brands = [
+            {
+                id: 1,
+                name: "MUSCLEBLAZE",
+                tagline: "Premium Protein & Supplements",
+                description: "Leading Indian sports nutrition brand offering high-quality protein powders, pre-workouts, and fitness supplements. Known for their innovative formulations and great taste.",
+                url: "muscleblaze.html",
+                icon: "fas fa-dumbbell",
+                specialties: ["Protein", "Pre-workout", "BCAA", "Weight Gain"],
+                rating: 4.8,
+                reviewCount: 12500,
+                priceRange: "mid-range",
+                established: "2012",
+                location: "India"
+            },
+            {
+                id: 2,
+                name: "GNC",
+                tagline: "Trusted Health & Nutrition",
+                description: "Global leader in health and wellness products. Offers a wide range of vitamins, minerals, protein supplements, and fitness accessories with premium quality assurance.",
+                url: "gnc.html",
+                icon: "fas fa-shield-alt",
+                specialties: ["Vitamins", "Minerals", "Protein", "Fitness"],
+                rating: 4.6,
+                reviewCount: 8900,
+                priceRange: "premium",
+                established: "1935",
+                location: "Global"
+            },
+            {
+                id: 3,
+                name: "NUTRABAY",
+                tagline: "Authentic Supplements",
+                description: "India's largest online supplement store offering authentic products from international and domestic brands. Known for genuine products and excellent customer service.",
+                url: "nutrabay.html",
+                icon: "fas fa-leaf",
+                specialties: ["Authentic Products", "International Brands", "Customer Service"],
+                rating: 4.7,
+                reviewCount: 15600,
+                priceRange: "mid-range",
+                established: "2011",
+                location: "India"
+            },
+            /*
+            {
+                id: 4,
+                name: "BIG MUSCLES",
+                tagline: "Premium Nutrition",
+                description: "Specialized in muscle building and fitness supplements. Offers high-quality protein powders, weight gainers, and performance-enhancing products.",
+                url: "bigmuscles.html",
+                icon: "fas fa-fire",
+                specialties: ["Muscle Building", "Weight Gain", "Performance"],
+                rating: 4.5,
+                reviewCount: 7200,
+                priceRange: "budget",
+                established: "2015",
+                location: "India"
+            },
+            {
+                id: 5,
+                name: "OPTIMUM NUTRITION",
+                tagline: "Gold Standard Quality",
+                description: "World-renowned brand known for their Gold Standard Whey Protein. Offers premium quality supplements with extensive research and development.",
+                url: "optimumnutrition.html",
+                icon: "fas fa-star",
+                specialties: ["Whey Protein", "Premium Quality", "Research Based"],
+                rating: 4.9,
+                reviewCount: 23400,
+                priceRange: "premium",
+                established: "1986",
+                location: "Global"
+            },
+            {
+                id: 6,
+                name: "HEALTHKART",
+                tagline: "Health & Wellness",
+                description: "Comprehensive health and wellness platform offering supplements, fitness equipment, and health products. Known for their extensive product range.",
+                url: "healthkart.html",
+                icon: "fas fa-heartbeat",
+                specialties: ["Health Products", "Fitness Equipment", "Wellness"],
+                rating: 4.4,
+                reviewCount: 18900,
+                priceRange: "mid-range",
+                established: "2011",
+                location: "India"
+            },
+            {
+                id: 7,
+                name: "DYMATIZE",
+                tagline: "Elite Performance",
+                description: "Premium sports nutrition brand focused on elite performance. Known for their innovative protein formulations and pre-workout supplements.",
+                url: "dymatize.html",
+                icon: "fas fa-bolt",
+                specialties: ["Elite Performance", "Innovation", "Quality"],
+                rating: 4.7,
+                reviewCount: 11200,
+                priceRange: "premium",
+                established: "1994",
+                location: "Global"
+            },
+            {
+                id: 8,
+                name: "SCITRON",
+                tagline: "Scientific Nutrition",
+                description: "Science-backed nutrition brand offering research-based supplements. Known for their clinical formulations and evidence-based products.",
+                url: "scitron.html",
+                icon: "fas fa-atom",
+                specialties: ["Scientific Research", "Clinical Formulations", "Evidence Based"],
+                rating: 4.6,
+                reviewCount: 6800,
+                priceRange: "premium",
+                established: "2008",
+                location: "India"
+            },
+            {
+                id: 9,
+                name: "MUSCLETECH",
+                tagline: "Advanced Technology",
+                description: "Innovative sports nutrition brand using advanced technology and research. Known for their cutting-edge formulations and performance products.",
+                url: "muscletech.html",
+                icon: "fas fa-cogs",
+                specialties: ["Advanced Technology", "Innovation", "Performance"],
+                rating: 4.5,
+                reviewCount: 9500,
+                priceRange: "premium",
+                established: "1995",
+                location: "Global"
+            },
+            {
+                id: 10,
+                name: "MYPROTEIN",
+                tagline: "Quality Protein",
+                description: "UK-based brand specializing in high-quality protein products. Known for their affordable pricing and extensive protein range.",
+                url: "myprotein.html",
+                icon: "fas fa-dumbbell",
+                specialties: ["Protein", "Affordable", "Quality"],
+                rating: 4.6,
+                reviewCount: 18700,
+                priceRange: "mid-range",
+                established: "2004",
+                location: "UK"
+            },
+            {
+                id: 11,
+                name: "BULK",
+                tagline: "Bulk Nutrition",
+                description: "Specialized in bulk nutrition products and wholesale supplements. Known for their cost-effective solutions and bulk purchasing options.",
+                url: "bulk.html",
+                icon: "fas fa-weight",
+                specialties: ["Bulk Products", "Wholesale", "Cost Effective"],
+                rating: 4.4,
+                reviewCount: 8200,
+                priceRange: "budget",
+                established: "2006",
+                location: "UK"
+            },
+            {
+                id: 12,
+                name: "NUTRITION X",
+                tagline: "Performance Nutrition",
+                description: "Performance-focused nutrition brand offering supplements for athletes and fitness enthusiasts. Known for their sports-specific formulations.",
+                url: "nutritionx.html",
+                icon: "fas fa-trophy",
+                specialties: ["Performance", "Athletes", "Sports Specific"],
+                rating: 4.7,
+                reviewCount: 13400,
+                priceRange: "premium",
+                established: "2010",
+                location: "Global"
+            }
+            */
+        ];
+
+        // Load brands on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadBrands();
+        });
+
+        function loadBrands(filteredBrands = null) {
+            const brandsToShow = filteredBrands || brands;
+            const container = document.getElementById('brandsContainer');
+            
+            const brandsHTML = brandsToShow.map(brand => `
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="brand-card">
+                        <div class="brand-icon" style="background: linear-gradient(135deg, ${getBrandColor(brand.id)}, ${getBrandColor(brand.id, true)});">
+                            <i class="${brand.icon}"></i>
+                        </div>
+                        
+                        <h4 class="brand-name">${brand.name}</h4>
+                        <p class="brand-tagline">${brand.tagline}</p>
+                        <p class="brand-description">${brand.description}</p>
+                        
+                        <div class="brand-specialties">
+                            ${brand.specialties.map(specialty => 
+                                `<span class="specialty-tag">${specialty}</span>`
+                            ).join('')}
+                        </div>
+                        
+                        <div class="brand-stats">
+                            <div class="stat-item">
+                                <div class="stat-value">${brand.rating}</div>
+                                <div class="stat-label">Rating</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">${brand.reviewCount.toLocaleString()}</div>
+                                <div class="stat-label">Reviews</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">${brand.established}</div>
+                                <div class="stat-label">Established</div>
+                            </div>
+                        </div>
+                        
+                        <a href="${brand.url}" rel="noopener" class="visit-btn">
+                            <i class="fas fa-external-link-alt me-2"></i>Visit Store
+                        </a>
+                    </div>
+                </div>
+            `).join('');
+            
+            container.innerHTML = brandsHTML;
+        }
+
+        function getBrandColor(brandId, isSecondary = false) {
+            const colors = [
+                ['#28a745', '#20c997'],
+                ['#007bff', '#0056b3'],
+                ['#fd7e14', '#e55a00'],
+                ['#dc3545', '#c82333'],
+                ['#6f42c1', '#5a2d91'],
+                ['#17a2b8', '#138496'],
+                ['#ffc107', '#e0a800'],
+                ['#6c757d', '#545b62'],
+                ['#e83e8c', '#d63384'],
+                ['#20c997', '#1ea085'],
+                ['#fd7e14', '#e55a00'],
+                ['#6f42c1', '#5a2d91']
+            ];
+            
+            const colorIndex = (brandId - 1) % colors.length;
+            return isSecondary ? colors[colorIndex][1] : colors[colorIndex][0];
+        }
+
+        function performSearch() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const filteredBrands = brands.filter(brand => 
+                brand.name.toLowerCase().includes(searchTerm) ||
+                brand.tagline.toLowerCase().includes(searchTerm) ||
+                brand.description.toLowerCase().includes(searchTerm) ||
+                brand.specialties.some(specialty => specialty.toLowerCase().includes(searchTerm))
+            );
+            
+            loadBrands(filteredBrands);
+            
+            if (filteredBrands.length === 0) {
+                showAlert('No brands found matching your search.', 'info');
+            }
+        }
+
+        function handleSearchKeyPress(event) {
+            if (event.key === 'Enter') {
+                performSearch();
+            }
+        }
+
+        function applyFilters() {
+            const specialty = document.getElementById('specialtyFilter').value;
+            const priceRange = document.getElementById('priceFilter').value;
+            const rating = document.getElementById('ratingFilter').value;
+            const sortBy = document.getElementById('sortFilter').value;
+            
+            let filteredBrands = brands;
+            
+            // Apply specialty filter
+            if (specialty) {
+                filteredBrands = filteredBrands.filter(brand => 
+                    brand.specialties.some(s => s.toLowerCase().includes(specialty.toLowerCase()))
+                );
+            }
+            
+            // Apply price range filter
+            if (priceRange) {
+                filteredBrands = filteredBrands.filter(brand => brand.priceRange === priceRange);
+            }
+            
+            // Apply rating filter
+            if (rating) {
+                const minRating = parseFloat(rating.replace('+', ''));
+                filteredBrands = filteredBrands.filter(brand => brand.rating >= minRating);
+            }
+            
+            // Apply sorting
+            filteredBrands.sort((a, b) => {
+                switch (sortBy) {
+                    case 'name':
+                        return a.name.localeCompare(b.name);
+                    case 'rating':
+                        return b.rating - a.rating;
+                    case 'popularity':
+                        return b.reviewCount - a.reviewCount;
+                    case 'newest':
+                        return b.established - a.established;
+                    default:
+                        return 0;
+                }
+            });
+            
+            loadBrands(filteredBrands);
+        }
+
+        function clearFilters() {
+            document.getElementById('specialtyFilter').value = '';
+            document.getElementById('priceFilter').value = '';
+            document.getElementById('ratingFilter').value = '';
+            document.getElementById('sortFilter').value = 'name';
+            loadBrands();
+        }
+
+        function showAlert(message, type) {
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${type} alert-dismissible fade show position-fixed`;
+            alertDiv.style.cssText = 'top: 20px; right: 20px; z-index: 9999; min-width: 300px;';
+            alertDiv.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-triangle'} me-2"></i>${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            
+            document.body.appendChild(alertDiv);
+            
+            setTimeout(() => {
+                if (alertDiv.parentNode) {
+                    alertDiv.remove();
+                }
+            }, 3000);
+        }
+    </script>
+</body>
+</html> 

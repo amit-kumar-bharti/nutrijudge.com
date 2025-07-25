@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="Description" content="NUTRIJUDGE Categories - Browse all supplement categories and find your perfect products" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #000;
+            --secondary-color: #222;
+            --accent-color: #444;
+            --light-color: #fff;
+            --dark-color: #000;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .navbar {
+            background: var(--light-color) !important;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05) !important;
+            border: none !important;
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
+        }
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 2.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0;
+            margin: 0;
+            padding: 0;
+            color: var(--primary-color) !important;
+            text-shadow: none;
+            transition: color 0.3s;
+        }
+        .navbar-brand:hover {
+            color: var(--secondary-color) !important;
+        }
+        .navbar-logo {
+            height: 80px;
+            width: auto;
+            border-radius: 12px;
+            margin: 0;
+            padding: 0;
+            background: var(--light-color) !important;
+            filter: none;
+            opacity: 1;
+        }
+        .nav-link, .navbar-nav .dropdown-toggle {
+            color: var(--primary-color) !important;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-shadow: none;
+        }
+        .nav-link:hover, .navbar-nav .dropdown-toggle:hover, .nav-link.active, .navbar-nav .dropdown-toggle.active {
+            color: var(--light-color) !important;
+            background: var(--primary-color) !important;
+        }
+        
+        .hero-section {
+            background: #fff;
+            color: #000;
+            padding: 120px 0 80px;
+            text-align: center;
+        }
+        
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: #000;
+            margin-bottom: 1rem;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: #000;
+            margin-bottom: 2rem;
+        }
+        
+        .category-card {
+            background: #fff;
+            color: #000;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 2rem;
+            cursor: pointer;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+            background: #000;
+            color: #fff;
+        }
+        
+        .category-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            color: white;
+        }
+        
+        .category-icon.ayurveda,
+        .category-icon.fat-burner {
+            background: linear-gradient(135deg, #28a745, #20c997);
+        }
+
+        .category-icon.supplement,
+        .category-icon.post-workout {
+            background: linear-gradient(135deg, #17a2b8, #6f42c1);
+        }
+
+        .category-icon.pre-workout {
+            background: linear-gradient(135deg, #dc3545, #fd7e14);
+        }
+
+        .category-icon.gainers {
+            background: linear-gradient(135deg, #ffc107, #fd7e14);
+        }
+
+        .category-description {
+            color: #6c757d;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            margin-bottom: 1.5rem;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+        
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        
+        .filter-section {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .search-box {
+            background: white;
+            border-radius: 50px;
+            padding: 8px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .search-input {
+            border: none;
+            outline: none;
+            padding: 12px 20px;
+            width: 100%;
+            border-radius: 25px;
+        }
+        
+        .search-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: 600;
+        }
+        
+        .footer {
+            background: #000;
+            color: #fff;
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        .footer h5,
+        .footer p,
+        .footer a,
+        .footer i {
+            color: #fff !important;
+        }
+        .footer a:hover {
+            color: #ccc !important;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            .navbar-logo {
+                width: 60px;
+                height: 60px;
+                background: transparent !important;
+                filter: brightness(1.1) contrast(1.1);
+            }
+            .navbar-brand {
+                font-size: 1.5rem;
+            }
+        }
+        
+        /* Categories Menu Styles */
+        .categories-menu {
+            min-width: 250px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .category-item {
+            padding: 10px 15px;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+        
+        .category-item:hover {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-left-color: var(--accent-color);
+            transform: translateX(5px);
+        }
+        
+        .category-item i {
+            width: 20px;
+            text-align: center;
+        }
+        
+        /* Hover Dropdown Styles */
+        .navbar-nav .dropdown:hover .dropdown-menu {
+            display: block !important;
+        }
+        
+        .navbar-nav .dropdown .dropdown-menu {
+            margin-top: 0;
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            border: none;
+            animation: fadeInDown 0.3s ease;
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Ensure dropdown stays open when hovering over menu items */
+        .dropdown-menu:hover {
+            display: block !important;
+        }
+        
+        /* Hamburger Menu Button - White by default, black on hover, no border */
+        #hamburgerMenu.btn {
+            background: #fff !important;
+            color: #000 !important;
+            border-radius: 8px;
+            border: none !important;
+            transition: background 0.2s, color 0.2s;
+        }
+        #hamburgerMenu.btn i {
+            color: #000 !important;
+            transition: color 0.2s;
+        }
+        #hamburgerMenu.btn:hover,
+        #hamburgerMenu.btn:focus,
+        #hamburgerMenu.btn.show {
+            background: #000 !important;
+            color: #fff !important;
+            border: none !important;
+        }
+        #hamburgerMenu.btn:hover i,
+        #hamburgerMenu.btn:focus i,
+        #hamburgerMenu.btn.show i {
+            color: #fff !important;
+        }
+        /* Hamburger Dropdown Menu Items */
+        .dropdown-menu,
+        .dropdown-menu-end {
+            background: #fff !important;
+            color: #000 !important;
+        }
+        .dropdown-menu .dropdown-item {
+            background: #fff !important;
+            color: #000 !important;
+            transition: background 0.2s, color 0.2s;
+        }
+        .dropdown-menu .dropdown-item:hover,
+        .dropdown-menu .dropdown-item:focus {
+            background: #000 !important;
+            color: #fff !important;
+        }
+    </style>
+    <title>Categories - NUTRIJUDGE</title>
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="src/logo_nav.jpg0000.png" alt="NUTRIJUDGE Logo" class="navbar-logo">
+                NUTRIJUDGE
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation menu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="comparison.html">Compare</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="categories.html"><i class="fas fa-th-large me-1"></i>Categories</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="blog.html"><i class="fas fa-blog me-1"></i>Blog</a>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Right side hamburger menu -->
+            <div class="navbar-nav ms-auto">
+                <div class="dropdown">
+                    <button class="btn btn-outline-light btn-sm dropdown-toggle" type="button" id="hamburgerMenu" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Open menu">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="hamburgerMenu">
+                        <li><a class="dropdown-item" href="#" onclick="openAuthModal('login')"><i class="fas fa-sign-in-alt me-2"></i>Login</a></li>
+                        <li><a class="dropdown-item" href="wishlist.html">
+                            <i class="fas fa-heart me-2"></i>Wishlist
+                            <span class="badge bg-danger ms-2 wishlist-count" style="display: none;">0</span>
+                        </a></li>
+                        <li><a class="dropdown-item" href="cart.html">
+                            <i class="fas fa-shopping-cart me-2"></i>Cart
+                            <span class="badge bg-primary ms-2 cart-count" style="display: none;">0</span>
+                        </a></li>
+                        <li><a class="dropdown-item" href="profile.html"><i class="fas fa-user me-2"></i>Profile</a></li>
+                        <li><a class="dropdown-item" href="orders.html"><i class="fas fa-box me-2"></i>Orders</a></li>
+                        <li><hr class="dropdown-divider"></li>
+
+                        <li><a class="dropdown-item" href="policies.html"><i class="fas fa-file-contract me-2"></i>Policies</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="https://wa.me/1234567890?text=Hi%20NUTRIJUDGE%20Support,%20I%20need%20help" target="_blank" rel="noopener"><i class="fab fa-whatsapp me-2"></i>WhatsApp Support</a></li>
+                        <li><a class="dropdown-item" href="admin.html"><i class="fas fa-user-cog me-2"></i>Admin</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#" onclick="openContactModal()"><i class="fas fa-phone me-2"></i>Contact Us</a></li>
+                        <li><a class="dropdown-item" href="mailto:contact@nutrijudge.com"><i class="fas fa-envelope me-2"></i>Email Support</a></li>
+                        <li><a class="dropdown-item" href="tel:+1234567890"><i class="fas fa-phone-alt me-2"></i>Call Us</a></li>
+                        <li><a class="dropdown-item" href="blog.html"><i class="fas fa-blog me-2"></i>Blog</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <h1 class="hero-title">All Categories</h1>
+            <p class="hero-subtitle">Browse through all supplement categories and find the perfect products for your fitness goals</p>
+            
+            <!-- Search Box -->
+            <div class="search-box">
+                <div class="row g-0">
+                    <div class="col-8">
+                        <input type="text" class="search-input" id="searchInput" placeholder="Search products across all categories..." onkeypress="handleSearchKeyPress(event)">
+                    </div>
+                    <div class="col-4">
+                        <button class="search-btn w-100" onclick="performSearch()" id="searchBtn">
+                            <i class="fas fa-search me-2"></i>Search
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filter Section -->
+    <!-- Removed filter section as per request -->
+
+    <!-- Categories Section -->
+    <section class="py-5" style="background: var(--light-color);">
+        <div class="container">
+            <div class="row text-center mb-5">
+                <div class="col-lg-8 mx-auto">
+                    <h2 class="display-4 fw-bold text-primary mb-3">All Categories</h2>
+                    <p class="lead text-muted">Explore our comprehensive range of supplement categories</p>
+                </div>
+            </div>
+            
+            <div class="row" id="categoriesContainer">
+                <!-- Categories will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row text-center mb-5">
+                <div class="col-lg-8 mx-auto">
+                    <h2 class="display-4 fw-bold text-primary mb-3">Featured Products</h2>
+                    <p class="lead text-muted">Discover top-rated products across all categories</p>
+                </div>
+            </div>
+            
+            <div class="row" id="productsContainer">
+                <!-- Products will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-5" style="background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); color: white;">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-lg-8 mx-auto">
+                    <h2 class="display-5 fw-bold mb-4">Ready to Compare Products?</h2>
+                    <p class="lead mb-4">Use our advanced comparison tool to find the best supplements for your needs.</p>
+                    <a href="comparison.html" class="btn btn-light btn-lg px-5 py-3 fw-bold me-3">
+                        Start Comparing
+                    </a>
+                    <a href="index.html" class="btn btn-outline-light btn-lg px-5 py-3 fw-bold">
+                        <i class="fas fa-home me-2"></i>Back to Home
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5><i class=""></i>NUTRIJUDGE</h5>
+                    <p class="text-muted">Your trusted partner in making informed supplement choices.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="text-muted">&copy; 2025 NUTRIJUDGE. All rights reserved.</p>
+                    <div class="mt-2">
+                        <a href="#" class="text-muted me-3"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-muted me-3"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-muted me-3"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-muted"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/js/bootstrap.min.js"></script>
+    <script src="src/data.js"></script>
+    <script src="src/unifiedLogin.js"></script>
+    <!-- No test/demo scripts needed for production -->
+    <script>
+        // Category data
+        const categories = [
+            {
+                id: 'protein',
+                name: 'Protein',
+                icon: 'fas fa-dumbbell',
+                description: 'High-quality protein supplements for muscle building and recovery',
+                productCount: 45,
+                color: 'protein'
+            },
+            {
+                id: 'gainers',
+                name: 'Gainers',
+                icon: 'fas fa-plus-circle', // changed from 'fas fa-weight'
+                description: 'Mass gainers and weight gain supplements for bulking',
+                productCount: 32,
+                color: 'gainers'
+            },
+            {
+                id: 'pre-workout',
+                name: 'Pre-Workout',
+                icon: 'fas fa-bolt',
+                description: 'Energy boosters and pre-workout supplements for performance',
+                productCount: 28,
+                color: 'pre-workout'
+            },
+            {
+                id: 'post-workout',
+                name: 'Post-Workout',
+                icon: 'fas fa-heartbeat',
+                description: 'Recovery supplements and post-workout nutrition',
+                productCount: 35,
+                color: 'post-workout'
+            },
+            {
+                id: 'ayurveda',
+                name: 'Ayurveda',
+                icon: 'fas fa-leaf',
+                description: 'Traditional Ayurvedic supplements and herbal products',
+                productCount: 22,
+                color: 'ayurveda'
+            },
+            {
+                id: 'supplement',
+                name: 'Supplement',
+                icon: 'fas fa-pills',
+                description: 'Essential vitamins and minerals',
+                color: 'supplement'
+            },
+            {
+                id: 'fat-burner',
+                name: 'Fat Burner',
+                icon: 'fas fa-fire',
+                description: 'Support your weight management goals',
+                color: 'fat-burner'
+            }
+        ];
+
+        // Update category card click to redirect with category parameter
+        function loadCategories() {
+            const categoryPageMap = {
+                'protein': 'protein.html',
+                'gainers': 'gainers.html',
+                'pre-workout': 'pre-workout.html',
+                'post-workout': 'post-workout.html',
+                'ayurveda': 'ayurveda.html',
+                'supplement': 'supplement.html',
+                'fat-burner': 'fat-burner.html'
+            };
+            const container = document.getElementById('categoriesContainer');
+            container.innerHTML = categories.map(category => `
+                <div class="col-lg-4 col-md-6">
+                    <div class="category-card" onclick="window.location.href='${categoryPageMap[category.id] || '#'}'">
+                        <div class="category-icon ${category.color}">
+                            <i class="${category.icon}"></i>
+                        </div>
+                        <h4 class="text-center mb-3">${category.name}</h4>
+                        <p class="text-center text-muted mb-3">${category.description}</p>
+                        <div class="text-center">
+                            <span class="badge bg-primary">${category.productCount || ''} Products</span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Update loadProducts to filter by category if provided
+        function loadProducts(categoryId) {
+            const container = document.getElementById('productsContainer');
+            if (window.product && Array.isArray(window.product)) {
+                let productsToShow = window.product;
+                if (categoryId) {
+                    productsToShow = productsToShow.filter(p => 
+                        p.category && p.category.toLowerCase() === categoryId.toLowerCase()
+                    );
+                }
+                if (productsToShow.length === 0) {
+                    container.innerHTML = '<div class="col-12 text-center"><p class="text-muted">No products found in this category.</p></div>';
+                    return;
+                }
+                container.innerHTML = productsToShow.map(product => `
+                    <div class="col-lg-3 col-md-6">
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="${product.image}" alt="${product.title}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <i class="fas fa-pills fa-3x text-muted" style="display: none;"></i>
+                            </div>
+                            <h5 class="mb-2">${product.title}</h5>
+                            <p class="text-muted small mb-2">${product.brand || 'Unknown Brand'}</p>
+                            <div class="text-warning mb-2">
+                                ${'⭐'.repeat(Math.floor(product.rating || 4))} ${product.rating || 4.0}
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <span class="h5 text-primary fw-bold">₹${product.price || 0}</span>
+                                ${product.discount ? `<span class="badge bg-success">${product.discount} OFF</span>` : ''}
+                            </div>
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-primary btn-sm" onclick="addToCart(${product.id})">
+                                    <i class="fas fa-shopping-cart me-2"></i>Add to Cart
+                                </button>
+                                <button class="btn btn-outline-primary btn-sm" onclick="addToWishlist(${product.id})">
+                                    <i class="fas fa-heart me-2"></i>Wishlist
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            } else {
+                container.innerHTML = '<div class="col-12 text-center"><p class="text-muted">Loading products...</p></div>';
+            }
+        }
+
+        // View category
+        function viewCategory(categoryId) {
+            // Store category in localStorage for comparison page
+            localStorage.setItem('selectedCategory', categoryId);
+            window.location.href = `comparison.html?category=${encodeURIComponent(categoryId)}`;
+        }
+
+        // Search functionality
+        function performSearch() {
+            const searchTerm = document.getElementById('searchInput').value.trim();
+            if (searchTerm) {
+                localStorage.setItem('searchResults', JSON.stringify([]));
+                window.location.href = `comparison.html?search=${encodeURIComponent(searchTerm)}`;
+            }
+        }
+
+        function handleSearchKeyPress(event) {
+            if (event.key === 'Enter') {
+                performSearch();
+            }
+        }
+
+        // Filter functionality
+        function applyFilters() {
+            const priceFilter = document.getElementById('priceFilter').value;
+            const ratingFilter = document.getElementById('ratingFilter').value;
+            const brandFilter = document.getElementById('brandFilter').value;
+            const sortFilter = document.getElementById('sortFilter').value;
+
+            // Store filters in localStorage for comparison page
+            const filters = { priceFilter, ratingFilter, brandFilter, sortFilter };
+            localStorage.setItem('appliedFilters', JSON.stringify(filters));
+            
+            window.location.href = 'comparison.html';
+        }
+
+        function clearFilters() {
+            document.getElementById('priceFilter').value = '';
+            document.getElementById('ratingFilter').value = '';
+            document.getElementById('brandFilter').value = '';
+            document.getElementById('sortFilter').value = 'name';
+        }
+
+        // Cart and wishlist functions
+        function addToCart(productId) {
+            showAlert('Product added to cart!', 'success');
+        }
+
+        function addToWishlist(productId) {
+            showAlert('Product added to wishlist!', 'success');
+        }
+
+        // Utility functions
+        function showAlert(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `alert alert-${type} alert-dismissible fade show position-fixed`;
+            notification.style.cssText = 'top: 20px; right: 20px; z-index: 9999; min-width: 300px;';
+            notification.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'warning' ? 'exclamation-triangle' : 'info-circle'} me-2"></i>${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.remove();
+                }
+            }, 3000);
+        }
+
+        // Placeholder functions for compatibility
+        function openAuthModal(tab = 'login') {
+            showAlert('Please visit the home page to login or register.', 'info');
+        }
+
+        function openContactModal() {
+            showAlert('Please visit the home page to contact us.', 'info');
+        }
+
+        // On DOMContentLoaded, check for category param and filter products
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const selectedCategory = urlParams.get('category');
+            loadCategories();
+            loadProducts(selectedCategory);
+        });
+    </script>
+</body>
+</html> 

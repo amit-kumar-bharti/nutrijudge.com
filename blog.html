@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - NUTRIJUDGE</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body { background: #f8f9fa; }
+        .blog-hero {
+            background: linear-gradient(135deg, #222, #444);
+            color: #fff;
+            padding: 60px 0 40px 0;
+            text-align: center;
+        }
+        .blog-card {
+            border-radius: 15px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            background: #fff;
+            overflow: hidden;
+            transition: box-shadow 0.2s;
+        }
+        .blog-card:hover {
+            box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+        }
+        .blog-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .blog-card-body {
+            padding: 1.5rem;
+        }
+        .blog-date {
+            font-size: 0.9rem;
+            color: #888;
+        }
+        .blog-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .blog-summary {
+            color: #555;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+        .read-more {
+            background: #000;
+            color: #fff;
+            border-radius: 25px;
+            padding: 8px 24px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+        .read-more:hover {
+            background: #222;
+            color: #fff;
+        }
+        .navbar {
+            background: #fff !important;
+        }
+        .navbar-brand,
+        .navbar-nav .nav-link,
+        .navbar-nav .nav-link i,
+        .navbar-toggler,
+        .navbar-toggler-icon {
+            color: #000 !important;
+        }
+        .navbar-nav .nav-link.active,
+        .navbar-nav .nav-link:focus,
+        .navbar-nav .nav-link:hover {
+            color: #fff !important;
+            background: #000 !important;
+            border-radius: 8px;
+            transition: background 0.2s, color 0.2s;
+        }
+        .navbar-logo {
+            height: 60px;
+            border-radius: 12px;
+            margin-right: 8px;
+        }
+        .navbar-brand {
+            font-weight: bold !important;
+            font-size: 2rem !important;
+        }
+        .btn#hamburgerMenu,
+        .btn#hamburgerMenu:focus,
+        .btn#hamburgerMenu:hover {
+            background: #000 !important;
+            color: #fff !important;
+            border: none !important;
+        }
+        #hamburgerMenu i {
+            color: #fff !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="src/logo_nav.jpg0000.png" alt="NUTRIJUDGE Logo" class="navbar-logo" style="height: 60px; border-radius: 12px; margin-right: 8px;">NUTRIJUDGE
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation menu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="comparison.html">Compare</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="categories.html">Categories</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="blog.html"><i class="fas fa-blog me-1"></i>Blog</a></li>
+                </ul>
+            </div>
+            <div class="navbar-nav ms-auto">
+                <div class="dropdown">
+                    <button class="btn btn-outline-light btn-sm dropdown-toggle" type="button" id="hamburgerMenu" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Open menu">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="hamburgerMenu">
+                        <li><a class="dropdown-item" href="#" onclick="openAuthModal()"><i class="fas fa-sign-in-alt me-2"></i>Login</a></li>
+                        <li><a class="dropdown-item" href="wishlist.html"><i class="fas fa-heart me-2"></i>Wishlist<span class="badge bg-danger ms-2 wishlist-count" style="display: none;">0</span></a></li>
+                        <li><a class="dropdown-item" href="cart.html"><i class="fas fa-shopping-cart me-2"></i>Cart<span class="badge bg-primary ms-2 cart-count" style="display: none;">0</span></a></li>
+                        <li><a class="dropdown-item" href="profile.html"><i class="fas fa-user me-2"></i>Profile</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="openSettingsModal()"><i class="fas fa-cog me-2"></i>Settings</a></li>
+                        <li><a class="dropdown-item" href="orders.html"><i class="fas fa-box me-2"></i>Orders</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="policies.html"><i class="fas fa-file-contract me-2"></i>Policies</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="https://wa.me/1234567890?text=Hi%20NUTRIJUDGE%20Support,%20I%20need%20help" target="_blank" rel="noopener"><i class="fab fa-whatsapp me-2"></i>WhatsApp Support</a></li>
+                        <li><a class="dropdown-item" href="admin.html"><i class="fas fa-user-cog me-2"></i>Admin</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#" onclick="openContactModal()"><i class="fas fa-phone me-2"></i>Contact Us</a></li>
+                        <li><a class="dropdown-item" href="blog.html"><i class="fas fa-blog me-2"></i>Blog</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div style="height: 80px;"></div>
+    <!-- Hero -->
+    <section class="blog-hero">
+        <div class="container">
+            <h1 class="display-4 fw-bold mb-3">NUTRIJUDGE Blog</h1>
+            <p class="lead mb-0">Latest tips, news, and guides on supplements, fitness, and health.</p>
+        </div>
+    </section>
+    <!-- Blog Grid -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="blog-card">
+                        <img src="src/1.home.jpg.jpg" alt="Blog 1">
+                        <div class="blog-card-body">
+                            <div class="blog-date mb-2"><i class="far fa-calendar-alt me-1"></i> July 2025</div>
+                            <div class="blog-title">How to Choose the Right Protein Supplement</div>
+                            <div class="blog-summary">A step-by-step guide to picking the best protein for your goals, budget, and dietary needs.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="blog-card">
+                        <img src="src/2home.jpg.jpg" alt="Blog 2">
+                        <div class="blog-card-body">
+                            <div class="blog-date mb-2"><i class="far fa-calendar-alt me-1"></i> July 2025</div>
+                            <div class="blog-title">Supplements for Weight Loss: What Works?</div>
+                            <div class="blog-summary">Explore the science behind popular fat burners and what to look for in a safe supplement.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="blog-card">
+                        <img src="src/3home.jpg.jpg" alt="Blog 3">
+                        <div class="blog-card-body">
+                            <div class="blog-date mb-2"><i class="far fa-calendar-alt me-1"></i> July 2025</div>
+                            <div class="blog-title">Understanding Supplement Labels</div>
+                            <div class="blog-summary">Learn how to read supplement facts, spot red flags, and make informed choices.</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Add more blog cards as needed -->
+            </div>
+        </div>
+    </section>
+    <footer class="footer bg-dark text-light py-4 mt-5">
+        <div class="container text-center">
+            <p class="mb-0">&copy; 2025 NUTRIJUDGE. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/js/bootstrap.min.js"></script>
+    <!-- No test/demo scripts needed for production -->
+</body>
+</html> 

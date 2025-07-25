@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Orders - NUTRIJUDGE</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #000;
+            --secondary-color: #222;
+            --accent-color: #444;
+            --success-color: #fff;
+            --warning-color: #bbb;
+            --danger-color: #fff;
+            --dark-color: #000;
+            --light-color: #fff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #000;
+            background: #fff;
+        }
+
+        .navbar {
+            background: #fff !important;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .navbar-brand,
+        .navbar-nav .nav-link {
+            color: #000 !important;
+        }
+        .navbar-nav .nav-link.active,
+        .navbar-nav .nav-link:focus,
+        .navbar-nav .nav-link:hover {
+            color: #000 !important;
+        }
+        .navbar-toggler {
+            border-color: #000 !important;
+            background: #000 !important;
+            color: #fff !important;
+        }
+        .btn#hamburgerMenu {
+            background: #000 !important;
+            border-color: #000 !important;
+            color: #fff !important;
+        }
+        .btn#hamburgerMenu .fas.fa-bars {
+            color: #fff !important;
+        }
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255,1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E") !important;
+        }
+
+        .hero-section {
+            background: #000;
+            color: #fff;
+            padding: 120px 0 80px;
+            text-align: center;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            margin-bottom: 2rem;
+            color: #fff;
+        }
+
+        .orders-section {
+            padding: 80px 0;
+            background: #fff;
+        }
+
+        .order-card {
+            background: #fff;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            border-left: 5px solid #000;
+        }
+
+        .order-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+        }
+
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .order-number {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #000;
+        }
+
+        .order-date {
+            color: #222;
+            font-size: 0.9rem;
+        }
+
+        .order-status {
+            padding: 5px 15px;
+            border-radius: 0;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            background: #000;
+            color: #fff;
+        }
+        .status-pending,
+        .status-processing,
+        .status-shipped,
+        .status-delivered,
+        .status-cancelled {
+            background: #000;
+            color: #fff;
+        }
+
+        .order-items {
+            margin-bottom: 20px;
+        }
+
+        .order-item {
+            display: flex;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #f8f9fa;
+        }
+
+        .order-item:last-child {
+            border-bottom: none;
+        }
+
+        .item-image {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-right: 15px;
+        }
+
+        .item-details {
+            flex: 1;
+        }
+
+        .item-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .item-price {
+            color: #000;
+            font-weight: 600;
+        }
+
+        .item-quantity {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+
+        .order-total {
+            text-align: right;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #000;
+        }
+
+        .order-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn-action {
+            padding: 8px 16px;
+            border-radius: 0;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            background: #000;
+            color: #fff;
+            border: 1px solid #000;
+        }
+        .btn-action:hover {
+            background: #222;
+            color: #fff;
+            border: 1px solid #222;
+        }
+
+        .btn-track {
+            background: var(--primary-color);
+            color: white;
+            border: 1px solid var(--primary-color);
+        }
+
+        .btn-track:hover {
+            background: #d90046;
+            color: white;
+        }
+
+        .btn-reorder {
+            background: var(--primary-color);
+            color: white;
+            border: 1px solid var(--primary-color);
+        }
+
+        .btn-reorder:hover {
+            background: #d90046;
+            color: white;
+        }
+
+        .btn-review {
+            background: var(--primary-color);
+            color: white;
+            border: 1px solid var(--primary-color);
+        }
+
+        .btn-review:hover {
+            background: #d90046;
+            color: white;
+        }
+
+        .btn-cancel {
+            background: var(--primary-color);
+            color: white;
+            border: 1px solid var(--primary-color);
+        }
+
+        .btn-cancel:hover {
+            background: #d90046;
+            color: white;
+        }
+
+        .filters-section {
+            background: #fff;
+            padding: 30px 0;
+            margin-bottom: 40px;
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .filter-select {
+            padding: 8px 15px;
+            border: 1px solid #000;
+            border-radius: 0;
+            background: #fff;
+            color: #000;
+        }
+
+        .empty-orders {
+            text-align: center;
+            padding: 80px 0;
+            background: #fff;
+        }
+
+        .empty-icon {
+            font-size: 4rem;
+            color: #000;
+            margin-bottom: 20px;
+        }
+
+        .tracking-timeline {
+            margin-top: 20px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 0;
+            border: 1px solid #000;
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 0.8rem;
+        }
+
+        .timeline-icon.active {
+            background: #000;
+            color: #fff;
+        }
+
+        .timeline-icon.pending {
+            background: #fff;
+            color: #000;
+            border: 1px solid #000;
+        }
+
+        .timeline-content {
+            flex: 1;
+        }
+
+        .timeline-title {
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .timeline-date {
+            font-size: 0.8rem;
+            color: #6c757d;
+        }
+
+        .footer {
+            background: #000;
+            color: #fff;
+            padding: 40px 0;
+            text-align: center;
+        }
+        .footer h5,
+        .footer p,
+        .footer a,
+        .footer i {
+            color: #fff !important;
+        }
+        .footer a:hover {
+            color: #bbb !important;
+        }
+
+        /* Auto open hamburger dropdown on hover */
+        .dropdown:hover .dropdown-menu[aria-labelledby="hamburgerMenu"] {
+            display: block !important;
+        }
+        .dropdown-menu[aria-labelledby="hamburgerMenu"] {
+            margin-top: 0;
+        }
+        .dropdown-menu[aria-labelledby="hamburgerMenu"] .dropdown-item:hover,
+        .dropdown-menu[aria-labelledby="hamburgerMenu"] .dropdown-item:focus {
+            background: #000 !important;
+            color: #fff !important;
+        }
+
+        /* Auto dropdown for Categories button on hover */
+        .navbar-nav .dropdown:hover .dropdown-menu {
+            display: block !important;
+        }
+
+        /* Home and Compare button active/hover/focus: black background, white text */
+        .navbar-nav .nav-link[href="index.html"].active,
+        .navbar-nav .nav-link[href="index.html"]:focus,
+        .navbar-nav .nav-link[href="index.html"]:hover,
+        .navbar-nav .nav-link[href="comparison.html"].active,
+        .navbar-nav .nav-link[href="comparison.html"]:focus,
+        .navbar-nav .nav-link[href="comparison.html"]:hover {
+            background: #000 !important;
+            color: #fff !important;
+            border-radius: 0 !important;
+        }
+
+        .navbar-brand {
+            font-weight: bold !important;
+            font-size: 2rem !important;
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            .order-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            .order-actions {
+                flex-direction: column;
+            }
+            .filter-group {
+                flex-direction: column;
+                align-items: stretch;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <div class="d-flex w-100 align-items-center justify-content-between">
+                <!-- Brand Left -->
+                <a class="navbar-brand me-3" href="index.html">
+                    <img src="src/logo_nav.jpg0000.png" alt="NUTRIJUDGE Logo" class="navbar-logo" style="height: 60px; border-radius: 12px; margin-right: 8px;">NUTRIJUDGE
+                </a>
+                <!-- Centered Nav -->
+                <div class="flex-grow-1 d-flex justify-content-center">
+                    <ul class="navbar-nav flex-row gap-3">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">
+                                <i class="fas fa-home me-1"></i>Home
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="categories.html"><i class="fas fa-th-large me-1"></i>Categories</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="comparison.html">
+                                <i class=""></i>Compare
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="blog.html"><i class="fas fa-blog me-1"></i>Blog</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Hamburger Right -->
+                <div class="d-flex align-items-center ms-3">
+                    <div class="navbar-nav">
+                        <div class="dropdown">
+                            <button class="btn btn-outline-light btn-sm dropdown-toggle" type="button" id="hamburgerMenu" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Open menu">
+                                <i class="fas fa-bars"></i>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="hamburgerMenu">
+                                <li><a class="dropdown-item" href="#" onclick="openAuthModal('login')"><i class="fas fa-sign-in-alt me-2"></i>Login</a></li>
+                                <li><a class="dropdown-item" href="wishlist.html"><i class="fas fa-heart me-2"></i>Wishlist</a></li>
+                                <li><a class="dropdown-item" href="cart.html"><i class="fas fa-shopping-cart me-2"></i>Cart</a></li>
+                                <li><a class="dropdown-item" href="profile.html"><i class="fas fa-user me-2"></i>Profile</a></li>
+                                <li><a class="dropdown-item active" href="orders.html"><i class="fas fa-box me-2"></i>Orders</a></li>
+                                <li><hr class="dropdown-divider"></li>
+        
+                                <li><a class="dropdown-item" href="policies.html"><i class="fas fa-file-contract me-2"></i>Policies</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="https://wa.me/1234567890?text=Hi%20NUTRIJUDGE%20Support,%20I%20need%20help" target="_blank" rel="noopener"><i class="fab fa-whatsapp me-2"></i>WhatsApp Support</a></li>
+                                <li><a class="dropdown-item" href="admin.html"><i class="fas fa-user-cog me-2"></i>Admin</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <h1 class="hero-title">
+                <i class="fas fa-box me-3"></i>My Orders
+            </h1>
+            <p class="hero-subtitle">Track your orders and manage your purchases</p>
+        </div>
+    </section>
+
+    <!-- Filters Section -->
+    <section class="filters-section">
+        <div class="container">
+            <div class="filter-group">
+                <select class="filter-select" id="statusFilter" title="Filter by order status">
+                    <option value="">All Status</option>
+                    <option value="pending">Pending</option>
+                    <option value="processing">Processing</option>
+                    <option value="shipped">Shipped</option>
+                    <option value="delivered">Delivered</option>
+                    <option value="cancelled">Cancelled</option>
+                </select>
+                
+                <select class="filter-select" id="timeFilter" title="Filter by time range">
+                    <option value="">All Time</option>
+                    <option value="7">Last 7 days</option>
+                    <option value="30">Last 30 days</option>
+                    <option value="90">Last 3 months</option>
+                    <option value="365">Last year</option>
+                </select>
+                
+                <input type="text" class="filter-select" id="searchOrders" placeholder="Search orders...">
+                
+                <button class="btn" style="background: var(--primary-color); color: white; border: none;" onclick="applyFilters()" title="Apply Filters">
+                    <i class="fas fa-filter me-2"></i>Apply Filters
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Orders Section -->
+    <section class="orders-section">
+        <div class="container">
+            <div id="ordersContainer">
+                <!-- Sample Orders -->
+                <div class="order-card">
+                    <div class="order-header">
+                        <div>
+                            <div class="order-number">#ORD-2025-001</div>
+                            <div class="order-date">January 15, 2025</div>
+                        </div>
+                        <span class="order-status status-delivered">Delivered</span>
+                    </div>
+                    
+                    <div class="order-items">
+                        <div class="order-item">
+                            <img src="https://via.placeholder.com/60x60" alt="Product" class="item-image">
+                            <div class="item-details">
+                                <div class="item-name">Whey Protein Isolate</div>
+                                <div class="item-price">₹2,499</div>
+                                <div class="item-quantity">Quantity: 1</div>
+                            </div>
+                        </div>
+                        <div class="order-item">
+                            <img src="https://via.placeholder.com/60x60" alt="Product" class="item-image">
+                            <div class="item-details">
+                                <div class="item-name">Creatine Monohydrate</div>
+                                <div class="item-price">₹899</div>
+                                <div class="item-quantity">Quantity: 2</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="order-total">Total: ₹4,297</div>
+                    
+                    <div class="order-actions">
+                        <a href="#" class="btn-action btn-track" onclick="trackOrder('ORD-2025-001')">
+                            <i class="fas fa-truck me-1"></i>Track Order
+                        </a>
+                        <a href="#" class="btn-action btn-reorder" onclick="reorder('ORD-2025-001')">
+                            <i class="fas fa-redo me-1"></i>Reorder
+                        </a>
+                        <a href="#" class="btn-action btn-review" onclick="writeReview('ORD-2025-001')">
+                            <i class="fas fa-star me-1"></i>Write Review
+                        </a>
+                    </div>
+                </div>
+
+                <div class="order-card">
+                    <div class="order-header">
+                        <div>
+                            <div class="order-number">#ORD-2025-002</div>
+                            <div class="order-date">January 12, 2025</div>
+                        </div>
+                        <span class="order-status status-shipped">Shipped</span>
+                    </div>
+                    
+                    <div class="order-items">
+                        <div class="order-item">
+                            <img src="https://via.placeholder.com/60x60" alt="Product" class="item-image">
+                            <div class="item-details">
+                                <div class="item-name">Ashwagandha Root</div>
+                                <div class="item-price">₹1,299</div>
+                                <div class="item-quantity">Quantity: 1</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="order-total">Total: ₹1,398</div>
+                    
+                    <div class="order-actions">
+                        <a href="#" class="btn-action btn-track" onclick="trackOrder('ORD-2025-002')">
+                            <i class="fas fa-truck me-1"></i>Track Order
+                        </a>
+                        <a href="#" class="btn-action btn-cancel" onclick="cancelOrder('ORD-2025-002')">
+                            <i class="fas fa-times me-1"></i>Cancel Order
+                        </a>
+                    </div>
+                    
+                    <div class="tracking-timeline">
+                        <h6><i class="fas fa-route me-2"></i>Tracking Timeline</h6>
+                        <div class="timeline-item">
+                            <div class="timeline-icon active">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div class="timeline-content">
+                                <div class="timeline-title">Order Placed</div>
+                                <div class="timeline-date">January 12, 2025 - 2:30 PM</div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-icon active">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div class="timeline-content">
+                                <div class="timeline-title">Order Confirmed</div>
+                                <div class="timeline-date">January 12, 2025 - 3:15 PM</div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-icon active">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div class="timeline-content">
+                                <div class="timeline-title">Order Shipped</div>
+                                <div class="timeline-date">January 13, 2025 - 10:30 AM</div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-icon pending">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="timeline-content">
+                                <div class="timeline-title">Out for Delivery</div>
+                                <div class="timeline-date">Expected: January 16, 2025</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="order-card">
+                    <div class="order-header">
+                        <div>
+                            <div class="order-number">#ORD-2025-003</div>
+                            <div class="order-date">January 10, 2025</div>
+                        </div>
+                        <span class="order-status status-processing">Processing</span>
+                    </div>
+                    
+                    <div class="order-items">
+                        <div class="order-item">
+                            <img src="https://via.placeholder.com/60x60" alt="Product" class="item-image">
+                            <div class="item-details">
+                                <div class="item-name">Multivitamin Complex</div>
+                                <div class="item-price">₹1,599</div>
+                                <div class="item-quantity">Quantity: 1</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="order-total">Total: ₹1,698</div>
+                    
+                    <div class="order-actions">
+                        <a href="#" class="btn-action btn-cancel" onclick="cancelOrder('ORD-2025-003')">
+                            <i class="fas fa-times me-1"></i>Cancel Order
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Empty State -->
+            <div id="emptyOrders" class="empty-orders" style="display: none;">
+                <div class="empty-icon">
+                    <i class="fas fa-box-open"></i>
+                </div>
+                <h3>No Orders Found</h3>
+                <p class="text-muted mb-4">You haven't placed any orders yet. Start shopping to see your order history here.</p>
+                <a href="comparison.html" class="btn btn-primary btn-lg">
+                    <i class="fas fa-shopping-cart me-2"></i>Start Shopping
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5><i class=""></i>NUTRIJUDGE</h5>
+                    <p class="text-muted">Your trusted partner in making informed supplement choices.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="text-muted">&copy; 2025 NUTRIJUDGE. All rights reserved.</p>
+                    <div class="mt-2">
+                        <a href="#" class="text-muted me-3"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-muted me-3"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-muted me-3"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-muted"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/js/bootstrap.min.js"></script>
+    <script src="src/data.js"></script>
+    <script src="src/unifiedLogin.js"></script>
+    <script src="main.js"></script>
+    <!-- No test/demo scripts needed for production -->
+    <script>
+        // Sample order data
+        const sampleOrders = [
+            {
+                id: 'ORD-2025-001',
+                date: '2025-01-15',
+                status: 'delivered',
+                total: 4297,
+                items: [
+                    { name: 'Whey Protein Isolate', price: 2499, quantity: 1 },
+                    { name: 'Creatine Monohydrate', price: 899, quantity: 2 }
+                ]
+            },
+            {
+                id: 'ORD-2025-002',
+                date: '2025-01-12',
+                status: 'shipped',
+                total: 1398,
+                items: [
+                    { name: 'Ashwagandha Root', price: 1299, quantity: 1 }
+                ]
+            },
+            {
+                id: 'ORD-2025-003',
+                date: '2025-01-10',
+                status: 'processing',
+                total: 1698,
+                items: [
+                    { name: 'Multivitamin Complex', price: 1599, quantity: 1 }
+                ]
+            },
+            {
+                id: 'ORD-2025-004',
+                date: '2025-01-08',
+                status: 'pending',
+                total: 2999,
+                items: [
+                    { name: 'Omega-3 Fish Oil', price: 1499, quantity: 2 }
+                ]
+            },
+            {
+                id: 'ORD-2025-005',
+                date: '2024-12-20',
+                status: 'cancelled',
+                total: 899,
+                items: [
+                    { name: 'Vitamin D3', price: 899, quantity: 1 }
+                ]
+            }
+        ];
+
+        let currentOrders = [...sampleOrders];
+
+        // Load orders from localStorage or use sample data
+        function loadOrders() {
+            const savedOrders = localStorage.getItem('nutrijudgeOrders');
+            if (savedOrders) {
+                // Load saved orders
+                currentOrders = JSON.parse(savedOrders);
+            } else {
+                // Use sample data for demonstration
+                currentOrders = [...sampleOrders];
+            }
+            renderOrders(currentOrders);
+        }
+
+        // Render orders
+        function renderOrders(orders) {
+            const container = document.getElementById('ordersContainer');
+            const emptyState = document.getElementById('emptyOrders');
+            
+            if (orders.length === 0) {
+                container.style.display = 'none';
+                emptyState.style.display = 'block';
+                return;
+            }
+            
+            container.style.display = 'block';
+            emptyState.style.display = 'none';
+            
+            container.innerHTML = orders.map(order => createOrderCard(order)).join('');
+        }
+
+        // Create order card HTML
+        function createOrderCard(order) {
+            const statusClass = `status-${order.status}`;
+            const statusText = order.status.charAt(0).toUpperCase() + order.status.slice(1);
+            const formattedDate = new Date(order.date).toLocaleDateString('en-IN', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            
+            const itemsHtml = order.items.map(item => `
+                <div class="order-item">
+                    <img src="https://via.placeholder.com/60x60" alt="Product" class="item-image">
+                    <div class="item-details">
+                        <div class="item-name">${item.name}</div>
+                        <div class="item-price">₹${item.price.toLocaleString()}</div>
+                        <div class="item-quantity">Quantity: ${item.quantity}</div>
+                    </div>
+                </div>
+            `).join('');
+
+            const actionsHtml = getOrderActions(order);
+
+            return `
+                <div class="order-card">
+                    <div class="order-header">
+                        <div>
+                            <div class="order-number">#${order.id}</div>
+                            <div class="order-date">${formattedDate}</div>
+                        </div>
+                        <span class="order-status ${statusClass}">${statusText}</span>
+                    </div>
+                    
+                    <div class="order-items">
+                        ${itemsHtml}
+                    </div>
+                    
+                    <div class="order-total">Total: ₹${order.total.toLocaleString()}</div>
+                    
+                    <div class="order-actions">
+                        ${actionsHtml}
+                    </div>
+                    
+                    ${order.status === 'shipped' ? createTrackingTimeline(order) : ''}
+                </div>
+            `;
+        }
+
+        // Get order actions based on status
+        function getOrderActions(order) {
+            const actions = [];
+            
+            if (['shipped', 'delivered'].includes(order.status)) {
+                actions.push(`<a href="#" class="btn-action btn-track" onclick="trackOrder('${order.id}')">
+                    <i class="fas fa-truck me-1"></i>Track Order
+                </a>`);
+            }
+            
+            if (order.status === 'delivered') {
+                actions.push(`<a href="#" class="btn-action btn-reorder" onclick="reorder('${order.id}')">
+                    <i class="fas fa-redo me-1"></i>Reorder
+                </a>`);
+                actions.push(`<a href="#" class="btn-action btn-review" onclick="writeReview('${order.id}')">
+                    <i class="fas fa-star me-1"></i>Write Review
+                </a>`);
+            }
+            
+            if (['pending', 'processing'].includes(order.status)) {
+                actions.push(`<a href="#" class="btn-action btn-cancel" onclick="cancelOrder('${order.id}')">
+                    <i class="fas fa-times me-1"></i>Cancel Order
+                </a>`);
+            }
+            
+            return actions.join('');
+        }
+
+        // Create tracking timeline
+        function createTrackingTimeline(order) {
+            return `
+                <div class="tracking-timeline">
+                    <h6><i class="fas fa-route me-2"></i>Tracking Timeline</h6>
+                    <div class="timeline-item">
+                        <div class="timeline-icon active">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div class="timeline-content">
+                            <div class="timeline-title">Order Placed</div>
+                            <div class="timeline-date">${new Date(order.date).toLocaleDateString('en-IN')} - 2:30 PM</div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-icon active">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div class="timeline-content">
+                            <div class="timeline-title">Order Confirmed</div>
+                            <div class="timeline-date">${new Date(order.date).toLocaleDateString('en-IN')} - 3:15 PM</div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-icon active">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div class="timeline-content">
+                            <div class="timeline-title">Order Shipped</div>
+                            <div class="timeline-date">${new Date(new Date(order.date).getTime() + 24*60*60*1000).toLocaleDateString('en-IN')} - 10:30 AM</div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-icon pending">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="timeline-content">
+                            <div class="timeline-title">Out for Delivery</div>
+                            <div class="timeline-date">Expected: ${new Date(new Date(order.date).getTime() + 4*24*60*60*1000).toLocaleDateString('en-IN')}</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Apply filters function
+        function applyFilters() {
+            const statusFilter = document.getElementById('statusFilter').value;
+            const timeFilter = document.getElementById('timeFilter').value;
+            const searchTerm = document.getElementById('searchOrders').value.toLowerCase().trim();
+            
+            let filteredOrders = [...sampleOrders];
+            
+            // Filter by status
+            if (statusFilter) {
+                filteredOrders = filteredOrders.filter(order => order.status === statusFilter);
+            }
+            
+            // Filter by time
+            if (timeFilter) {
+                const daysAgo = parseInt(timeFilter);
+                const cutoffDate = new Date();
+                cutoffDate.setDate(cutoffDate.getDate() - daysAgo);
+                
+                filteredOrders = filteredOrders.filter(order => {
+                    const orderDate = new Date(order.date);
+                    return orderDate >= cutoffDate;
+                });
+            }
+            
+            // Filter by search term
+            if (searchTerm) {
+                filteredOrders = filteredOrders.filter(order => {
+                    return order.id.toLowerCase().includes(searchTerm) ||
+                           order.items.some(item => item.name.toLowerCase().includes(searchTerm));
+                });
+            }
+            
+            // Update current orders and render
+            currentOrders = filteredOrders;
+            renderOrders(filteredOrders);
+            
+            // Show filter results message
+            showFilterResults(filteredOrders.length, sampleOrders.length);
+        }
+
+        // Show filter results message
+        function showFilterResults(filteredCount, totalCount) {
+            // Remove existing message
+            const existingMessage = document.querySelector('.filter-results-message');
+            if (existingMessage) {
+                existingMessage.remove();
+            }
+            
+            if (filteredCount !== totalCount) {
+                const message = document.createElement('div');
+                message.className = 'alert alert-info filter-results-message';
+                message.innerHTML = `
+                    <i class="fas fa-filter me-2"></i>
+                    Showing ${filteredCount} of ${totalCount} orders
+                    <button type="button" class="btn-close float-end" onclick="clearFilters()"></button>
+                `;
+                
+                const container = document.querySelector('.orders-section .container');
+                container.insertBefore(message, container.firstChild);
+            }
+        }
+
+        // Clear all filters
+        function clearFilters() {
+            document.getElementById('statusFilter').value = '';
+            document.getElementById('timeFilter').value = '';
+            document.getElementById('searchOrders').value = '';
+            
+            currentOrders = [...sampleOrders];
+            renderOrders(currentOrders);
+            
+            // Remove filter results message
+            const existingMessage = document.querySelector('.filter-results-message');
+            if (existingMessage) {
+                existingMessage.remove();
+            }
+        }
+
+        // Add clear filters button functionality
+        function addClearFiltersButton() {
+            const filterGroup = document.querySelector('.filter-group');
+            const clearButton = document.createElement('button');
+            clearButton.className = 'btn btn-outline-secondary';
+            clearButton.innerHTML = '<i class="fas fa-times me-2"></i>Clear Filters';
+            clearButton.onclick = clearFilters;
+            filterGroup.appendChild(clearButton);
+        }
+
+        function trackOrder(orderId) {
+            alert(`Tracking order ${orderId}. This would open detailed tracking information.`);
+        }
+
+        function reorder(orderId) {
+            if (confirm('Add all items from this order to your cart?')) {
+                // Add items to cart logic
+                alert('Items added to cart successfully!');
+            }
+        }
+
+        function writeReview(orderId) {
+            alert(`Write review for order ${orderId}. This would open a review form.`);
+        }
+
+        function cancelOrder(orderId) {
+            if (confirm('Are you sure you want to cancel this order?')) {
+                // Cancel order logic
+                alert('Order cancelled successfully!');
+            }
+        }
+
+        // Cart and Wishlist Functions
+        function addToCart(productId) {
+            const product = window.product.find(p => p.id === productId);
+            if (!product) {
+                showAlert('Product not found!', 'error');
+                return;
+            }
+
+            let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            const existingItem = cart.find(item => item.id === productId);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    id: productId,
+                    title: product.title,
+                    price: product.price,
+                    brand: product.brand,
+                    image: product.image,
+                    quantity: 1
+                });
+            }
+            
+            localStorage.setItem('cart', JSON.stringify(cart));
+            showAlert(`${product.title} added to cart!`, 'success');
+        }
+
+        function addToWishlist(productId) {
+            const product = window.product.find(p => p.id === productId);
+            if (!product) {
+                showAlert('Product not found!', 'error');
+                return;
+            }
+
+            let wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
+            const existingItem = wishlist.find(item => item.id === productId);
+            
+            if (existingItem) {
+                showAlert(`${product.title} is already in your wishlist!`, 'info');
+                return;
+            }
+            
+            wishlist.push({
+                id: productId,
+                title: product.title,
+                price: product.price,
+                brand: product.brand,
+                image: product.image,
+                rating: product.rating,
+                reviewCount: product.reviewCount
+            });
+            
+            localStorage.setItem('wishlist', JSON.stringify(wishlist));
+            showAlert(`${product.title} added to wishlist!`, 'success');
+        }
+
+
+
+        // Show alert message
+        function showAlert(message, type) {
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${type} alert-dismissible fade show position-fixed`;
+            alertDiv.style.cssText = 'top: 20px; right: 20px; z-index: 9999; min-width: 300px;';
+            alertDiv.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'warning' ? 'exclamation-triangle' : 'info-circle'} me-2"></i>${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            
+            document.body.appendChild(alertDiv);
+            
+            setTimeout(() => {
+                if (alertDiv.parentNode) {
+                    alertDiv.remove();
+                }
+            }, 3000);
+        }
+
+        // Load orders when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            loadOrders();
+            addClearFiltersButton();
+        });
+    </script>
+</body>
+</html> 
